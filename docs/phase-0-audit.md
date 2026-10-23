@@ -1,6 +1,6 @@
 # Phase 0 — Project audit and discovery
 
-**Status:** In progress  
+**Status:** In progress — owner decisions partially confirmed  
 **Audit date:** 2026-10-23  
 **Repository:** https://github.com/folayeleglobalresources-dot/clinicconsilium  
 **Current public preview:** https://clinicconsilium.vercel.app  
@@ -76,12 +76,12 @@ Do not include real patient accounts, medical-record uploads, clinical advice, m
 
 These need owner decisions and qualified professional advice; this audit does not provide legal or clinical determinations.
 
-- **Operating entity:** Which legal entity will operate the service, contract with users and partner organisations, and handle complaints?
-- **Service boundary:** Is ClinicConsilium initially an information/referral/coordination service, or will it itself provide any clinical services?
+- **Operating entity (still open):** Which legal entity will operate the service, contract with users and partner organisations, and handle complaints?
+- **Service boundary (initial assumption confirmed):** ClinicConsilium will begin as a healthcare access and coordination platform working with qualified providers. Direct clinical service provision is not in the first-release scope unless separately approved.
 - **Clinical governance:** Who is accountable for clinical content, referrals, escalation and any future telehealth?
 - **Data protection:** Who will be controller and processor for each data flow? What lawful basis, privacy notice, retention schedule, data-subject process and impact assessment are required?
 - **Partner verification:** Which authoritative bodies and procedures will be used to verify each professional, facility and pharmacy category?
-- **Medicines:** Which local medicine-access categories and routes are in scope first? Who is the licensed pharmacy/clinical lead, and who approves prescription, product-registration, import, customs, storage and destination checks?
+- **Medicines (decision confirmed):** Defer medicine sourcing from the first release. Begin with public information and partner enquiries. Do not accept medicine orders or promise supply. Any later medicine-access service requires a separate scope decision, authorised partners and qualified pharmacy/regulatory review.
 - **Emergency handling:** What is the service's scope and escalation process for emergencies? The website must not imply emergency-response capability without an operational arrangement.
 - **Geography:** Confirm Nigeria as the initial market and defer each additional country until country-specific review and partnerships are ready.
 - **Data hosting and vendors:** Approve hosting, database, file storage, email/SMS vendors, access locations, backups and incident responsibilities before sensitive data is introduced.
@@ -104,9 +104,10 @@ These need owner decisions and qualified professional advice; this audit does no
 - [x] Existing planning documents and proposed schema reviewed.
 - [x] Prototype vs. production boundary recorded.
 - [x] Initial MVP scope and major risks documented.
-- [ ] Owner confirms operating entity and initial service boundary.
+- [ ] Owner confirms the legal operating entity and who contracts with users/partners. (Open)
 - [ ] Qualified Nigerian legal, data-protection, clinical and pharmacy advisers identified for applicable reviews.
-- [ ] First medicine categories/routes and partner responsibilities agreed, or medicine access deferred from MVP.
+- [x] Owner confirms medicine sourcing is deferred from the first release.
+- [ ] Define whether the initial service will provide only information, referral and coordination, and what clinical escalation it can support.
 - [ ] Data-flow map, privacy impact assessment plan and retention requirements approved.
 - [ ] Acceptance criteria for Phase 1 approved.
 - [ ] Phase 0 findings reviewed and approved by the owner.
@@ -114,3 +115,26 @@ These need owner decisions and qualified professional advice; this audit does no
 ## 9. Recommendation
 
 Proceed with a low-risk **public information and partner-interest MVP** first. Keep the present landing page as the visual baseline, preserve the placeholder brandmark until the original logo is supplied, and make service-status wording unmistakable. Build server-side enquiry handling only after the data-flow, privacy notice, access controls, retention and operational ownership are decided. Treat accounts, health records, medicine fulfilment and clinical workflows as separate gated releases.
+
+
+## 10. Owner decisions recorded — 2026-10-23
+
+### Confirmed
+1. **First-release medicine scope:** Defer medicine sourcing. Focus on public information and partner enquiries first. No medicine ordering, fulfilment, or supply promises in the first release.
+2. **Initial operating role:** Healthcare access and coordination platform working with qualified healthcare providers. This is the starting assumption, not a determination that ClinicConsilium itself is a licensed clinical provider.
+
+### Remaining owner decisions
+1. **Legal operating entity:** Identify the legal entity that will operate ClinicConsilium, own the service, contract with users/partners and handle complaints.
+2. **First-release service boundary:** Confirm which non-clinical functions are included (public information, education, general enquiries and partner-interest collection) and whether referral/coordination will be informational only at launch.
+3. **Clinical content and escalation:** Name the accountable reviewer for health education and define how urgent/emergency enquiries will be handled; do not imply emergency-response capability without an operational arrangement.
+4. **Partner onboarding priorities:** Decide which partner groups to approach first (for example, hospitals/clinics, licensed professionals, laboratories or other healthcare organisations) and who will manage responses.
+5. **Enquiry ownership and contact channels:** Choose the authorised team/role that receives, reviews and answers enquiries, and approve the public contact channel(s).
+6. **Data handling and hosting:** Approve the intended data controller/processor arrangements and proposed vendors only after qualified data-protection review; define minimum data collected, access, retention and deletion.
+7. **Phase 1 acceptance:** Approve the proposed public information and partner-interest MVP scope and its acceptance criteria before implementation begins.
+8. **Brand asset:** Upload the original logo when available; keep the current placeholder until supplied.
+
+### Professional review still required
+- Nigerian legal and regulatory advice on the operating model and public claims.
+- Data-protection review, including applicable Nigeria Data Protection Act obligations, privacy notice, lawful basis, retention/deletion and whether a privacy impact assessment is required.
+- Clinical review of any health education, referral language and escalation process.
+- Security review before collecting personal information through a live form.
