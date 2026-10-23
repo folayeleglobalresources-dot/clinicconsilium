@@ -1,0 +1,197 @@
+// Proposed starting model only. Review before production migrations.
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum AccountStatus { PENDING ACTIVE SUSPENDED CLOSED }
+enum VerificationStatus { NOT_SUBMITTED PENDING VERIFIED REJECTED EXPIRED }
+enum RecordType { CONSULTATION_SUMMARY DIAGNOSIS MEDICATION ALLERGY LAB_RESULT IMAGING REFERRAL DISCHARGE_SUMMARY PRESCRIPTION OTHER }
+enum RecordSourceType { PATIENT_UPLOAD PROFESSIONAL HOSPITAL CLINIC LABORATORY IMPORTED }
+enum ConsentStatus { ACTIVE WITHDRAWN EXPIRED }
+enum SourcingStatus { REQUESTED UNDER_REVIEW LOCAL_SEARCH INTERNATIONAL_REVIEW QUOTED APPROVED FULFILMENT SHIPPED DELIVERED DECLINED CANCELLED }
+
+model User {
+  id              String        @id @default(uuid())
+  email           String?       @unique
+  phone           String?       @unique
+  displayName     String
+  status          AccountStatus @default(PENDING)
+  interfaceLocale String        @default("en")
+  communicationLanguage String  @default("en")
+  countryCode     String        @default("NG")
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+  patient         PatientProfile?
+  memberships     OrganisationMembership[]
+  auditEvents     AuditEvent[]  @relation("ActorAudit")
+}
+
+model PatientProfile {
+  id             String   @id @default(uuid())
+  userId         String   @unique
+  dateOfBirth    DateTime?
+  preferredName  String?
+  emergencyContactEncrypted String?
+  user           User     @relation(fields: [userId], references: [id])
+  records        HealthRecord[]
+  consents       RecordAccessGrant[]
+  sourcingCases  MedicineSourcingCase[]
+  createdAt      DateTime @default(now())
+}
+
+model Organisation {
+  id             String   @id @default(uuid())
+  name           String
+  type           String
+  countryCode    String   @default("NG")
+  registrationId String?
+  verification   VerificationStatus @default(NOT_SUBMITTED)
+  createdAt      DateTime @default(now())
+  memberships    OrganisationMembership[]
+  records        HealthRecord[]
+  credentials    Credential[]
+}
+
+model OrganisationMembership {
+  id             String   @id @default(uuid())
+  userId         String
+  organisationId String
+  role           String
+  active         Boolean  @default(false)
+  user           User         @relation(fields: [userId], references: [id])
+  organisation   Organisation @relation(fields: [organisationId], references: [id])
+  createdAt      DateTime @default(now())
+  @@unique([userId, organisationId, role])
+}
+
+model Credential {
+  id             String   @id @default(uuid())
+  organisationId String
+  credentialType String
+  issuer         String?
+  reference      String?
+  status         VerificationStatus @default(PENDING)
+  verifiedBy     String?
+  evidenceObjectKey String?
+  expiresAt      DateTime?
+  checkedAt      DateTime?
+  organisation   Organisation @relation(fields: [organisationId], references: [id])
+  createdAt      DateTime @default(now())
+}
+
+model HealthRecord {
+  id               String   @id @default(uuid())
+  patientId        String
+  organisationId   String?
+  recordType       RecordType
+  sourceType       RecordSourceType
+  sourceName       String?
+  authorUserId     String?
+  title            String
+  clinicalDate     DateTime?
+  receivedAt       DateTime @default(now())
+  objectKey        String?
+  contentHash      String?
+  verificationStatus String @default("UNREVIEWED")
+  supersedesId     String?
+  patient          PatientProfile @relation(fields: [patientId], references: [id])
+  organisation     Organisation? @relation(fields: [organisationId], references: [id])
+  grants            RecordAccessGrant[]
+  createdAt        DateTime @default(now())
+  @@index([patientId, clinicalDate])
+  @@index([organisationId, receivedAt])
+}
+
+model RecordAccessGrant {
+  id             String        @id @default(uuid())
+  patientId      String
+  recordId       String?
+  granteeOrgId   String?
+  granteeUserId  String?
+  purpose        String
+  status         ConsentStatus @default(ACTIVE)
+  grantedAt      DateTime      @default(now())
+  expiresAt      DateTime?
+  revokedAt      DateTime?
+  patient        PatientProfile @relation(fields: [patientId], references: [id])
+  record         HealthRecord?  @relation(fields: [recordId], references: [id])
+  @@index([patientId, status])
+}
+
+model Medicine {
+  id             String   @id @default(uuid())
+  genericName    String
+  brandName      String?
+  strength       String?
+  formulation    String?
+  countryCode    String   @default("NG")
+  listings       MedicineListing[]
+  sourcingCases  MedicineSourcingCase[]
+  createdAt      DateTime @default(now())
+  @@index([genericName, countryCode])
+}
+
+model MedicineListing {
+  id             String   @id @default(uuid())
+  medicineId     String
+  organisationId String
+  availability   String
+  quantityBand   String?
+  confirmedAt    DateTime?
+  expiresAt      DateTime?
+  registrationStatus String @default("UNCONFIRMED")
+  medicine       Medicine @relation(fields: [medicineId], references: [id])
+  createdAt      DateTime @default(now())
+  @@index([medicineId, confirmedAt])
+}
+
+model MedicineSourcingCase {
+  id             String   @id @default(uuid())
+  patientId      String
+  medicineId     String?
+  destinationCountry String @default("NG")
+  destinationRegion  String?
+  status         SourcingStatus @default(REQUESTED)
+  prescriptionRequired Boolean?
+  regulatoryChecks Json?
+  quoteCurrency  String?
+  quoteAmountMinor Int?
+  quoteValidUntil DateTime?
+  shipmentReference String?
+  patient        PatientProfile @relation(fields: [patientId], references: [id])
+  medicine       Medicine? @relation(fields: [medicineId], references: [id])
+  events         SourcingEvent[]
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
+model SourcingEvent {
+  id          String   @id @default(uuid())
+  caseId      String
+  status      SourcingStatus
+  note        String?
+  evidenceKey String?
+  actorUserId String?
+  createdAt   DateTime @default(now())
+  sourcingCase MedicineSourcingCase @relation(fields: [caseId], references: [id])
+}
+
+model AuditEvent {
+  id          String   @id @default(uuid())
+  actorUserId String?
+  action      String
+  resourceType String
+  resourceId  String
+  purpose     String?
+  ipHash      String?
+  metadata    Json?
+  createdAt   DateTime @default(now())
+  actor       User? @relation("ActorAudit", fields: [actorUserId], references: [id])
+  @@index([resourceType, resourceId, createdAt])
+  @@index([actorUserId, createdAt])
+}
