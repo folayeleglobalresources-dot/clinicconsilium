@@ -125,10 +125,10 @@ Proceed with a low-risk **public information and partner-interest MVP** first. K
 
 ### Remaining owner decisions
 1. **Legal operating entity:** Identify the legal entity that will operate ClinicConsilium, own the service, contract with users/partners and handle complaints.
-2. **First-release service boundary:** Confirm which non-clinical functions are included (public information, education, general enquiries and partner-interest collection) and whether referral/coordination will be informational only at launch.
+2. **First-release service boundary:** Confirmed as public health information, education, general enquiries and partner-interest forms only. Referral/coordination workflows are out of scope for the first release unless later approved.
 3. **Clinical content and escalation:** Name the accountable reviewer for health education and define how urgent/emergency enquiries will be handled; do not imply emergency-response capability without an operational arrangement.
-4. **Partner onboarding priorities:** Decide which partner groups to approach first (for example, hospitals/clinics, licensed professionals, laboratories or other healthcare organisations) and who will manage responses.
-5. **Enquiry ownership and contact channels:** Choose the authorised team/role that receives, reviews and answers enquiries, and approve the public contact channel(s).
+4. **Partner onboarding priorities:** Initial priority is doctors and other qualified healthcare professionals. Owner/team responsible for outreach and partner verification process remain open.
+5. **Enquiry ownership and contact channels:** The recipient is undecided. Choose the authorised team/role and approved public contact channel before enabling live forms.
 6. **Data handling and hosting:** Approve the intended data controller/processor arrangements and proposed vendors only after qualified data-protection review; define minimum data collected, access, retention and deletion.
 7. **Phase 1 acceptance:** Approve the proposed public information and partner-interest MVP scope and its acceptance criteria before implementation begins.
 8. **Brand asset:** Upload the original logo when available; keep the current placeholder until supplied.
@@ -138,3 +138,21 @@ Proceed with a low-risk **public information and partner-interest MVP** first. K
 - Data-protection review, including applicable Nigeria Data Protection Act obligations, privacy notice, lawful basis, retention/deletion and whether a privacy impact assessment is required.
 - Clinical review of any health education, referral language and escalation process.
 - Security review before collecting personal information through a live form.
+
+
+## 11. Updated remaining decisions — 2026-10-23
+
+### Owner decisions still open
+- [ ] Select the legal operating entity and accountable service owner.
+- [ ] Name the authorised enquiry recipient and approve public contact channels; live forms remain disabled/non-submitting until this is settled and secure handling is implemented.
+- [ ] Name the accountable clinical reviewer for health education and approve the boundary for urgent/emergency enquiries.
+- [ ] Decide who leads professional outreach and who is responsible for reviewing/recording credentials before any professional is described as verified.
+- [ ] Approve the data-handling approach: minimum fields, access restrictions, retention/deletion, hosting/vendor choices and incident ownership after qualified privacy review.
+- [ ] Approve Phase 1 acceptance criteria and final website wording.
+- [ ] Provide original logo asset when available.
+
+### Professional review gates still open
+- [ ] Qualified Nigerian legal/regulatory review of the operating model and public claims.
+- [ ] Qualified data-protection review of applicable obligations, privacy notice, lawful basis, retention/deletion and impact-assessment requirements.
+- [ ] Clinical review of educational content and escalation language.
+- [ ] Security review of the enquiry workflow before live personal-data collection.
