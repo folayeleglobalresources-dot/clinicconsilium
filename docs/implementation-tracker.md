@@ -11,7 +11,7 @@
 
 | Phase | Scope | Status | Exit gate |
 |---|---|---|---|
-| 0 | Project audit, product scope, governance, risk and MVP definition | **In progress — decisions partially confirmed** | Legal operating entity, remaining service boundaries and review owners agreed; owner approves audit |
+| 0 | Project audit, product scope, governance, risk and MVP definition | **In progress — legal-entity direction agreed; formation and governance remain open** | Legal form/name, accountable service owner, remaining service boundaries and review owners agreed; owner approves audit |
 | 1 | Public information website, visual identity, privacy/terms pages, accessible enquiry experience | **Acceptance criteria drafted — awaiting approval** | Meet `docs/phase-1-acceptance-criteria.md`; owner approves; relevant legal/privacy/clinical/security gates pass for the features actually launching |
 | 2 | Identity, partner directories and verification workflows | Blocked by Phase 0 governance | Auth, roles, verification sources and access tests approved |
 | 3 | Health-record MVP | Not started; high-risk gate | Privacy impact assessment, secure storage, consent, audit, recovery and security testing approved |
@@ -28,7 +28,8 @@
 - [x] Recommend a low-risk first release and identify governance blockers.
 - [x] Owner confirms medicine sourcing is deferred from the first release.
 - [x] Initial operating role set as healthcare access and coordination working with qualified providers.
-- [ ] Owner confirms legal operating entity.
+- [x] Owner chooses direction: establish a new company or registered organisation as ClinicConsilium's operating entity.
+- [ ] Determine and register the specific legal form and name; confirm accountable service owner.
 - [x] Owner confirms first-release scope: public health information, education, general enquiries and partner-interest forms only.
 - [x] Owner sets initial partner priority: doctors and other qualified healthcare professionals.
 - [x] Enquiry recipient remains undecided; live forms must not be enabled until assigned and secure handling is ready.
@@ -48,13 +49,14 @@
 6. Medicine access must not promise supply and must not begin without qualified pharmacy/regulatory review and authorised partners.
 7. First-release decision: defer medicine sourcing; begin with public information and partner enquiries. No ordering or supply promises.
 8. Initial operating role: healthcare access and coordination working with qualified providers, subject to confirming the exact service boundary and qualified review.
-9. Dedicated reviewed privacy and terms pages are required; live personal-data collection also requires an approved secure handling process.
-10. Real patient records, telehealth, payments and clinical workflows are separate gated releases.
-11. Phase 1 criteria are drafted; they do not themselves authorise launch or live data collection.
+9. **Legal-entity direction:** establish a new company or registered organisation for ClinicConsilium. The specific legal form, registered name, registration and accountable service owner are not yet confirmed; do not represent the entity as already incorporated.
+10. Dedicated reviewed privacy and terms pages are required; live personal-data collection also requires an approved secure handling process.
+11. Real patient records, telehealth, payments and clinical workflows are separate gated releases.
+12. Phase 1 criteria are drafted; they do not themselves authorise launch or live data collection.
 
 ## Remaining owner decisions
 
-- [ ] Identify the legal operating entity and accountable service owner.
+- [ ] Select the specific legal form and name, complete required registration, and identify the accountable service owner.
 - [x] First-release scope confirmed: public health information, education, general enquiries and partner-interest only; referral/coordination workflows excluded unless separately approved.
 - [ ] Name the accountable reviewer for health education and define emergency/urgent-enquiry boundaries.
 - [x] Initial partner priority: doctors and other qualified healthcare professionals.
@@ -66,7 +68,7 @@
 
 ## Professional review gates
 
-- [ ] Nigerian legal/regulatory review of operating model and public claims.
+- [ ] Nigerian legal/regulatory review of the proposed operating model, entity form and public claims.
 - [ ] Data-protection review of controller/processor roles, data minimisation, notice, retention/deletion and impact-assessment needs.
 - [ ] Clinical review of educational content, referral wording and escalation limits.
 - [ ] Security review before live collection of personal information.
@@ -77,3 +79,4 @@
 - 2026-10-23 — Owner confirmed medicine sourcing is deferred from first release and initial operating role is healthcare access/coordination with qualified providers.
 - 2026-10-23 — Owner confirmed first-release scope is public health information, education, general enquiries and partner-interest forms only; initial partner priority is doctors and other qualified healthcare professionals. Enquiry recipient remains undecided.
 - 2026-10-23 — Drafted Phase 1 acceptance criteria covering scope, content, form safety, privacy/legal pages, accessibility, security and release sign-off.
+- 2026-10-23 — Owner chose to establish a new company or registered organisation as the intended legal operating entity. Specific legal form, name, registration and accountable service owner remain to be determined.
