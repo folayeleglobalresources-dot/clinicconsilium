@@ -11,8 +11,8 @@
 
 | Phase | Scope | Status | Exit gate |
 |---|---|---|---|
-| 0 | Project audit, product scope, governance, risk and MVP definition | **In progress — decisions partially confirmed** | Legal operating entity, remaining service boundaries, review owners and Phase 1 acceptance criteria agreed |
-| 1 | Public information website, visual identity, privacy/terms pages, accessible enquiry experience | Not started | Owner approves content/design; legal notices reviewed; forms and service status tested |
+| 0 | Project audit, product scope, governance, risk and MVP definition | **In progress — decisions partially confirmed** | Legal operating entity, remaining service boundaries and review owners agreed; owner approves audit |
+| 1 | Public information website, visual identity, privacy/terms pages, accessible enquiry experience | **Acceptance criteria drafted — awaiting approval** | Meet `docs/phase-1-acceptance-criteria.md`; owner approves; relevant legal/privacy/clinical/security gates pass for the features actually launching |
 | 2 | Identity, partner directories and verification workflows | Blocked by Phase 0 governance | Auth, roles, verification sources and access tests approved |
 | 3 | Health-record MVP | Not started; high-risk gate | Privacy impact assessment, secure storage, consent, audit, recovery and security testing approved |
 | 4 | Medicine access operations | Not started; high-risk gate | Licensed partners, product/prescription/import checks and operational accountability approved |
@@ -34,7 +34,8 @@
 - [x] Enquiry recipient remains undecided; live forms must not be enabled until assigned and secure handling is ready.
 - [ ] Name accountable reviewer for health education and confirm emergency/escalation limits.
 - [ ] Identify qualified advisers and partner leads for required reviews.
-- [ ] Approve Phase 1 scope and acceptance criteria.
+- [x] Draft Phase 1 scope and acceptance criteria in `docs/phase-1-acceptance-criteria.md`.
+- [ ] Owner approves Phase 1 criteria.
 - [ ] Owner approves Phase 0 findings.
 
 ## Current decisions / working assumptions
@@ -47,15 +48,12 @@
 6. Medicine access must not promise supply and must not begin without qualified pharmacy/regulatory review and authorised partners.
 7. First-release decision: defer medicine sourcing; begin with public information and partner enquiries. No ordering or supply promises.
 8. Initial operating role: healthcare access and coordination working with qualified providers, subject to confirming the exact service boundary and qualified review.
-9. Recommended first release includes dedicated reviewed privacy and terms pages and a secure enquiry workflow before live collection of personal information.
+9. Dedicated reviewed privacy and terms pages are required; live personal-data collection also requires an approved secure handling process.
 10. Real patient records, telehealth, payments and clinical workflows are separate gated releases.
-
-## Change log
-
-- 2026-10-23 — Started Phase 0 and recorded initial repository/product audit.
-
+11. Phase 1 criteria are drafted; they do not themselves authorise launch or live data collection.
 
 ## Remaining owner decisions
+
 - [ ] Identify the legal operating entity and accountable service owner.
 - [x] First-release scope confirmed: public health information, education, general enquiries and partner-interest only; referral/coordination workflows excluded unless separately approved.
 - [ ] Name the accountable reviewer for health education and define emergency/urgent-enquiry boundaries.
@@ -67,10 +65,15 @@
 - [ ] Upload original logo when available; keep placeholder until then.
 
 ## Professional review gates
+
 - [ ] Nigerian legal/regulatory review of operating model and public claims.
 - [ ] Data-protection review of controller/processor roles, data minimisation, notice, retention/deletion and impact-assessment needs.
 - [ ] Clinical review of educational content, referral wording and escalation limits.
 - [ ] Security review before live collection of personal information.
 
+## Change log
+
+- 2026-10-23 — Started Phase 0 and recorded initial repository/product audit.
 - 2026-10-23 — Owner confirmed medicine sourcing is deferred from first release and initial operating role is healthcare access/coordination with qualified providers.
 - 2026-10-23 — Owner confirmed first-release scope is public health information, education, general enquiries and partner-interest forms only; initial partner priority is doctors and other qualified healthcare professionals. Enquiry recipient remains undecided.
+- 2026-10-23 — Drafted Phase 1 acceptance criteria covering scope, content, form safety, privacy/legal pages, accessibility, security and release sign-off.
