@@ -29,7 +29,10 @@
 - [x] Owner confirms medicine sourcing is deferred from the first release.
 - [x] Initial operating role set as healthcare access and coordination working with qualified providers.
 - [ ] Owner confirms legal operating entity.
-- [ ] Owner confirms exact first-release service boundary and emergency/escalation limits.
+- [x] Owner confirms first-release scope: public health information, education, general enquiries and partner-interest forms only.
+- [x] Owner sets initial partner priority: doctors and other qualified healthcare professionals.
+- [x] Enquiry recipient remains undecided; live forms must not be enabled until assigned and secure handling is ready.
+- [ ] Name accountable reviewer for health education and confirm emergency/escalation limits.
 - [ ] Identify qualified advisers and partner leads for required reviews.
 - [ ] Approve Phase 1 scope and acceptance criteria.
 - [ ] Owner approves Phase 0 findings.
@@ -54,10 +57,11 @@
 
 ## Remaining owner decisions
 - [ ] Identify the legal operating entity and accountable service owner.
-- [ ] Approve the exact first-release scope: public information, education, general enquiries and partner-interest only, or any additional coordination/referral functions.
+- [x] First-release scope confirmed: public health information, education, general enquiries and partner-interest only; referral/coordination workflows excluded unless separately approved.
 - [ ] Name the accountable reviewer for health education and define emergency/urgent-enquiry boundaries.
-- [ ] Choose initial partner categories and the person/team responsible for onboarding and replies.
-- [ ] Approve public contact channels and who can access/respond to submissions.
+- [x] Initial partner priority: doctors and other qualified healthcare professionals.
+- [ ] Assign the person/team responsible for partner outreach, credential review and replies.
+- [ ] Assign authorised enquiry recipient and approve public contact channels before live forms are enabled.
 - [ ] Approve data-handling and hosting approach after qualified privacy review.
 - [ ] Approve Phase 1 acceptance criteria.
 - [ ] Upload original logo when available; keep placeholder until then.
@@ -69,3 +73,4 @@
 - [ ] Security review before live collection of personal information.
 
 - 2026-10-23 — Owner confirmed medicine sourcing is deferred from first release and initial operating role is healthcare access/coordination with qualified providers.
+- 2026-10-23 — Owner confirmed first-release scope is public health information, education, general enquiries and partner-interest forms only; initial partner priority is doctors and other qualified healthcare professionals. Enquiry recipient remains undecided.
