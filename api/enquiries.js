@@ -4,7 +4,11 @@ const ALLOWED_ROLES = new Set([
   'Doctor or healthcare professional',
   'Clinic or hospital representative',
   'Laboratory or diagnostic provider',
-  'Other healthcare partner'
+  'Other healthcare partner',
+  'Partnership enquiry',
+  'Job or volunteer enquiry',
+  'Accessibility feedback',
+  'International care enquiry'
 ]);
 
 function reply(res, status, payload) {
@@ -92,7 +96,7 @@ module.exports = async (req, res) => {
   }
 
   const text = [
-    'New ClinicConsilium general expression of interest',
+    'New ClinicConsilium enquiry',
     '',
     'Name: ' + name,
     'Email: ' + email,
@@ -115,7 +119,7 @@ module.exports = async (req, res) => {
         from: sender,
         to: [recipient],
         reply_to: email,
-        subject: 'ClinicConsilium — General expression of interest',
+        subject: 'ClinicConsilium — ' + role,
         text
       })
     });
