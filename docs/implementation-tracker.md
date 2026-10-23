@@ -11,7 +11,7 @@
 
 | Phase | Scope | Status | Exit gate |
 |---|---|---|---|
-| 0 | Project audit, product scope, governance, risk and MVP definition | **In progress** | Audit reviewed; operating model, service boundary, blockers and Phase 1 criteria agreed |
+| 0 | Project audit, product scope, governance, risk and MVP definition | **In progress — decisions partially confirmed** | Legal operating entity, remaining service boundaries, review owners and Phase 1 acceptance criteria agreed |
 | 1 | Public information website, visual identity, privacy/terms pages, accessible enquiry experience | Not started | Owner approves content/design; legal notices reviewed; forms and service status tested |
 | 2 | Identity, partner directories and verification workflows | Blocked by Phase 0 governance | Auth, roles, verification sources and access tests approved |
 | 3 | Health-record MVP | Not started; high-risk gate | Privacy impact assessment, secure storage, consent, audit, recovery and security testing approved |
@@ -26,8 +26,10 @@
 - [x] Review proposed Prisma data model at a planning level.
 - [x] Document what is and is not operational.
 - [x] Recommend a low-risk first release and identify governance blockers.
-- [ ] Owner confirms legal operating entity and service boundary.
-- [ ] Owner decides whether medicine access is deferred from the first release.
+- [x] Owner confirms medicine sourcing is deferred from the first release.
+- [x] Initial operating role set as healthcare access and coordination working with qualified providers.
+- [ ] Owner confirms legal operating entity.
+- [ ] Owner confirms exact first-release service boundary and emergency/escalation limits.
 - [ ] Identify qualified advisers and partner leads for required reviews.
 - [ ] Approve Phase 1 scope and acceptance criteria.
 - [ ] Owner approves Phase 0 findings.
@@ -40,9 +42,30 @@
 4. No real patient data should be collected or uploaded during prototype testing.
 5. No provider, pharmacy, stock, treatment or professional verification claim should be made without evidence.
 6. Medicine access must not promise supply and must not begin without qualified pharmacy/regulatory review and authorised partners.
-7. Recommended first release is public information plus secure partner-interest/general enquiries, with dedicated reviewed privacy and terms pages.
-8. Real patient records, telehealth, payments and clinical workflows are separate gated releases.
+7. First-release decision: defer medicine sourcing; begin with public information and partner enquiries. No ordering or supply promises.
+8. Initial operating role: healthcare access and coordination working with qualified providers, subject to confirming the exact service boundary and qualified review.
+9. Recommended first release includes dedicated reviewed privacy and terms pages and a secure enquiry workflow before live collection of personal information.
+10. Real patient records, telehealth, payments and clinical workflows are separate gated releases.
 
 ## Change log
 
 - 2026-10-23 — Started Phase 0 and recorded initial repository/product audit.
+
+
+## Remaining owner decisions
+- [ ] Identify the legal operating entity and accountable service owner.
+- [ ] Approve the exact first-release scope: public information, education, general enquiries and partner-interest only, or any additional coordination/referral functions.
+- [ ] Name the accountable reviewer for health education and define emergency/urgent-enquiry boundaries.
+- [ ] Choose initial partner categories and the person/team responsible for onboarding and replies.
+- [ ] Approve public contact channels and who can access/respond to submissions.
+- [ ] Approve data-handling and hosting approach after qualified privacy review.
+- [ ] Approve Phase 1 acceptance criteria.
+- [ ] Upload original logo when available; keep placeholder until then.
+
+## Professional review gates
+- [ ] Nigerian legal/regulatory review of operating model and public claims.
+- [ ] Data-protection review of controller/processor roles, data minimisation, notice, retention/deletion and impact-assessment needs.
+- [ ] Clinical review of educational content, referral wording and escalation limits.
+- [ ] Security review before live collection of personal information.
+
+- 2026-10-23 — Owner confirmed medicine sourcing is deferred from first release and initial operating role is healthcare access/coordination with qualified providers.
