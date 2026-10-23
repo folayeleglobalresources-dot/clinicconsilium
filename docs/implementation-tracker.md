@@ -75,6 +75,8 @@
 
 ## Change log
 
+- 2026-10-23 — Updated the public prototype to display a clear not-live status, clarify that demo forms do not transmit or store submissions, and align health-record and medicine-sourcing copy with the approved first-release scope. This is a copy/scope pass, not a compliance approval or production launch.
+
 - 2026-10-23 — Started Phase 0 and recorded initial repository/product audit.
 - 2026-10-23 — Owner confirmed medicine sourcing is deferred from first release and initial operating role is healthcare access/coordination with qualified providers.
 - 2026-10-23 — Owner confirmed first-release scope is public health information, education, general enquiries and partner-interest forms only; initial partner priority is doctors and other qualified healthcare professionals. Enquiry recipient remains undecided.
