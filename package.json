@@ -1,0 +1,13 @@
+{
+  "name": "clinicconsilium",
+  "version": "0.1.0",
+  "private": true,
+  "description": "ClinicConsilium public site and serverless API foundation",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "test": "node --test",
+    "check": "node --check api/health.js && node --check api/enquiries.js"
+  }
+}
