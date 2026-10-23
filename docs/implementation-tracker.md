@@ -75,6 +75,8 @@
 
 ## Change log
 
+- 2026-10-23 — Added dedicated About, Contact/Enquiries, Privacy Notice, Terms of Use and Service Status prototype pages, and linked them from the homepage. Privacy and terms copy is explicitly preliminary and requires qualified review; the Contact page explains that submissions are not active. Page files were fetched back from GitHub to confirm they exist.
+
 - 2026-10-23 — Updated the public prototype to display a clear not-live status, clarify that demo forms do not transmit or store submissions, and align health-record and medicine-sourcing copy with the approved first-release scope. This is a copy/scope pass, not a compliance approval or production launch.
 
 - 2026-10-23 — Started Phase 0 and recorded initial repository/product audit.
