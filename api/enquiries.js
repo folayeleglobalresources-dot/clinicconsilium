@@ -95,7 +95,7 @@ module.exports = async (req, res) => {
   }
 
   // The first release must not collect clinical or identifying health information.
-  const forbiddenTerms = /\b(patient diagnosis|medical record|medical history|prescription details|date of birth|national identification number)\b/i;
+  const forbiddenTerms = /\b(diagnos(?:is|es|ed)|medical record|medical history|prescription|date of birth|national identification number|patient details|health condition|symptom|medicine name|drug name|dosage|treatment history)\b/i;
   if (forbiddenTerms.test(interest)) {
     return reply(res, 400, {
       ok: false,
