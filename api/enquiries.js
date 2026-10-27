@@ -22,6 +22,24 @@ function clean(value, max) {
   return typeof value === 'string' ? value.trim().slice(0, max) : '';
 }
 
+function enquiryType(role) {
+  if (role === 'Partnership enquiry') return 'partnership';
+  if (role === 'Doctor or healthcare professional') return 'professional_interest';
+  if (role === 'Clinic or hospital representative' || role === 'Laboratory or diagnostic provider') {
+    return 'organisation_interest';
+  }
+  return 'general';
+}
+
+function supabaseHeaders(serviceKey, extra = {}) {
+  return {
+    apikey: serviceKey,
+    Authorization: 'Bearer ' + serviceKey,
+    'Content-Type': 'application/json',
+    ...extra
+  };
+}
+
 module.exports = async (req, res) => {
   if (req.method !== 'POST') {
     res.setHeader('Allow', 'POST');
@@ -57,7 +75,6 @@ module.exports = async (req, res) => {
     return reply(res, 400, { ok: false, error: 'invalid_request' });
   }
 
-  // Honeypot field for simple automated form submissions.
   if (clean(body.website, 200)) {
     return reply(res, 200, { ok: true, message: 'Thank you for your interest.' });
   }
@@ -74,7 +91,7 @@ module.exports = async (req, res) => {
     return reply(res, 400, { ok: false, error: 'invalid_email' });
   }
 
-  // Never accept clinical details through this general enquiry endpoint.
+  // The first release must not collect clinical or identifying health information.
   const forbiddenTerms = /\b(patient diagnosis|medical record|medical history|prescription details|date of birth|national identification number)\b/i;
   if (forbiddenTerms.test(interest)) {
     return reply(res, 400, {
@@ -84,62 +101,123 @@ module.exports = async (req, res) => {
     });
   }
 
-  const apiKey = process.env.RESEND_API_KEY;
-  const recipient = process.env.CLINICCONSILIUM_ENQUIRY_TO;
-  const sender = process.env.CLINICCONSILIUM_FROM_EMAIL;
-  if (!apiKey || !recipient || !sender) {
+  const supabaseUrl = clean(process.env.SUPABASE_URL, 500).replace(/\/$/, '');
+  const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  if (!supabaseUrl || !serviceKey) {
     return reply(res, 503, {
       ok: false,
-      error: 'enquiry_delivery_not_configured',
-      message: 'The enquiry service is not ready yet. Your information has not been sent or stored.'
+      error: 'database_not_configured',
+      message: 'The enquiry service is not ready yet. Your information has not been stored or sent.'
     });
   }
 
-  const text = [
-    'New ClinicConsilium enquiry',
-    '',
-    'Name: ' + name,
-    'Email: ' + email,
-    'Role: ' + role,
-    '',
-    'General enquiry:',
-    interest || '(No additional message)',
-    '',
-    'Reminder: this endpoint is for general enquiries only; do not use it for clinical or sensitive health information.'
-  ].join('\n');
-
+  let baseUrl;
   try {
-    const response = await fetch('https://api.resend.com/emails', {
+    baseUrl = new URL(supabaseUrl);
+    if (baseUrl.protocol !== 'https:' && baseUrl.hostname !== 'localhost') throw new Error('https_required');
+  } catch (_) {
+    return reply(res, 503, { ok: false, error: 'database_configuration_invalid' });
+  }
+
+  let saved;
+  try {
+    const insertResponse = await fetch(supabaseUrl + '/rest/v1/enquiries', {
       method: 'POST',
-      headers: {
-        Authorization: 'Bearer ' + apiKey,
-        'Content-Type': 'application/json'
-      },
+      headers: supabaseHeaders(serviceKey, { Prefer: 'return=representation' }),
       body: JSON.stringify({
-        from: sender,
-        to: [recipient],
-        reply_to: email,
-        subject: 'ClinicConsilium — ' + role,
-        text
+        name,
+        email,
+        role,
+        interest,
+        enquiry_type: enquiryType(role),
+        source: 'website',
+        email_delivery_status: 'pending'
       })
     });
-
-    if (!response.ok) {
-      return reply(res, 502, {
+    if (!insertResponse.ok) {
+      return reply(res, 503, {
         ok: false,
-        error: 'delivery_failed',
-        message: 'We could not send your enquiry. Please try again later.'
+        error: 'database_save_failed',
+        message: 'We could not securely save your enquiry. Please try again later.'
       });
     }
-    return reply(res, 200, {
-      ok: true,
-      message: 'Your general enquiry has been sent successfully.'
-    });
+    const rows = await insertResponse.json();
+    saved = Array.isArray(rows) ? rows[0] : null;
+    if (!saved || !saved.id) {
+      return reply(res, 503, { ok: false, error: 'database_save_unconfirmed' });
+    }
   } catch (_) {
-    return reply(res, 502, {
+    return reply(res, 503, {
       ok: false,
-      error: 'delivery_unavailable',
-      message: 'We could not send your enquiry. Please try again later.'
+      error: 'database_unavailable',
+      message: 'The enquiry service is temporarily unavailable. Please try again later.'
     });
   }
+
+  let deliveryStatus = 'not_configured';
+  const apiKey = process.env.RESEND_API_KEY;
+  const recipient = process.env.CLINICCONSILIUM_ENQUIRY_TO || 'clinicconsilium@gmail.com';
+  const sender = process.env.CLINICCONSILIUM_FROM_EMAIL;
+
+  if (apiKey && sender) {
+    const text = [
+      'New ClinicConsilium enquiry',
+      '',
+      'Reference: ' + saved.id,
+      'Name: ' + name,
+      'Email: ' + email,
+      'Role: ' + role,
+      '',
+      'General enquiry:',
+      interest || '(No additional message)',
+      '',
+      'Reminder: general enquiries only; do not use this endpoint for clinical or sensitive health information.'
+    ].join('\n');
+
+    try {
+      const response = await fetch('https://api.resend.com/emails', {
+        method: 'POST',
+        headers: {
+          Authorization: 'Bearer ' + apiKey,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          from: sender,
+          to: [recipient],
+          reply_to: email,
+          subject: 'ClinicConsilium — ' + role,
+          text
+        })
+      });
+      deliveryStatus = response.ok ? 'sent' : 'failed';
+    } catch (_) {
+      deliveryStatus = 'failed';
+    }
+  }
+
+  if (deliveryStatus !== 'pending') {
+    try {
+      await fetch(supabaseUrl + '/rest/v1/enquiries?id=eq.' + encodeURIComponent(saved.id), {
+        method: 'PATCH',
+        headers: supabaseHeaders(serviceKey, { Prefer: 'return=minimal' }),
+        body: JSON.stringify({ email_delivery_status: deliveryStatus })
+      });
+    } catch (_) {
+      // The saved enquiry remains available even if notification status could not be updated.
+    }
+  }
+
+  if (deliveryStatus === 'sent') {
+    return reply(res, 200, {
+      ok: true,
+      message: 'Your general enquiry has been received and the team has been notified.',
+      reference: saved.id
+    });
+  }
+  return reply(res, 200, {
+    ok: true,
+    message: 'Your general enquiry has been safely received. Email notifications are not yet active.',
+    reference: saved.id,
+    notification: deliveryStatus
+  });
 };
