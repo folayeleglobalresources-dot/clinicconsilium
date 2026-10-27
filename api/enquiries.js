@@ -8,7 +8,10 @@ const ALLOWED_ROLES = new Set([
   'Partnership enquiry',
   'Job or volunteer enquiry',
   'Accessibility feedback',
-  'International care enquiry'
+  'International care enquiry',
+  'Medicine access enquiry',
+  'Pharmacy partner application',
+  'Medicine supplier partnership'
 ]);
 
 function reply(res, status, payload) {
@@ -23,7 +26,7 @@ function clean(value, max) {
 }
 
 function enquiryType(role) {
-  if (role === 'Partnership enquiry') return 'partnership';
+  if (['Partnership enquiry', 'Medicine access enquiry', 'Pharmacy partner application', 'Medicine supplier partnership'].includes(role)) return 'partnership';
   if (role === 'Doctor or healthcare professional') return 'professional_interest';
   if (role === 'Clinic or hospital representative' || role === 'Laboratory or diagnostic provider') {
     return 'organisation_interest';
