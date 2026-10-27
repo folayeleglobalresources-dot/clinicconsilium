@@ -57,16 +57,16 @@ module.exports = async (req, res) => {
   const website = clean(body.organisation_website, 200);
 
   if (organisationName.length < 2 || contactName.length < 2 ||
-      !/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(contactEmail) ||
+      !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(contactEmail) ||
       !TYPES.has(organisationType)) {
     return reply(res, 400, { ok: false, error: 'check_required_fields' });
   }
-  if (/[\\r\\n]/.test(contactEmail)) return reply(res, 400, { ok: false, error: 'invalid_email' });
+      !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(contactEmail) ||
   if (website && !/^https:\/\//i.test(website)) {
     return reply(res, 400, { ok: false, error: 'website_must_use_https' });
   }
 
-  const supabaseUrl = clean(process.env.SUPABASE_URL, 500).replace(/\\/$/, '');
+  const supabaseUrl = clean(process.env.SUPABASE_URL, 500).replace(/\/$/, '');
   const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
   if (!supabaseUrl || !serviceKey) {
     return reply(res, 503, {
