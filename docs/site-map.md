@@ -48,7 +48,7 @@ On mobile, keep the same destinations inside an accessible menu. Do not expose d
 - `international-care.html` and `international-care-enquiry.html` — explain planned international-care coordination and collect only approved non-clinical interest until the service is operational.
 - `pharmaceutical-store.html` — medicine-access information and separate pharmacy/supplier application.
 - `careers.html` and `careers-enquiry.html` — careers information and interest.
-- Future gap to add: a dedicated hospital/clinic partner information page if partner outreach needs a more specific route than the existing general partnership page.
+- `hospital-partnerships.html` — dedicated hospital/clinic partnership information and CTA to the existing organisation enquiry route.
 
 ### Legal, accessibility and support
 - `privacy.html` — privacy notice; review against actual data collection and Nigerian data-protection requirements before launch.
