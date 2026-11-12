@@ -28,6 +28,7 @@ function clean(value, max) {
 function enquiryType(role) {
   if (['Partnership enquiry', 'Medicine access enquiry', 'Pharmacy partner application', 'Medicine supplier partnership'].includes(role)) return 'partnership';
   if (role === 'Doctor or healthcare professional') return 'professional_interest';
+  if (role === 'International care enquiry') return 'international_care';
   if (role === 'Clinic or hospital representative' || role === 'Laboratory or diagnostic provider') {
     return 'organisation_interest';
   }
