@@ -16,3 +16,14 @@ SET search_path = public;
 REVOKE EXECUTE ON FUNCTION public.rls_auto_enable() FROM PUBLIC;
 REVOKE EXECUTE ON FUNCTION public.rls_auto_enable() FROM anon;
 REVOKE EXECUTE ON FUNCTION public.rls_auto_enable() FROM authenticated;
+
+
+CREATE POLICY "service_role_manage_pharmacy_applications"
+ON public.pharmacy_partner_applications
+FOR ALL
+TO service_role
+USING (true)
+WITH CHECK (true);
+
+ALTER FUNCTION public.set_pharmacy_partner_updated_at()
+SET search_path = public;
