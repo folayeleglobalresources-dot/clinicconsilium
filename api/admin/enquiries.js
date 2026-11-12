@@ -43,7 +43,8 @@ async function requireAdmin(req) {
     response = await fetch(supabaseUrl + '/auth/v1/user', {
       method: 'GET',
       headers: {
-        apikey: serviceKey,
+        // Verify the user's session with the public key; secret keys must not be paired with a user token.
+        apikey: process.env.SUPABASE_ANON_KEY || serviceKey,
         Authorization: 'Bearer ' + match[1]
       }
     });
@@ -58,6 +59,10 @@ async function requireAdmin(req) {
   }
 
   const email = clean(user && user.email, 254).toLowerCase();
+  // An unconfirmed address must never count as an admin identity.
+  if (!user || !user.email_confirmed_at) {
+    return { ok: false, status: 403, error: 'email_not_confirmed' };
+  }
   if (!email || !allowed.includes(email)) {
     return { ok: false, status: 403, error: 'admin_access_denied' };
   }

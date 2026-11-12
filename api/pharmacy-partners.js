@@ -61,7 +61,6 @@ module.exports = async (req, res) => {
       !TYPES.has(organisationType)) {
     return reply(res, 400, { ok: false, error: 'check_required_fields' });
   }
-      !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(contactEmail) ||
   if (website && !/^https:\/\//i.test(website)) {
     return reply(res, 400, { ok: false, error: 'website_must_use_https' });
   }

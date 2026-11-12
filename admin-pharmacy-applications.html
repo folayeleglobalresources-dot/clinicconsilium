@@ -1,0 +1,38 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>Pharmacy applications · ClinicConsilium admin</title>
+<style>:root{--navy:#123B6D;--teal:#0D9488;--grey:#F3F6FA;--line:#d9e2ec}*{box-sizing:border-box}body{margin:0;font:16px/1.5 'DM Sans',system-ui,sans-serif;background:var(--grey);color:#16273d}
+header{display:flex;align-items:center;gap:16px;padding:14px 24px;background:#fff;border-bottom:1px solid var(--line)}header img{height:44px}header a{margin-left:auto;color:var(--navy);font-weight:600}
+main{max-width:1180px;margin:24px auto;padding:0 20px}h1{margin:0 0 4px;color:var(--navy);letter-spacing:-.02em}.sub{margin:0 0 18px;color:#52657d}
+.note{background:#fff;border-left:4px solid var(--teal);padding:12px 16px;border-radius:12px;margin-bottom:18px;font-size:14px}
+.bar{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:14px}input,select,textarea,button{font:inherit;padding:9px 12px;border:1px solid var(--line);border-radius:10px;background:#fff}
+button{background:linear-gradient(120deg,var(--navy),var(--teal));color:#fff;border:0;font-weight:700;cursor:pointer}button:disabled{opacity:.5}
+.grid{display:grid;grid-template-columns:1.3fr 1fr;gap:18px}@media(max-width:900px){.grid{grid-template-columns:1fr}}
+.panel{background:#fff;border:1px solid var(--line);border-radius:18px;padding:14px;overflow:auto;max-height:70vh}table{width:100%;border-collapse:collapse;font-size:14px}th,td{text-align:left;padding:9px 8px;border-bottom:1px solid #eef2f6}tr[data-id]{cursor:pointer}tr[data-id]:hover,tr.sel{background:#eefaf8}
+.pill{display:inline-block;padding:2px 10px;border-radius:99px;font-size:12px;font-weight:700;background:#e6eef8;color:var(--navy)}.pill.approved{background:#d8f3ef;color:#0A7C72}.pill.rejected,.pill.suspended{background:#fde8e8;color:#9b1c1c}.pill.under_review{background:#fff4d6;color:#8a5a00}
+dl{display:grid;grid-template-columns:130px 1fr;gap:6px 12px;margin:0 0 14px;font-size:14px}dt{color:#52657d}dd{margin:0;word-break:break-word}label{display:block;font-weight:600;margin:10px 0 4px}textarea{width:100%;min-height:110px}
+#msg{margin-top:10px;font-weight:600}.err{color:#9b1c1c}.ok{color:#0A7C72}</style></head><body>
+<header><img src="assets/clinicconsilium-logo-optimized.png" alt="ClinicConsilium"><a href="admin-dashboard.html">← Back to admin dashboard</a></header>
+<main><h1>Pharmacy &amp; supplier applications</h1><p class="sub">Review partner applications submitted through the Pharmaceutical Store page.</p>
+<div class="note"><strong>Approving an application does not publish a pharmacy.</strong> Public listings, licence verification and medicine availability remain separate, later steps. Medicine sales are not active.</div>
+<div id="gate" hidden class="note err">Please <a href="admin-dashboard.html">sign in on the admin dashboard</a> first, then return here.</div>
+<div id="app" hidden><div class="bar"><input id="q" type="search" placeholder="Search name, email, city…" aria-label="Search"><select id="f" aria-label="Filter by status"><option value="">All statuses</option><option value="pending_review">Pending review</option><option value="under_review">Under review</option><option value="approved">Approved</option><option value="rejected">Rejected</option><option value="suspended">Suspended</option></select><button id="r" type="button">Refresh</button></div>
+<div class="grid"><div class="panel"><table><thead><tr><th>Organisation</th><th>Type</th><th>Location</th><th>Status</th><th>Received</th></tr></thead><tbody id="rows"></tbody></table><p id="empty" hidden>No applications yet.</p></div>
+<div class="panel" id="detail"><p>Select an application to review it.</p></div></div></div>
+<div id="msg" role="status"></div></main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+(function(){var sb,session,list=[],cur=null;var $=function(i){return document.getElementById(i)};
+function esc(s){var d=document.createElement('div');d.textContent=s==null?'':String(s);return d.innerHTML}
+function say(t,c){$('msg').textContent=t||'';$('msg').className=c||''}
+function pretty(s){return String(s||'').replace(/_/g,' ')}
+async function api(path,opt){var r=await fetch(path,Object.assign({},opt,{headers:{'Content-Type':'application/json',Authorization:'Bearer '+session.access_token}}));var j=await r.json().catch(function(){return{}});if(!r.ok)throw new Error(j.error||'Request failed');return j}
+function draw(){var q=$('q').value.toLowerCase();var rows=list.filter(function(a){return !q||[a.organisation_name,a.contact_name,a.contact_email,a.city,a.state_region].join(' ').toLowerCase().indexOf(q)>-1});
+$('rows').innerHTML=rows.map(function(a){return '<tr data-id="'+esc(a.id)+'"'+(cur&&cur.id===a.id?' class="sel"':'')+'><td>'+esc(a.organisation_name)+'</td><td>'+esc(pretty(a.organisation_type))+'</td><td>'+esc([a.city,a.state_region].filter(Boolean).join(', '))+'</td><td><span class="pill '+esc(a.status)+'">'+esc(pretty(a.status))+'</span></td><td>'+esc(new Date(a.created_at).toLocaleDateString())+'</td></tr>'}).join('');$('empty').hidden=rows.length>0}
+function show(a){cur=a;var f=function(k,v){return '<dt>'+k+'</dt><dd>'+esc(v||'—')+'</dd>'};
+$('detail').innerHTML='<h2>'+esc(a.organisation_name)+'</h2><dl>'+f('Contact',a.contact_name)+f('Email',a.contact_email)+f('Phone',a.phone)+f('Type',pretty(a.organisation_type))+f('Licence type',a.licence_type)+f('Licence no.',a.licence_number)+f('Location',[a.city,a.state_region,a.country_code].filter(Boolean).join(', '))+f('Website',a.website)+f('Received',new Date(a.created_at).toLocaleString())+f('Last reviewed',a.reviewed_at?new Date(a.reviewed_at).toLocaleString():'')+'</dl><label for="st">Status</label><select id="st">'+['pending_review','under_review','approved','rejected','suspended'].map(function(s){return '<option value="'+s+'"'+(s===a.status?' selected':'')+'>'+pretty(s)+'</option>'}).join('')+'</select><label for="nt">Internal notes (never shown publicly)</label><textarea id="nt" maxlength="2000">'+esc(a.internal_notes||'')+'</textarea><p><button id="sv" type="button">Save review</button></p>';
+$('sv').onclick=save;draw()}
+async function save(){$('sv').disabled=true;say('Saving…');try{var j=await api('/api/admin/pharmacy-applications',{method:'PATCH',body:JSON.stringify({id:cur.id,status:$('st').value,internal_notes:$('nt').value})});list=list.map(function(x){return x.id===j.application.id?j.application:x});show(j.application);say('Saved.','ok')}catch(e){say('Could not save: '+e.message,'err')}finally{if($('sv'))$('sv').disabled=false}}
+async function load(){say('Loading…');try{var s=$('f').value;var j=await api('/api/admin/pharmacy-applications'+(s?'?status='+s:''));list=j.applications;draw();say('')}catch(e){say(e.message==='admin_access_not_configured'?'The server is not configured yet (SUPABASE_SERVICE_ROLE_KEY or admin emails missing on Vercel).':'Could not load: '+e.message,'err')}}
+$('rows').addEventListener('click',function(e){var tr=e.target.closest('tr[data-id]');if(!tr)return;var a=list.find(function(x){return x.id===tr.dataset.id});if(a)show(a)});
+$('q').oninput=draw;$('f').onchange=load;$('r').onclick=load;
+(async function(){try{var c=await fetch('/api/admin/config',{cache:'no-store'});var cfg=await c.json();if(!c.ok)throw 0;sb=window.supabase.createClient(cfg.supabaseUrl,cfg.supabaseAnonKey);var d=await sb.auth.getSession();if(!d.data.session)throw 0;session=d.data.session;$('app').hidden=false;load()}catch(_){$('gate').hidden=false}})()})();
+</script></body></html>
