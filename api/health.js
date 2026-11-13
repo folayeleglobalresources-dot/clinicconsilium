@@ -8,7 +8,7 @@ module.exports = async (req, res) => {
     return res.status(405).json({ ok: false, error: 'method_not_allowed' });
   }
 
-  const supabaseUrl = String(process.env.SUPABASE_URL || '').replace(/\\/$/, '');
+  const supabaseUrl = String(process.env.SUPABASE_URL || '').replace(/\/$/, '');
   const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
   let database = 'not_configured';
 
