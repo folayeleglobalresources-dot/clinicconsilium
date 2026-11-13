@@ -69,11 +69,29 @@ test('enquiries rejects foreign origins', async () => {
   assert.equal(res.code, 403);
 });
 
-test('health endpoint does not claim a verified connection', () => {
-  process.env.SUPABASE_URL = 'x'; process.env.SUPABASE_SERVICE_ROLE_KEY = 'y';
+test('health endpoint verifies the database without reading enquiry rows', async () => {
+  process.env.SUPABASE_URL = 'https://example.supabase.co';
+  process.env.SUPABASE_SERVICE_ROLE_KEY = 'test-key';
+  let requested;
+  global.fetch = async (url, options) => {
+    requested = { url, options };
+    return { ok: true, status: 200 };
+  };
   const res = mockRes();
-  require('../api/health.js')({ method: 'GET' }, res);
-  assert.equal(res.body.database, 'configured_not_connection_verified');
+  await require('../api/health.js')({ method: 'GET' }, res);
+  assert.equal(res.body.database, 'connected');
+  assert.match(requested.url, /enquiries\\?select=id&limit=0$/);
+  assert.equal(requested.options.method, 'GET');
+});
+
+test('health endpoint reports database unavailable without exposing errors', async () => {
+  process.env.SUPABASE_URL = 'https://example.supabase.co';
+  process.env.SUPABASE_SERVICE_ROLE_KEY = 'test-key';
+  global.fetch = async () => ({ ok: false, status: 503 });
+  const res = mockRes();
+  await require('../api/health.js')({ method: 'GET' }, res);
+  assert.equal(res.body.database, 'unavailable');
+  assert.equal(res.body.ok, true);
 });
 
 function adminEnv() {
