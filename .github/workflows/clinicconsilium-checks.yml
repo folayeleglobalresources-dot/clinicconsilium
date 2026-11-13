@@ -20,7 +20,7 @@ jobs:
         with:
           node-version: 22
       - name: Install dependencies
-        run: npm ci
+        run: npm install --ignore-scripts
       - name: Run API tests
         run: npm test
       - name: Check serverless API syntax
