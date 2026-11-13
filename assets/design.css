@@ -35,3 +35,26 @@ h1 em,h2 em{font-style:normal;background:var(--grad);-webkit-background-clip:tex
 /* Logo: official square lockup was capped at 64px; enlarge proportionally, never distort */
 .brand-logo{width:auto!important;height:auto!important;max-height:84px!important;object-fit:contain}
 @media(max-width:700px){.brand-logo{max-height:64px!important}}
+
+
+/* Emerald Green brand system — shared public-page layer */
+:root{--grad:linear-gradient(120deg,#075E45 0%,#043D2E 100%);--glow:0 18px 50px #075e4533;--ease:cubic-bezier(.2,.7,.2,1)}
+body{background:linear-gradient(135deg,#075E45 0%,#064F3C 46%,#043D2E 100%);background-attachment:fixed}
+.topline{background:linear-gradient(90deg,#043D2E,#075E45 55%,#064F3C);color:#EAF5EF}
+.topline strong{color:#D9EF9B}
+.nav,header.nav,.header{background:linear-gradient(110deg,#075E45F2 0%,#043D2EEB 100%);border-bottom:1px solid #ffffff22}
+.links a{color:#E1F1E8}.links a:hover,.links a[aria-current=page]{color:#D9EF9B}
+.hero{background:linear-gradient(125deg,#075E45 0%,#064B39 52%,#043D2E 100%);color:#fff}
+.hero h1,.hero h2,.hero h3{color:#fff}.hero p,.hero-copy{color:#D8EEE5}
+.hero .eyebrow{background:#EAF5EF;color:#075E45}
+.section{background:#EAF5EF;color:#102B24}.section.tint{background:linear-gradient(135deg,#D8EEE5,#EAF5EF)}
+.section.dark{background:#043D2E;color:#fff}
+.card{border-color:#C8DFD1}.card:before{background:var(--grad)}.card:hover{border-color:#86BBA4;box-shadow:var(--glow)}
+.number{background:var(--grad)!important;color:#fff!important}
+.button.primary,.button.primary:hover{background:var(--grad)!important;color:#fff!important;box-shadow:var(--glow)}
+.button.secondary{border-color:#075E45;color:#043D2E}.button.secondary:hover{background:#075E45;color:#fff}
+.cta{background:radial-gradient(500px 260px at 90% 0,#075E4566,#075E4500 70%),linear-gradient(115deg,#075E45,#043D2E)}
+.footer,footer{background:#043D2E;color:#C1D8C9;border-color:#D9EF9B}
+.disclaimer,.trust-note{border-left-color:#075E45}
+:focus-visible{outline-color:#D9EF9B}
+@media(prefers-reduced-motion:reduce){.eyebrow:before{animation:none}}
