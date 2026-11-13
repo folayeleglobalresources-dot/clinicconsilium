@@ -80,7 +80,7 @@ test('health endpoint verifies the database without reading enquiry rows', async
   const res = mockRes();
   await require('../api/health.js')({ method: 'GET' }, res);
   assert.equal(res.body.database, 'connected');
-  assert.match(requested.url, /enquiries\\?select=id&limit=0$/);
+  assert.ok(requested.url.endsWith('/rest/v1/enquiries?select=id&limit=0'));
   assert.equal(requested.options.method, 'GET');
 });
 
