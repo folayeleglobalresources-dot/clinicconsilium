@@ -58,3 +58,11 @@ body{background:linear-gradient(135deg,#075E45 0%,#064F3C 46%,#043D2E 100%);back
 .disclaimer,.trust-note{border-left-color:#075E45}
 :focus-visible{outline-color:#D9EF9B}
 @media(prefers-reduced-motion:reduce){.eyebrow:before{animation:none}}
+
+
+/* Compact navigation and footer across public pages */
+.navin,.nav .w{min-height:68px!important}
+.brand img,.brand-logo{width:auto!important;max-height:52px!important;object-fit:contain}
+.footer,footer{padding:28px 0 16px!important}
+.footer-top,.foot-top{padding-bottom:18px!important}
+@media(max-width:700px){.navin,.nav .w{min-height:62px!important}.brand img,.brand-logo{max-height:46px!important}}
