@@ -290,6 +290,43 @@ tbody tr:hover{background:#F7FBF8!important}
 }
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto!important}}
 
+
+/* Company-wide Super Admin workspace modules */
+.platform-hub,.platform-module{margin-top:22px;scroll-margin-top:84px}
+.platform-hub{padding:22px;background:#fff;border:1px solid var(--line);border-radius:15px;box-shadow:var(--shadow)}
+.platform-module{padding:21px;background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow)}
+.platform-module-head{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;margin-bottom:18px}
+.platform-module-head h2{font:750 20px Inter,"Plus Jakarta Sans",sans-serif;letter-spacing:-.6px;color:var(--ink);margin:7px 0 5px}
+.platform-module-head p{font-size:11px;color:var(--muted);margin:0;max-width:660px;line-height:1.6}
+.module-state{flex-shrink:0;padding:6px 9px;border:1px solid #E5EAE6;background:#F5F8F6;border-radius:7px;color:#687A70;font-size:9px;font-weight:700}
+.platform-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:20px 0}
+.platform-stats article{border:1px solid var(--line);border-radius:11px;padding:14px;background:#FBFDFC;display:flex;flex-direction:column;gap:8px}
+.platform-stats article span{font-size:10px;color:#6B7C72;font-weight:650}
+.platform-stats article strong{font-size:27px;line-height:1;color:#87958C;font-weight:750}
+.platform-stats article small{font-size:9px;color:#8B9991;line-height:1.4}
+.platform-callout{display:flex;gap:12px;padding:14px 15px;background:#EFF7F2;border:1px solid #DCECE2;border-radius:11px;margin:18px 0}
+.platform-callout>span{width:30px;height:30px;display:grid;place-items:center;flex-shrink:0;border-radius:8px;background:#DDEFE4;color:var(--brand)}
+.platform-callout svg,.module-icon svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.platform-callout strong{font-size:11px;color:var(--brand-deep)}
+.platform-callout p{font-size:10px;line-height:1.6;color:#536D60;margin:5px 0 0}
+.platform-launch-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin-top:18px}
+.platform-launch{display:flex;align-items:center;gap:10px;padding:12px;border:1px solid var(--line);border-radius:10px;text-decoration:none;background:#fff;min-width:0;transition:.16s ease}
+.platform-launch:hover{background:#F5FAF6;border-color:#BBD9C6;transform:translateY(-1px)}
+.module-icon{width:32px;height:32px;display:grid;place-items:center;flex-shrink:0;border-radius:9px;background:var(--brand-soft);color:var(--brand)}
+.platform-launch>span:nth-child(2){display:flex;flex-direction:column;gap:4px;min-width:0}
+.platform-launch strong{font-size:10px;color:#263C31}
+.platform-launch small{font-size:9px;line-height:1.4;color:#829087}
+.platform-launch>b{margin-left:auto;color:#6C8978;font-size:14px}
+.module-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.module-card{border:1px solid var(--line);border-radius:11px;padding:14px;display:flex;flex-direction:column;align-items:flex-start;gap:11px;background:#FCFDFC;min-height:155px}
+.module-card h3{font-size:11px;color:#2A4034;margin:0 0 5px}
+.module-card p{font-size:10px;line-height:1.55;color:#78877F;margin:0}
+.module-status{margin-top:auto;padding:5px 7px;border-radius:6px;background:#F1F4F2;color:#7B8981;font-size:9px;font-weight:650}
+.module-foot{display:flex;justify-content:space-between;gap:10px;margin-top:14px;padding-top:12px;border-top:1px solid #EDF2EE;color:#89968F;font-size:9px}
+.module-foot a{color:var(--brand);font-weight:700;text-decoration:none}
+@media(max-width:1050px){.platform-launch-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.module-cards{grid-template-columns:1fr}.module-card{min-height:0}}
+@media(max-width:700px){.platform-hub,.platform-module{padding:15px}.platform-module-head{flex-direction:column;gap:10px}.platform-stats{grid-template-columns:repeat(2,minmax(0,1fr))}.platform-launch-grid{grid-template-columns:1fr}.module-foot{flex-direction:column}}
+
 </style>
 <style id="sitewide-contrast-guard">
 body{color:#102B24!important}
@@ -320,6 +357,18 @@ footer p,footer a,footer .disclaimer,footer .foot-bottom{color:#E5F0EA!important
 <a href="providers.html"><svg><use href="#i-users"/></svg> Professionals</a>
 <a href="partnerships.html"><svg><use href="#i-building"/></svg> Care partners</a>
 <a href="insights.html"><svg><use href="#i-book"/></svg> Health information</a>
+</nav></div>
+<div><div class="nav-caption">Company command centre</div><nav class="nav" aria-label="Company platform management">
+<a href="#platform-overview"><svg><use href="#i-grid"/></svg> Platform overview</a>
+<a href="#platform-patients"><svg><use href="#i-heart"/></svg> Patient oversight</a>
+<a href="#platform-facilities"><svg><use href="#i-building"/></svg> Hospitals &amp; clinics</a>
+<a href="#platform-professionals"><svg><use href="#i-users"/></svg> Doctors &amp; professionals</a>
+<a href="#platform-pharmacies"><svg><use href="#i-plus"/></svg> Pharmacies</a>
+<a href="#platform-labs"><svg><use href="#i-note"/></svg> Laboratories</a>
+<a href="#platform-care"><svg><use href="#i-route"/></svg> Appointments &amp; referrals</a>
+<a href="#platform-records"><svg><use href="#i-shield"/></svg> Records access</a>
+<a href="#platform-access"><svg><use href="#i-users"/></svg> Team &amp; permissions</a>
+<a href="#platform-audit"><svg><use href="#i-book"/></svg> Audit &amp; security</a>
 </nav></div>
 <div><div class="nav-caption">Security &amp; governance</div><nav class="nav"><a href="trust-security.html"><svg><use href="#i-shield"/></svg> Trust &amp; access</a></nav></div>
 <div class="aside-bottom"><div class="tiny-mark"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v18M3 12h18"/><circle cx="12" cy="12" r="9"/></svg></div><strong>Care before complexity.</strong>A dedicated workspace for coordinating access to trusted healthcare.</div>
@@ -357,6 +406,111 @@ footer p,footer a,footer .disclaimer,footer .foot-bottom{color:#E5F0EA!important
 <section class="card"><div class="card-head"><div><h2>Operating principle</h2><p>Built around the care journey</p></div></div><div style="padding:18px 19px 20px"><div style="display:flex;gap:11px;align-items:flex-start"><span class="shortcut-icon" style="flex-shrink:0"><svg><use href="#i-heart"/></svg></span><div><strong style="font-size:11px">Every enquiry deserves a clear next step.</strong><p style="font-size:10px;color:var(--muted);margin:6px 0 0">The planned workflow helps teams route questions, coordinate qualified partners, and keep people informed — without presenting the platform as a substitute for clinical judgement.</p></div></div></div></section>
 </div>
 </div>
+
+<section class="platform-hub" id="platform-overview">
+ <div class="platform-module-head"><div><div class="eyebrow">ClinicConsilium · company administration</div><h2>Platform management</h2><p>One command centre for the healthcare network, partner operations and platform governance.</p></div><span class="module-state">Preview · not connected</span></div>
+ <div class="platform-stats">
+  <article><span>Patient accounts</span><strong>—</strong><small>Awaiting secure patient platform</small></article>
+  <article><span>Facilities</span><strong>—</strong><small>Awaiting partner onboarding</small></article>
+  <article><span>Professionals</span><strong>—</strong><small>Awaiting credential workflow</small></article>
+  <article><span>Pharmacy &amp; lab partners</span><strong>—</strong><small>Awaiting verification workflows</small></article>
+ </div>
+ <div class="platform-callout"><span><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-shield"/></svg></span><div><strong>Privacy-first administration</strong><p>This company dashboard is designed for platform oversight. It does not grant unrestricted access to patient medical records. Patient-level clinical access must be separately authorised, limited to a defined care purpose and recorded in an audit trail.</p></div></div>
+ <div class="platform-launch-grid">
+ <a href="#platform-patients" class="platform-launch"><span class="module-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-heart"/></svg></span><span><strong>Patient oversight</strong><small>Manage patient account operations while keeping clinical information protected.</small></span><b>↗</b></a><a href="#platform-facilities" class="platform-launch"><span class="module-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-building"/></svg></span><span><strong>Hospitals & clinics</strong><small>Review facility applications and manage the participating care network.</small></span><b>↗</b></a><a href="#platform-professionals" class="platform-launch"><span class="module-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-users"/></svg></span><span><strong>Doctors & professionals</strong><small>Oversee professional onboarding, credentials and network participation.</small></span><b>↗</b></a><a href="#platform-pharmacies" class="platform-launch"><span class="module-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-plus"/></svg></span><span><strong>Pharmacy partners</strong><small>Manage pharmacy partner applications and operational readiness.</small></span><b>↗</b></a><a href="#platform-labs" class="platform-launch"><span class="module-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-note"/></svg></span><span><strong>Laboratories</strong><small>Coordinate diagnostic partner onboarding and service availability.</small></span><b>↗</b></a><a href="#platform-care" class="platform-launch"><span class="module-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-route"/></svg></span><span><strong>Appointments & referrals</strong><small>Coordinate the operational journey between patients and approved providers.</small></span><b>↗</b></a><a href="#platform-records" class="platform-launch"><span class="module-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-shield"/></svg></span><span><strong>Medical records access</strong><small>Oversee permissions and sharing events, not unrestricted access to clinical files.</small></span><b>↗</b></a><a href="#platform-access" class="platform-launch"><span class="module-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-users"/></svg></span><span><strong>Team & permissions</strong><small>Create distinct staff roles and assign the minimum access required for each job.</small></span><b>↗</b></a><a href="#platform-audit" class="platform-launch"><span class="module-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-book"/></svg></span><span><strong>Audit & security</strong><small>Maintain accountability for sensitive access and important administrative actions.</small></span><b>↗</b></a>
+ </div>
+</section>
+
+<section class="platform-module" id="platform-overview">
+ <div class="platform-module-head"><div><div class="eyebrow">Company workspace · 01</div><h2>Company overview</h2><p>A single operational view of the ClinicConsilium network.</p></div><span class="module-state">Integration pending</span></div>
+ <div class="module-cards">
+  <article class="module-card"><span class="module-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-grid"/></svg></span><div><h3>Network health</h3><p>Monitor onboarding, verification and service readiness across every partner category.</p></div><span class="module-status">Not connected</span></article>
+  <article class="module-card"><span class="module-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-route"/></svg></span><div><h3>Partner onboarding</h3><p>Track registration and verification progress without exposing private clinical information.</p></div><span class="module-status">Not connected</span></article>
+  <article class="module-card"><span class="module-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-shield"/></svg></span><div><h3>Platform activity</h3><p>Review operational events and service status once connected to approved data sources.</p></div><span class="module-status">Policy required</span></article>
+ </div>
+ <div class="module-foot"><span>Workspace interface preview · No live records are displayed</span><a href="#platform-overview">Back to overview ↑</a></div>
+</section>
+<section class="platform-module" id="platform-patients">
+ <div class="platform-module-head"><div><div class="eyebrow">Company workspace · 02</div><h2>Patient oversight</h2><p>Manage patient account operations while keeping clinical information protected.</p></div><span class="module-state">Integration pending</span></div>
+ <div class="module-cards">
+  <article class="module-card"><span class="module-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-heart"/></svg></span><div><h3>Patient accounts</h3><p>Registration status, account support and consent preferences only.</p></div><span class="module-status">Not connected</span></article>
+  <article class="module-card"><span class="module-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-route"/></svg></span><div><h3>Care coordination</h3><p>Authorised coordination cases, assigned teams and follow-up status.</p></div><span class="module-status">Not connected</span></article>
+  <article class="module-card"><span class="module-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-shield"/></svg></span><div><h3>Privacy boundary</h3><p>Clinical notes, diagnoses and documents are not exposed in this company overview. Access requires a valid care purpose, patient authority and an audited permission.</p></div><span class="module-status">Policy required</span></article>
+ </div>
+ <div class="module-foot"><span>Workspace interface preview · No live records are displayed</span><a href="#platform-overview">Back to overview ↑</a></div>
+</section>
+<section class="platform-module" id="platform-facilities">
+ <div class="platform-module-head"><div><div class="eyebrow">Company workspace · 03</div><h2>Hospitals & clinics</h2><p>Review facility applications and manage the participating care network.</p></div><span class="module-state">Integration pending</span></div>
+ <div class="module-cards">
+  <article class="module-card"><span class="module-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-building"/></svg></span><div><h3>Facility directory</h3><p>Facility profiles, locations, service categories and onboarding status.</p></div><span class="module-status">Not connected</span></article>
+  <article class="module-card"><span class="module-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-route"/></svg></span><div><h3>Verification queue</h3><p>Review submitted licences, registration evidence and verification decisions.</p></div><span class="module-status">Not connected</span></article>
+  <article class="module-card"><span class="module-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-shield"/></svg></span><div><h3>Facility access</h3><p>Facility accounts and staff access are scoped to their own organisation and approved workflows.</p></div><span class="module-status">Policy required</span></article>
+ </div>
+ <div class="module-foot"><span>Workspace interface preview · No live records are displayed</span><a href="#platform-overview">Back to overview ↑</a></div>
+</section>
+<section class="platform-module" id="platform-professionals">
+ <div class="platform-module-head"><div><div class="eyebrow">Company workspace · 04</div><h2>Doctors & professionals</h2><p>Oversee professional onboarding, credentials and network participation.</p></div><span class="module-state">Integration pending</span></div>
+ <div class="module-cards">
+  <article class="module-card"><span class="module-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-users"/></svg></span><div><h3>Professional directory</h3><p>Profiles, specialties, registration details and affiliation status.</p></div><span class="module-status">Not connected</span></article>
+  <article class="module-card"><span class="module-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-route"/></svg></span><div><h3>Credential review</h3><p>Track licence evidence, verification expiry and review outcomes.</p></div><span class="module-status">Not connected</span></article>
+  <article class="module-card"><span class="module-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-shield"/></svg></span><div><h3>Role boundaries</h3><p>Professional access is limited to the patients and workflows they are authorised to support.</p></div><span class="module-status">Policy required</span></article>
+ </div>
+ <div class="module-foot"><span>Workspace interface preview · No live records are displayed</span><a href="#platform-overview">Back to overview ↑</a></div>
+</section>
+<section class="platform-module" id="platform-pharmacies">
+ <div class="platform-module-head"><div><div class="eyebrow">Company workspace · 05</div><h2>Pharmacy partners</h2><p>Manage pharmacy partner applications and operational readiness.</p></div><span class="module-state">Integration pending</span></div>
+ <div class="module-cards">
+  <article class="module-card"><span class="module-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-plus"/></svg></span><div><h3>Pharmacy directory</h3><p>Partner details, licence status, service area and contact information.</p></div><span class="module-status">Not connected</span></article>
+  <article class="module-card"><span class="module-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-route"/></svg></span><div><h3>Partner verification</h3><p>Review premises and professional licensing evidence before activation.</p></div><span class="module-status">Not connected</span></article>
+  <article class="module-card"><span class="module-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-shield"/></svg></span><div><h3>Medication services</h3><p>No live medicine inventory, ordering or fulfilment is represented until a verified integration exists.</p></div><span class="module-status">Policy required</span></article>
+ </div>
+ <div class="module-foot"><span>Workspace interface preview · No live records are displayed</span><a href="#platform-overview">Back to overview ↑</a></div>
+</section>
+<section class="platform-module" id="platform-labs">
+ <div class="platform-module-head"><div><div class="eyebrow">Company workspace · 06</div><h2>Laboratories</h2><p>Coordinate diagnostic partner onboarding and service availability.</p></div><span class="module-state">Integration pending</span></div>
+ <div class="module-cards">
+  <article class="module-card"><span class="module-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-note"/></svg></span><div><h3>Laboratory directory</h3><p>Partner profiles, diagnostic categories and service coverage.</p></div><span class="module-status">Not connected</span></article>
+  <article class="module-card"><span class="module-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-route"/></svg></span><div><h3>Verification</h3><p>Track accreditation/licensing evidence and approval status.</p></div><span class="module-status">Not connected</span></article>
+  <article class="module-card"><span class="module-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-shield"/></svg></span><div><h3>Results handling</h3><p>Laboratory results must flow only through secure, authorised patient-care workflows.</p></div><span class="module-status">Policy required</span></article>
+ </div>
+ <div class="module-foot"><span>Workspace interface preview · No live records are displayed</span><a href="#platform-overview">Back to overview ↑</a></div>
+</section>
+<section class="platform-module" id="platform-care">
+ <div class="platform-module-head"><div><div class="eyebrow">Company workspace · 07</div><h2>Appointments & referrals</h2><p>Coordinate the operational journey between patients and approved providers.</p></div><span class="module-state">Integration pending</span></div>
+ <div class="module-cards">
+  <article class="module-card"><span class="module-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-route"/></svg></span><div><h3>Appointments</h3><p>Booking requests, confirmations, cancellations and follow-up status.</p></div><span class="module-status">Not connected</span></article>
+  <article class="module-card"><span class="module-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-route"/></svg></span><div><h3>Referrals</h3><p>Referral routing, receiving provider, acceptance and progress tracking.</p></div><span class="module-status">Not connected</span></article>
+  <article class="module-card"><span class="module-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-shield"/></svg></span><div><h3>Virtual care</h3><p>Consultation scheduling and connection status; clinical consultation content remains access-restricted.</p></div><span class="module-status">Policy required</span></article>
+ </div>
+ <div class="module-foot"><span>Workspace interface preview · No live records are displayed</span><a href="#platform-overview">Back to overview ↑</a></div>
+</section>
+<section class="platform-module" id="platform-records">
+ <div class="platform-module-head"><div><div class="eyebrow">Company workspace · 08</div><h2>Medical records access</h2><p>Oversee permissions and sharing events, not unrestricted access to clinical files.</p></div><span class="module-state">Integration pending</span></div>
+ <div class="module-cards">
+  <article class="module-card"><span class="module-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-shield"/></svg></span><div><h3>Consent register</h3><p>Patient-authorised sharing scope, recipient, purpose and expiry.</p></div><span class="module-status">Not connected</span></article>
+  <article class="module-card"><span class="module-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-route"/></svg></span><div><h3>Access requests</h3><p>Review requests for access with appropriate legal and care authorisation.</p></div><span class="module-status">Not connected</span></article>
+  <article class="module-card"><span class="module-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-shield"/></svg></span><div><h3>Clinical privacy</h3><p>Platform administrators do not receive automatic access to diagnoses, prescriptions, test results or full medical histories.</p></div><span class="module-status">Policy required</span></article>
+ </div>
+ <div class="module-foot"><span>Workspace interface preview · No live records are displayed</span><a href="#platform-overview">Back to overview ↑</a></div>
+</section>
+<section class="platform-module" id="platform-access">
+ <div class="platform-module-head"><div><div class="eyebrow">Company workspace · 09</div><h2>Team & permissions</h2><p>Create distinct staff roles and assign the minimum access required for each job.</p></div><span class="module-state">Integration pending</span></div>
+ <div class="module-cards">
+  <article class="module-card"><span class="module-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-users"/></svg></span><div><h3>Platform administrators</h3><p>Manage platform settings and approved operational workflows.</p></div><span class="module-status">Not connected</span></article>
+  <article class="module-card"><span class="module-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-route"/></svg></span><div><h3>Care coordination staff</h3><p>Access assigned coordination cases and only the information needed for that case.</p></div><span class="module-status">Not connected</span></article>
+  <article class="module-card"><span class="module-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-shield"/></svg></span><div><h3>Permission model</h3><p>Facility owner, doctor, nurse, records officer, pharmacist, laboratory staff and support roles must have separate permissions.</p></div><span class="module-status">Policy required</span></article>
+ </div>
+ <div class="module-foot"><span>Workspace interface preview · No live records are displayed</span><a href="#platform-overview">Back to overview ↑</a></div>
+</section>
+<section class="platform-module" id="platform-audit">
+ <div class="platform-module-head"><div><div class="eyebrow">Company workspace · 10</div><h2>Audit & security</h2><p>Maintain accountability for sensitive access and important administrative actions.</p></div><span class="module-state">Integration pending</span></div>
+ <div class="module-cards">
+  <article class="module-card"><span class="module-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-book"/></svg></span><div><h3>Access history</h3><p>Who accessed which record, when, for what purpose and under which authority.</p></div><span class="module-status">Not connected</span></article>
+  <article class="module-card"><span class="module-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-route"/></svg></span><div><h3>Administrative actions</h3><p>Track account changes, verification decisions, role changes and exports.</p></div><span class="module-status">Not connected</span></article>
+  <article class="module-card"><span class="module-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-shield"/></svg></span><div><h3>Security controls</h3><p>Encryption, secure sessions, retention, backups, incident response and access reviews must be implemented and tested before live clinical use.</p></div><span class="module-status">Policy required</span></article>
+ </div>
+ <div class="module-foot"><span>Workspace interface preview · No live records are displayed</span><a href="#platform-overview">Back to overview ↑</a></div>
+</section>
 <footer class="footer"><span>© <span id="year"></span> ClinicConsilium · Admin prototype</span><span>Trusted Healthcare. Without Borders.</span></footer>
 </div>
 </main>
@@ -383,6 +537,7 @@ async function saveRecord(){const r=records.find(x=>x.id===selected);if(!r)retur
 async function signOut(showMessage=true){if(supabaseClient)await supabaseClient.auth.signOut();session=null;records=[];allRecords=[];setSignedIn(false);if(showMessage)setLoginMessage('You have signed out.');tbody.replaceChildren()}
 async function signIn(event){event.preventDefault();const btn=document.getElementById('loginBtn');btn.disabled=true;setLoginMessage('');try{const email=document.getElementById('loginEmail').value.trim(),password=document.getElementById('loginPassword').value;const {data,error}=await supabaseClient.auth.signInWithPassword({email,password});if(error)throw error;session=data.session;const test=await api('/api/admin/enquiries');setSignedIn(true);document.querySelector('.profile strong').textContent=session.user.email;document.querySelector('.profile small').textContent='Authorized administrator';setLoginMessage('');await loadEnquiries()}catch(e){await signOut(false);setLoginMessage(e.message==='Invalid login credentials'?'Email or password is incorrect.':e.message||'Sign-in failed. Verify your account and administrator access.')}finally{btn.disabled=false}}
 async function init(){document.getElementById('today').textContent=new Date().toLocaleDateString(undefined,{weekday:'short',month:'short',day:'numeric',year:'numeric'});document.getElementById('year').textContent=new Date().getFullYear();try{const cfgResponse=await fetch('/api/admin/config',{cache:'no-store'});const cfg=await cfgResponse.json();if(!cfgResponse.ok)throw new Error('Admin sign-in configuration is not ready. Add SUPABASE_ANON_KEY in Vercel.');if(!window.supabase?.createClient)throw new Error('The sign-in library did not load. Refresh the page or check your connection.');supabaseClient=window.supabase.createClient(cfg.supabaseUrl,cfg.supabaseAnonKey);const {data}=await supabaseClient.auth.getSession();if(data.session){session=data.session;try{await api('/api/admin/enquiries');setSignedIn(true);document.querySelector('.profile strong').textContent=session.user.email;document.querySelector('.profile small').textContent='Authorized administrator';await loadEnquiries()}catch(_){await signOut(false)}}}catch(e){setLoginMessage(e.message)}}
+document.querySelectorAll('aside .nav a[href^="#"]').forEach(link=>link.addEventListener('click',()=>{document.querySelectorAll('aside .nav a').forEach(a=>a.classList.remove('active'));link.classList.add('active')}));
 document.getElementById('loginForm').addEventListener('submit',signIn);document.getElementById('logoutBtn').addEventListener('click',()=>signOut(true));document.getElementById('refreshBtn').addEventListener('click',loadEnquiries);tbody.addEventListener('click',e=>{const tr=e.target.closest('tr[data-id]');if(tr)openRecord(tr.dataset.id)});tbody.addEventListener('keydown',e=>{const tr=e.target.closest('tr[data-id]');if(tr&&(e.key==='Enter'||e.key===' ')){e.preventDefault();openRecord(tr.dataset.id)}});document.getElementById('closeDialog').addEventListener('click',closeRecord);document.getElementById('dialogShade').addEventListener('click',e=>{if(e.target.id==='dialogShade')closeRecord()});document.addEventListener('keydown',e=>{if(e.key==='Escape')closeRecord()});document.getElementById('applyStatus').addEventListener('click',saveRecord);let searchTimer;search.addEventListener('input',()=>{clearTimeout(searchTimer);searchTimer=setTimeout(loadEnquiries,350)});statusFilter.addEventListener('change',loadEnquiries);document.getElementById('exportCsv').addEventListener('click',()=>{const quote=v=>{let t=String(v??'');if(/^[=+\-@\t\r]/.test(t))t="'"+t;return '"'+t.replace(/"/g,'""')+'"'};const csv=[['Reference','Name','Email','Role','Type','Received','Status','Notification'],...filtered().map(r=>[r.id,r.name,r.email,r.role,r.enquiry_type,dateLabel(r.created_at),labelStatus[r.status]||r.status,r.email_delivery_status])].map(row=>row.map(quote).join(',')).join('\r\n');const url=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8;'}));const a=document.createElement('a');a.href=url;a.download='clinicconsilium-enquiries.csv';document.body.append(a);a.click();a.remove();URL.revokeObjectURL(url);notify('Exported the currently loaded enquiry records.')});init();
 </script>
 </body></html>
