@@ -133,3 +133,32 @@ test('pharmacy admin PATCH validates input and records the reviewer', async () =
   assert.equal(patched.reviewed_by, 'u1');
   assert.equal(patched.status, 'approved');
 });
+
+
+test('account status requires a bearer session', async () => {
+  const h = require('../api/account/status.js');
+  const res = mockRes();
+  await h({ method: 'GET', headers: {} }, res);
+  assert.equal(res.code, 401);
+  assert.equal(res.body.error, 'sign_in_required');
+});
+
+test('registration review API requires an allow-listed administrator session', async () => {
+  const h = require('../api/admin/registrations.js');
+  const res = mockRes();
+  await h({ method: 'GET', headers: {}, query: {} }, res);
+  assert.equal(res.code, 401);
+});
+
+test('registration review API rejects unconfirmed or non-admin users', async () => {
+  process.env.SUPABASE_URL = 'https://example.supabase.co';
+  process.env.SUPABASE_SERVICE_ROLE_KEY = 'svc';
+  process.env.SUPABASE_ANON_KEY = 'anon';
+  process.env.CLINICCONSILIUM_ADMIN_EMAILS = 'boss@example.com';
+  const h = require('../api/admin/registrations.js');
+  global.fetch = async () => ({ ok: true, json: async () => ({ id: 'u1', email: 'other@example.com', email_confirmed_at: '2026-01-01' }) });
+  const res = mockRes();
+  await h({ method: 'GET', headers: { authorization: 'Bearer token' }, query: {} }, res);
+  assert.equal(res.code, 403);
+  assert.equal(res.body.error, 'admin_access_denied');
+});
