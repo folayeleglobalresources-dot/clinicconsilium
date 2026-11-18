@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#075E45">
+<meta name="theme-color" content="#123B6D">
 <meta name="robots" content="noindex,follow">
-<title>My Health Dashboard | ClinicConsilium</title>
+<title>Patient Dashboard | ClinicConsilium</title>\n<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
 <meta name="description" content="A preview of the planned ClinicConsilium patient workspace for consultations, medications, health records, appointments and care coordination.">
 <style>
 :root{--green:#075E45;--deep:#043D2E;--accent:#0B8060;--ink:#102B24;--muted:#526B60;--line:#DCE9E1;--bg:#F4F8F5;--pale:#EAF4EE;--white:#fff;--lime:#D9EF9B;--amber:#805B18;--amber-bg:#FFF7E8;--shadow:0 12px 34px rgba(4,61,46,.06)}
@@ -17,7 +17,80 @@
 @media(max-width:800px){.workspace{display:block}.sidebar{position:fixed;z-index:30;top:36px;bottom:0;left:0;width:270px;transform:translateX(-105%);transition:transform .22s ease;box-shadow:12px 0 35px #043D2E20;overflow-y:auto}.sidebar.open{transform:translateX(0)}.mobile-menu{display:block}.topbar{height:60px;padding:0 14px}.top-status,.profile-chip>div{display:none}.content{padding:17px 13px 35px}.hero{display:block;padding:23px 20px;border-radius:17px}.hero-actions{margin-top:16px}.two-col{grid-template-columns:1fr}.steps{grid-template-columns:1fr}.feature-grid{grid-template-columns:1fr 1fr}}
 @media(max-width:520px){.topline{height:auto;min-height:34px;padding:7px 10px;font-size:9px;gap:8px}.topline strong{font-size:8px}.sidebar{top:34px}.brand img{height:48px}.content{padding:13px 10px 28px}.hero h1{font-size:29px}.hero p{font-size:11px}.hero-actions{display:grid;grid-template-columns:1fr}.hero-actions .button{width:100%}.stats{gap:8px}.stat{padding:11px}.stat-value{font-size:19px}.feature-grid{grid-template-columns:1fr}.panel{padding:14px}.section-heading{align-items:flex-start;flex-direction:column}.footer-note{display:block}.footer-note span{display:block;margin-top:6px}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
-</style>
+
+/* Shared ClinicConsilium dashboard design language */
+:root{--green:#123B6D;--deep:#123B6D;--accent:#0D9488;--ink:#183653;--muted:#66788D;--line:#DFE7EF;--bg:#F3F6FA;--pale:#E3EDF7;--white:#fff;--lime:#D9F2EF;--amber:#89651E;--amber-bg:#FFF4DF;--shadow:0 8px 28px #123b6d0a}
+body{background:var(--bg);color:var(--ink);font-family:'DM Sans',sans-serif}
+.topline{height:0;padding:0;overflow:hidden}
+.workspace{grid-template-columns:254px minmax(0,1fr);min-height:100vh}
+.sidebar{background:#123B6D;color:#f9fbff;border-right:0;padding:24px 17px;gap:28px}
+.brand{padding:2px 9px 18px;border-bottom:1px solid #ffffff1c}
+.brand img{height:auto;max-height:54px;max-width:178px;filter:brightness(0) invert(1)}
+.nav-label{color:#b8c9dc;font-size:9px;font-weight:700;letter-spacing:1.7px;text-transform:uppercase}
+.side-nav{gap:5px}
+.side-nav button{color:#d8e3ef;padding:11px 12px;border-radius:12px;font-size:12px;font-weight:600;transition:background .15s,color .15s}
+.side-nav button:hover{background:#ffffff10;color:#fff}
+.side-nav button.active{background:#f8fbff;color:#123B6D;box-shadow:0 6px 16px #071d3522;font-weight:800}
+.nav-icon{width:27px;height:27px;border-radius:9px;background:#ffffff13;color:#d9f2ef;font-size:14px}
+.side-nav button.active .nav-icon{background:#d9f2ef;color:#0D9488}
+.sidebar-note{border-top:1px solid #ffffff25}
+.preview-pill{border-color:#efdfbb;background:#fff3d9;color:#89651E}
+.sidebar-note p{color:#c9d6e4}
+.sidebar-note a{color:#bcece6}
+.main{min-width:0}
+.topbar{height:78px;padding:0 34px;background:#F3F6FAe8;border-bottom:1px solid var(--line)}
+.crumb{color:var(--muted);font-size:11px}.crumb strong{color:var(--ink)}
+.top-actions{gap:14px}
+.top-status{font-size:10px;font-weight:700;color:#89651E;background:#fff3d9;border:1px solid #efdfbb;border-radius:999px;padding:7px 10px}
+.avatar{width:35px;height:35px;border-radius:13px;background:#E3EDF7;color:#315D88;font-size:11px}
+.profile-chip strong{font-size:11px;color:var(--ink)}.profile-chip small{font-size:10px;color:var(--muted)}
+.content{max-width:1560px;padding:30px 34px 40px}
+.hero{border-color:var(--line);border-radius:19px;background:linear-gradient(115deg,#E3EDF7 0%,#fff 58%,#D9F2EF 100%);box-shadow:var(--shadow)}
+.hero:after{border-color:#bfd5e8}
+.eyebrow{color:#0D9488;font-size:10px;letter-spacing:1.8px}
+.hero h1{font-family:'Plus Jakarta Sans',sans-serif;color:#123B6D}
+.hero p{color:#66788D}
+.button{border-radius:12px;font-size:11px}
+.button.primary{background:#123B6D;border-color:#123B6D}
+.button.primary:hover{background:#0d2e55}
+.button.secondary{border-color:var(--line);color:#123B6D}
+.notice{border-radius:14px;font-size:11px}
+.notice strong{font-size:11px}
+.stats{gap:12px}
+.stat,.panel,.feature{border-color:var(--line);border-radius:19px;box-shadow:var(--shadow)}
+.stat{padding:18px 19px}
+.stat-top{font-size:11px}
+.stat-icon,.feature-icon,.empty-icon,.resource-icon,.timeline-dot,.step-number{background:#E3EDF7;color:#315D88}
+.stat-value{font-family:'Plus Jakarta Sans',sans-serif;color:#123B6D;font-size:30px}
+.stat-foot{font-size:10px}
+.two-col{gap:18px}
+.panel{padding:18px}
+.panel-head h2,.section-heading h2,.feature h3,.resource strong,.timeline-item strong,.step strong{font-family:'Plus Jakarta Sans',sans-serif;color:#123B6D}
+.panel-head h2{font-size:14px}
+.panel-head p,.section-heading p{font-size:11px;color:var(--muted)}
+.feature-grid{gap:12px}
+.feature{padding:17px;min-height:175px}
+.feature h3{font-size:12px}
+.feature p{font-size:10px;color:var(--muted)}
+.status{border-radius:8px;font-size:9px}
+.status.public{background:#D9F2EF;color:#0D746C}
+.status.planned{background:#E3EDF7;color:#315D88}
+.empty{border-color:#d4e0ec;background:#f9fbfd}
+.empty strong{font-size:12px;color:#123B6D}
+.empty p,.resource p,.timeline-item p,.step p{font-size:10px;color:var(--muted)}
+.resource{border-color:var(--line);border-radius:12px}
+.callout{background:#eaf5f3;border-color:#cde8e3;color:#405a68;border-radius:12px}
+.callout strong{color:#123B6D}
+.footer-note{border-color:var(--line);font-size:10px}
+.footer-note a,.text-link{color:#0D9488}
+.emergency-panel{border-radius:16px}
+.directory-tools,.directory-card{border-color:var(--line);border-radius:14px;box-shadow:var(--shadow)}
+.directory-filter{border-color:var(--line);color:#345448}
+.directory-filter.active{background:#123B6D;border-color:#123B6D}
+@media(max-width:1100px){.workspace{grid-template-columns:220px minmax(0,1fr)}.content{padding:22px 20px}}
+@media(max-width:800px){.workspace{display:block}.sidebar{top:0}.content{padding:17px 13px 35px}.topbar{height:60px;padding:0 14px}}
+@media(max-width:520px){.content{padding:13px 10px 28px}.topline{display:none}.sidebar{top:0}}
+\n</style>
 </head>
 <body>
 <div class="app-shell">
