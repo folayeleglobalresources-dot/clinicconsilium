@@ -328,6 +328,45 @@ tbody tr:hover{background:#F7FBF8!important}
 @media(max-width:700px){.platform-hub,.platform-module{padding:15px}.platform-module-head{flex-direction:column;gap:10px}.platform-stats{grid-template-columns:repeat(2,minmax(0,1fr))}.platform-launch-grid{grid-template-columns:1fr}.module-foot{flex-direction:column}}
 
 
+
+/* Compact dashboard workspace, brighter brand green and original logo treatment */
+:root{--plum:#07864F;--plum2:#10A866;--coral:#12A86A;--coralsoft:#DDF7E9;--sage:#E2F6E9;--sageink:#087A49;--lav:#E4F7ED;--lavink:#087A49;--ink:#15382B;--muted:#61766B;--line:#DCEBE2;--ivory:#F4FAF6;--amber:#FFF2D6;--amberink:#8A6418}
+body{background:#F4FAF6;color:#15382B}
+.shell{min-height:100vh}
+@media(min-width:721px){.main{height:100vh;min-height:0;overflow-y:auto;overscroll-behavior:contain}.topbar{position:sticky;top:0;z-index:12;background:#FFFFFFF2;backdrop-filter:blur(12px)}}
+.brand{background:#fff;border-radius:14px;padding:10px 11px!important;border:0!important;min-height:65px}
+.brand img{width:100%!important;max-width:190px;height:44px!important;max-height:44px!important;object-fit:contain;object-position:left center;filter:none!important}
+aside{background:linear-gradient(165deg,#079657 0%,#087B4B 100%)!important;color:#fff}
+.nav-caption{color:#D9FBE9!important}
+.nav-group.is-open .nav-caption{color:#fff!important}
+.nav a{color:#E4F8EC!important}
+.nav a.active{background:#fff!important;color:#087A49!important}
+.nav a.active svg{color:#079657!important}
+.nav .count{background:#BDF4D5;color:#075D39}
+.primary{background:#079657!important;color:#fff!important;box-shadow:0 5px 14px #07864f24}
+.primary:hover{background:#087A49!important}
+.eyebrow,.plain-link{color:#07864F!important}
+.metric:nth-child(2):after,.metric:nth-child(2) .metric-icon{background:#DDF7E9}
+.metric:nth-child(2) .metric-icon{color:#07864F}
+.shortcut:hover{border-color:#8BDDB0;background:#F0FBF4}
+.status.s-new{background:#DDF7E9;color:#087A49}
+.platform-hub{display:none!important}
+.platform-module{display:none!important}
+.platform-module.is-current{display:block!important;scroll-margin-top:92px}
+.content{padding-top:24px;padding-bottom:28px}
+.welcome{margin-bottom:16px}
+.notice{margin-bottom:16px}
+.overview-grid{gap:14px}
+.main-stack,.right-stack{gap:14px}
+.metric{min-height:122px;padding:15px 17px}
+.metric strong{font-size:30px;margin:9px 0 3px}
+.card-head,.queue-head{padding-top:14px;padding-bottom:12px}
+.activity{padding:10px 0}
+.journey{padding:14px 17px}
+.shortcuts{padding:12px}
+.shortcut{min-height:88px;padding:10px}
+@media(max-width:720px){.brand{width:max-content;min-width:190px}.brand img{width:178px!important}.main{height:auto;overflow:visible}.content{padding-top:18px}.platform-module.is-current{display:block!important}}
+
 /* Fixed navigation rail with selection-aware accordion groups */
 @media(min-width:721px){
  .shell{grid-template-columns:268px minmax(0,1fr)!important}
@@ -431,7 +470,7 @@ footer p,footer a,footer .disclaimer,footer .foot-bottom{color:#E5F0EA!important
 </div>
 </div>
 
-<section class="platform-hub" id="platform-overview">
+<section class="platform-hub" id="platform-hub">
  <div class="platform-module-head"><div><div class="eyebrow">ClinicConsilium · company administration</div><h2>Platform management</h2><p>One command centre for the healthcare network, partner operations and platform governance.</p></div><span class="module-state">Preview · not connected</span></div>
  <div class="platform-stats">
   <article><span>Patient accounts</span><strong>—</strong><small>Awaiting secure patient platform</small></article>
@@ -587,6 +626,17 @@ navGroups.forEach(group=>{
   document.querySelectorAll('aside .nav a').forEach(a=>a.classList.remove('active'));
   link.classList.add('active');
   setOpenGroup(group);
+  const targetId=link.getAttribute('href').slice(1);
+  const module=document.querySelector('.platform-module#'+CSS.escape(targetId));
+  const modules=[...document.querySelectorAll('.platform-module')];
+  modules.forEach(item=>item.classList.toggle('is-current',item===module));
+  const overviewIds=['overview','queue','journey'];
+  const showOverview=overviewIds.includes(targetId);
+  document.querySelector('.welcome').hidden=!showOverview;
+  document.querySelector('.notice').hidden=!showOverview;
+  document.querySelector('.overview-grid').hidden=!showOverview;
+  if(module){module.scrollIntoView({behavior:'smooth',block:'start'});}
+  else if(showOverview){document.getElementById(targetId==='overview'?'overview':targetId).scrollIntoView({behavior:'smooth',block:'start'});}
  }));
 });
 
