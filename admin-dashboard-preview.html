@@ -329,6 +329,42 @@ tbody tr:hover{background:#F7FBF8!important}
 
 
 
+
+/* Dashboard-specific views, clear hierarchy and high-contrast ClinicConsilium palette */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@500;600;700;800&display=swap');
+:root{--plum:#078A52;--plum2:#12A96B;--coral:#0AA968;--coralsoft:#DDF7E9;--sage:#E5F7EC;--sageink:#087A49;--lav:#E8F8EF;--lavink:#087A49;--ink:#142F25;--muted:#536B5E;--line:#DCEBE2;--ivory:#F4FAF6;--paper:#FFFFFF}
+body{font-family:'Inter',sans-serif!important;color:#142F25;background:#F4FAF6}
+h1,h2,h3,h4,.welcome h1,.section-heading h2,.card h2{font-family:'Manrope','Inter',sans-serif!important;color:#123B2A}
+p,small,label,td,th{color:inherit}
+.welcome h1{font-weight:800;letter-spacing:-.045em}
+.welcome p,.section-heading p,.card-head p,.queue-head p{color:#536B5E!important}
+.eyebrow{color:#078A52!important;font-weight:800;letter-spacing:.1em}
+.metric{border:1px solid #DFECE4;box-shadow:0 7px 22px #0A6C4010}
+.metric strong{color:#087A49!important;font-family:'Manrope',sans-serif}
+.metric-top{color:#355345}
+.metric small{color:#62776B}
+.card{border:1px solid #DCEBE2;box-shadow:0 10px 28px #164B3210}
+.queue-filters input,.queue-filters select{border:1px solid #CBDDD1;color:#173B2B;background:#fff}
+.queue-filters input::placeholder{color:#718579}
+.table-wrap th{background:#F0F8F3;color:#365B48}
+.table-wrap td{color:#294638}
+.nav a.active{box-shadow:0 5px 15px #063F281C;font-weight:800}
+.primary{background:#078A52!important;color:#fff!important}
+.primary:hover{background:#056D41!important}
+.plain-link{color:#078A52!important;font-weight:700}
+.notice{background:#EAF8EF;border-color:#B9E5C9;color:#28513A}
+.notice strong{color:#075D39}
+.dashboard-hidden{display:none!important}
+.overview-grid[data-view="triage"]{grid-template-columns:minmax(0,1fr)!important}
+.overview-grid[data-view="triage"] .right-stack{display:none!important}
+.overview-grid[data-view="triage"] .main-stack{min-width:0}
+.overview-grid[data-view="pathways"]{grid-template-columns:minmax(0,1fr)!important}
+.overview-grid[data-view="pathways"] .main-stack{display:none!important}
+.overview-grid[data-view="pathways"] .right-stack{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(260px,.65fr);align-items:start}
+.overview-grid[data-view="pathways"] .right-stack>.card{min-width:0}
+@media(max-width:900px){.overview-grid[data-view="pathways"] .right-stack{grid-template-columns:1fr}}
+@media(min-width:721px){.main{scroll-behavior:smooth}.content{max-width:1600px;margin:0 auto}.topbar{border-bottom:1px solid #E1ECE5}}
+
 /* Compact dashboard workspace, brighter brand green and original logo treatment */
 :root{--plum:#07864F;--plum2:#10A866;--coral:#12A86A;--coralsoft:#DDF7E9;--sage:#E2F6E9;--sageink:#087A49;--lav:#E4F7ED;--lavink:#087A49;--ink:#15382B;--muted:#61766B;--line:#DCEBE2;--ivory:#F4FAF6;--amber:#FFF2D6;--amberink:#8A6418}
 body{background:#F4FAF6;color:#15382B}
@@ -603,43 +639,66 @@ async function signOut(showMessage=true){if(supabaseClient)await supabaseClient.
 async function signIn(event){event.preventDefault();const btn=document.getElementById('loginBtn');btn.disabled=true;setLoginMessage('');try{const email=document.getElementById('loginEmail').value.trim(),password=document.getElementById('loginPassword').value;const {data,error}=await supabaseClient.auth.signInWithPassword({email,password});if(error)throw error;session=data.session;const test=await api('/api/admin/enquiries');setSignedIn(true);document.querySelector('.profile strong').textContent=session.user.email;document.querySelector('.profile small').textContent='Authorized administrator';setLoginMessage('');await loadEnquiries()}catch(e){await signOut(false);setLoginMessage(e.message==='Invalid login credentials'?'Email or password is incorrect.':e.message||'Sign-in failed. Verify your account and administrator access.')}finally{btn.disabled=false}}
 async function init(){document.getElementById('today').textContent=new Date().toLocaleDateString(undefined,{weekday:'short',month:'short',day:'numeric',year:'numeric'});document.getElementById('year').textContent=new Date().getFullYear();try{const cfgResponse=await fetch('/api/admin/config',{cache:'no-store'});const cfg=await cfgResponse.json();if(!cfgResponse.ok)throw new Error('Admin sign-in configuration is not ready. Add SUPABASE_ANON_KEY in Vercel.');if(!window.supabase?.createClient)throw new Error('The sign-in library did not load. Refresh the page or check your connection.');supabaseClient=window.supabase.createClient(cfg.supabaseUrl,cfg.supabaseAnonKey);const {data}=await supabaseClient.auth.getSession();if(data.session){session=data.session;try{await api('/api/admin/enquiries');setSignedIn(true);document.querySelector('.profile strong').textContent=session.user.email;document.querySelector('.profile small').textContent='Authorized administrator';await loadEnquiries()}catch(_){await signOut(false)}}}catch(e){setLoginMessage(e.message)}}
 
+
 const navGroups=[...document.querySelectorAll('aside .nav-group')];
-function setOpenGroup(activeGroup){
- navGroups.forEach(group=>{
-  const open=group===activeGroup;
-  group.classList.toggle('is-open',open);
-  group.querySelector('.nav-caption')?.setAttribute('aria-expanded',String(open));
+const dashboardContent=document.querySelector('.content');
+const overviewGrid=document.querySelector('.overview-grid');
+const mainStack=overviewGrid.querySelector('.main-stack');
+const rightStack=overviewGrid.querySelector('.right-stack');
+const metricsSection=mainStack.children[0];
+const queueSection=mainStack.querySelector('#queue');
+const shortcutsSection=mainStack.querySelector('#shortcuts');
+const operationsSection=rightStack.children[0];
+const journeySection=rightStack.querySelector('#journey');
+const principleSection=rightStack.children[2];
+const viewItems=[
+ [metricsSection,['command','triage']],
+ [queueSection,['triage']],
+ [shortcutsSection,['command']],
+ [operationsSection,['command','triage']],
+ [journeySection,['pathways']],
+ [principleSection,['pathways']]
+];
+viewItems.forEach(([node,views])=>{if(node)node.dataset.dashboardViews=views.join(' ')});
+const viewCopy={
+ command:{title:'Platform command centre',description:'Your operational overview: enquiry workload, recent activity and the key tools used to manage the ClinicConsilium network.'},
+ triage:{title:'Enquiry triage',description:'Review incoming enquiries, search and filter submissions, check their current stage and prioritise the next response.'},
+ pathways:{title:'Care pathways',description:'Understand how enquiries move from first contact through review, coordination, response and resolution.'}
+};
+function setDashboardView(view,updateUrl=true){
+ if(!viewCopy[view])view='command';
+ dashboardContent.dataset.activeView=view;
+ overviewGrid.dataset.view=view;
+ viewItems.forEach(([node,views])=>{if(node)node.classList.toggle('dashboard-hidden',!views.includes(view))});
+ const title=document.querySelector('.welcome h1');
+ const description=document.querySelector('.welcome p');
+ title.textContent=viewCopy[view].title;
+ description.textContent=viewCopy[view].description;
+ document.querySelector('.notice').classList.toggle('dashboard-hidden',view==='pathways');
+ document.querySelectorAll('aside .nav a[href^="#"]').forEach(link=>{
+  const selected=link.getAttribute('href')==='#'+({command:'overview',triage:'queue',pathways:'journey'}[view]);
+  link.classList.toggle('active',selected);
+  if(selected)link.setAttribute('aria-current','page');else link.removeAttribute('aria-current');
  });
+ const selectedLink=document.querySelector('aside .nav a[href="#'+({command:'overview',triage:'queue',pathways:'journey'}[view])+'"]');
+ if(selectedLink){const group=selectedLink.closest('.nav-group');navGroups.forEach(g=>{const open=g===group;g.classList.toggle('is-open',open);g.querySelector('.nav-caption')?.setAttribute('aria-expanded',String(open))})}
+ if(updateUrl)history.replaceState(null,'','#'+({command:'overview',triage:'queue',pathways:'journey'}[view]));
 }
 navGroups.forEach(group=>{
- const heading=group.querySelector('.nav-caption');
- const nav=group.querySelector('.nav');
- if(nav)nav.id=nav.id||'nav-'+Math.random().toString(36).slice(2,8);
+ const heading=group.querySelector('.nav-caption'),nav=group.querySelector('.nav');
+ if(nav)nav.id=nav.id||'nav-'+navGroups.indexOf(group);
  heading.setAttribute('aria-controls',nav.id);
- group.classList.toggle('is-open',group.querySelector('.nav a.active')!==null);
- heading.addEventListener('click',()=>{
-  const wasOpen=group.classList.contains('is-open');
-  if(wasOpen){group.classList.remove('is-open');heading.setAttribute('aria-expanded','false')}
-  else setOpenGroup(group);
- });
- group.querySelectorAll('.nav a[href^="#"]').forEach(link=>link.addEventListener('click',()=>{
-  document.querySelectorAll('aside .nav a').forEach(a=>a.classList.remove('active'));
-  link.classList.add('active');
-  setOpenGroup(group);
-  const targetId=link.getAttribute('href').slice(1);
-  const module=document.querySelector('.platform-module#'+CSS.escape(targetId));
-  const modules=[...document.querySelectorAll('.platform-module')];
-  modules.forEach(item=>item.classList.toggle('is-current',item===module));
-  const overviewIds=['overview','queue','journey'];
-  const showOverview=overviewIds.includes(targetId);
-  document.querySelector('.welcome').hidden=!showOverview;
-  document.querySelector('.notice').hidden=!showOverview;
-  document.querySelector('.overview-grid').hidden=!showOverview;
-  if(module){module.scrollIntoView({behavior:'smooth',block:'start'});}
-  else if(showOverview){document.getElementById(targetId==='overview'?'overview':targetId).scrollIntoView({behavior:'smooth',block:'start'});}
+ heading.setAttribute('aria-expanded',String(group.querySelector('.nav a.active')!==null));
+ heading.addEventListener('click',()=>{const open=!group.classList.contains('is-open');navGroups.forEach(g=>{const active=g===group&&open;g.classList.toggle('is-open',active);g.querySelector('.nav-caption')?.setAttribute('aria-expanded',String(active))})});
+ group.querySelectorAll('.nav a[href^="#"]').forEach(link=>link.addEventListener('click',event=>{
+  event.preventDefault();
+  const id=link.getAttribute('href').slice(1);
+  setDashboardView(id==='queue'?'triage':id==='journey'?'pathways':'command');
+  document.querySelector('.main').scrollTo({top:0,behavior:'smooth'});
  }));
 });
-
+const initialHash=location.hash.slice(1);
+setDashboardView(initialHash==='queue'?'triage':initialHash==='journey'?'pathways':'command',false);
 document.getElementById('refreshBtn').addEventListener('click',loadEnquiries);tbody.addEventListener('click',e=>{const tr=e.target.closest('tr[data-id]');if(tr)openRecord(tr.dataset.id)});tbody.addEventListener('keydown',e=>{const tr=e.target.closest('tr[data-id]');if(tr&&(e.key==='Enter'||e.key===' ')){e.preventDefault();openRecord(tr.dataset.id)}});document.getElementById('closeDialog').addEventListener('click',closeRecord);document.getElementById('dialogShade').addEventListener('click',e=>{if(e.target.id==='dialogShade')closeRecord()});document.addEventListener('keydown',e=>{if(e.key==='Escape')closeRecord()});document.getElementById('applyStatus').addEventListener('click',saveRecord);let searchTimer;search.addEventListener('input',()=>{clearTimeout(searchTimer);searchTimer=setTimeout(loadEnquiries,350)});statusFilter.addEventListener('change',loadEnquiries);document.getElementById('exportCsv').addEventListener('click',()=>{const quote=v=>{let t=String(v??'');if(/^[=+\-@\t\r]/.test(t))t="'"+t;return '"'+t.replace(/"/g,'""')+'"'};const csv=[['Reference','Name','Email','Role','Type','Received','Status','Notification'],...filtered().map(r=>[r.id,r.name,r.email,r.role,r.enquiry_type,dateLabel(r.created_at),labelStatus[r.status]||r.status,r.email_delivery_status])].map(row=>row.map(quote).join(',')).join('\r\n');const url=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8;'}));const a=document.createElement('a');a.href=url;a.download='clinicconsilium-enquiries.csv';document.body.append(a);a.click();a.remove();URL.revokeObjectURL(url);notify('Exported the currently loaded enquiry records.')});
 const demoNow=new Date();
 const demoStamp=(hours)=>new Date(demoNow.getTime()-hours*3600000).toISOString();
