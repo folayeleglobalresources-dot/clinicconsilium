@@ -182,3 +182,43 @@ test('professional registration cannot be approved before credential verificatio
   assert.equal(res.body.error, 'professional_credentials_not_verified');
   assert.equal(patchCalled, false);
 });
+
+
+test('dashboard access guard requires a signed-in user', async () => {
+ const h=require('../api/access/dashboard.js'),res=mockRes();
+ await h({method:'POST',headers:{},body:{workspace:'patient'}},res);
+ assert.equal(res.code,401);assert.equal(res.body.error,'sign_in_required');
+});
+test('dashboard access guard rejects unknown workspace keys', async () => {
+ const h=require('../api/access/dashboard.js'),res=mockRes();
+ await h({method:'POST',headers:{authorization:'Bearer token'},body:{workspace:'super_admin'}},res);
+ assert.equal(res.code,400);assert.equal(res.body.error,'invalid_workspace');
+});
+test('patient dashboard access requires approved patient registration', async () => {
+ process.env.SUPABASE_URL='https://example.supabase.co';process.env.SUPABASE_ANON_KEY='anon';process.env.SUPABASE_SERVICE_ROLE_KEY='svc';
+ const h=require('../api/access/dashboard.js');
+ global.fetch=async url=>{if(url.endsWith('/auth/v1/user'))return{ok:true,json:async()=>({id:ID,email:'patient@example.com',email_confirmed_at:'2026-01-01'})};if(url.includes('/rest/v1/account_registrations?'))return{ok:true,json:async()=>[{status:'approved',requested_account_type:'patient',verification_status:'not_required',approved_access_role:'patient'}]};throw Error('unexpected request');};
+ const res=mockRes();await h({method:'POST',headers:{authorization:'Bearer token'},body:{workspace:'patient'}},res);
+ assert.equal(res.code,200);assert.equal(res.body.access,'granted');
+});
+test('dashboard access denies professional accounts pending credential review', async () => {
+ process.env.SUPABASE_URL='https://example.supabase.co';process.env.SUPABASE_ANON_KEY='anon';process.env.SUPABASE_SERVICE_ROLE_KEY='svc';
+ const h=require('../api/access/dashboard.js');
+ global.fetch=async url=>{if(url.endsWith('/auth/v1/user'))return{ok:true,json:async()=>({id:ID,email:'doctor@example.com',email_confirmed_at:'2026-01-01'})};if(url.includes('/rest/v1/account_registrations?'))return{ok:true,json:async()=>[{status:'pending_review',requested_account_type:'professional',verification_status:'pending',approved_access_role:null}]};throw Error('unexpected request');};
+ const res=mockRes();await h({method:'POST',headers:{authorization:'Bearer token'},body:{workspace:'professional'}},res);
+ assert.equal(res.code,403);assert.equal(res.body.error,'registration_pending_review');
+});
+test('organisation dashboard requires active organisation membership', async () => {
+ process.env.SUPABASE_URL='https://example.supabase.co';process.env.SUPABASE_ANON_KEY='anon';process.env.SUPABASE_SERVICE_ROLE_KEY='svc';
+ const h=require('../api/access/dashboard.js');
+ global.fetch=async url=>{if(url.endsWith('/auth/v1/user'))return{ok:true,json:async()=>({id:ID,email:'user@example.com',email_confirmed_at:'2026-01-01'})};if(url.includes('/rest/v1/organisation_memberships?'))return{ok:true,json:async()=>[]};throw Error('unexpected request');};
+ const res=mockRes();await h({method:'POST',headers:{authorization:'Bearer token'},body:{workspace:'pharmacy'}},res);
+ assert.equal(res.code,403);assert.equal(res.body.error,'active_membership_required');
+});
+test('coordination dashboard requires active platform role assignment', async () => {
+ process.env.SUPABASE_URL='https://example.supabase.co';process.env.SUPABASE_ANON_KEY='anon';process.env.SUPABASE_SERVICE_ROLE_KEY='svc';
+ const h=require('../api/access/dashboard.js');
+ global.fetch=async url=>{if(url.endsWith('/auth/v1/user'))return{ok:true,json:async()=>({id:ID,email:'user@example.com',email_confirmed_at:'2026-01-01'})};if(url.includes('/rest/v1/platform_role_assignments?'))return{ok:true,json:async()=>[]};throw Error('unexpected request');};
+ const res=mockRes();await h({method:'POST',headers:{authorization:'Bearer token'},body:{workspace:'coordination'}},res);
+ assert.equal(res.code,403);assert.equal(res.body.error,'platform_role_required');
+});
