@@ -454,7 +454,70 @@ h1,h2,h3,h4,.welcome h1,.section-heading h2,.card h2,.metric strong{font-family:
 .table-wrap th{background:#EEF8F2;color:#28553E}
 .table-wrap td{color:#294638}
 .dashboard-hidden{display:none!important}
-</style></head>
+</style><style>
+/* ClinicConsilium clinical navy + cool-neutral canvas */
+:root{
+ --plum:#123B6D;--plum2:#0D9488;--ivory:#F4F7FA;--paper:#FFFFFF;
+ --ink:#183653;--muted:#64788D;--line:#E1E8EF;
+ --lav:#E8F0F8;--lavink:#315D88;--coral:#0D9488;--coralsoft:#DDF3F0;
+ --sage:#E3F0E8;--sageink:#28704F;--shadow:0 10px 30px rgba(18,59,109,.055);
+}
+html,body{background:#F4F7FA!important;color:#183653!important}
+body{background:#F4F7FA!important}
+aside,.sidebar{
+ background:#123B6D!important;color:#F7FBFF!important;
+ border-color:#123B6D!important;
+}
+aside .brand,aside .brandfallback{color:#FFFFFF!important}
+aside .brand img{filter:none!important}
+aside .nav-caption{color:#AFC5DC!important}
+aside .nav a,aside .sidebar a,aside .sidebar button{color:#DCE8F4!important}
+aside .nav a:hover{background:rgba(255,255,255,.11)!important;color:#FFFFFF!important}
+aside .nav a.active{
+ background:#FFFFFF!important;color:#123B6D!important;
+ box-shadow:0 5px 16px rgba(4,24,49,.18)!important;
+}
+aside .nav a.active svg{color:#0D9488!important}
+aside .nav .count{background:#0D9488!important;color:#FFFFFF!important}
+aside .aside-bottom{border-color:rgba(255,255,255,.22)!important;color:#C7D7E7!important}
+aside .aside-bottom strong{color:#FFFFFF!important}
+aside .aside-bottom .tiny-mark{background:rgba(255,255,255,.13)!important;color:#FFFFFF!important}
+.main{background:#F4F7FA!important}
+.topbar{background:rgba(255,255,255,.96)!important;border-color:#E1E8EF!important}
+.content{background:transparent!important}
+.welcome h1,.metric strong,.section-heading h2,.card-head h2,.queue-head h2{color:#183653!important}
+.welcome p,.crumb,.profile small,.metric-top,.metric small{color:#64788D!important}
+.eyebrow,.plain-link{color:#0D9488!important}
+.primary,button.primary,.login-card .primary{background:#123B6D!important;color:#FFFFFF!important;border-color:#123B6D!important}
+.primary:hover,button.primary:hover,.login-card .primary:hover{background:#0D2D52!important}
+.card,.metric,.panel,.login-card{background:#FFFFFF!important;border-color:#E1E8EF!important;box-shadow:0 10px 30px rgba(18,59,109,.055)!important}
+.metric:after{background:#E8F0F8!important}
+.metric:nth-child(2):after{background:#DDF3F0!important}
+.metric:nth-child(3):after{background:#E3F0E8!important}
+.metric:nth-child(4):after{background:#FFF1D9!important}
+.metric-icon,.shortcut-icon,.case-avatar,.profile-avatar{background:#E8F0F8!important;color:#315D88!important}
+.metric:nth-child(2) .metric-icon,.shortcut:nth-child(2) .shortcut-icon{background:#DDF3F0!important;color:#087D73!important}
+.metric:nth-child(3) .metric-icon,.shortcut:nth-child(3) .shortcut-icon{background:#E3F0E8!important;color:#28704F!important}
+.metric:nth-child(4) .metric-icon,.shortcut:nth-child(4) .shortcut-icon{background:#FFF1D9!important;color:#91651D!important}
+th{background:#F0F4F8!important;color:#64788D!important}
+th,td,.card-head,.table-foot{border-color:#E7EDF3!important}
+tbody tr:hover{background:#F5FAFC!important}
+.shortcut{background:#FFFFFF!important;border-color:#E1E8EF!important}
+.shortcut:hover{background:#F2FAF9!important;border-color:#A8DCD5!important}
+.queue-filters input,.queue-filters select,.dialog-actions select,.login-card input{background:#FFFFFF!important;border-color:#D7E1EA!important;color:#183653!important}
+.field{background:#F1F5F9!important}
+.notice{background:#EAF5F3!important;border-color:#CDE7E2!important;color:#285E58!important}
+.notice strong{color:#123B6D!important}
+.status.s-new{background:#DDF3F0!important;color:#08766E!important}
+.status.s-review{background:#E8F0F8!important;color:#315D88!important}
+.status.s-wait{background:#FFF1D9!important;color:#91651D!important}
+.status.s-done{background:#E3F0E8!important;color:#28704F!important}
+.login-screen{background:linear-gradient(135deg,#F4F7FA 0%,#EAF1F7 58%,#E5F3F0 100%)!important}
+.login-brand,.login-card h1,.login-card label{color:#123B6D!important}
+.toast{background:#123B6D!important}
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{outline-color:#0D9488!important}
+</style>
+</head>
 <body>
 <svg aria-hidden="true" width="0" height="0" style="position:absolute"><symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="2"/><rect x="14" y="3" width="7" height="7" rx="2"/><rect x="3" y="14" width="7" height="7" rx="2"/><rect x="14" y="14" width="7" height="7" rx="2"/></symbol><symbol id="i-inbox" viewBox="0 0 24 24"><path d="M4 4h16v16H4z"/><path d="M4 13h4l2 3h4l2-3h4"/></symbol><symbol id="i-route" viewBox="0 0 24 24"><circle cx="6" cy="5" r="2"/><circle cx="18" cy="19" r="2"/><path d="M6 7v3a3 3 0 0 0 3 3h6a3 3 0 0 1 3 3v1"/></symbol><symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3 20v-2a6 6 0 0 1 12 0v2"/><path d="M16 5a3 3 0 0 1 0 6M18 14a5 5 0 0 1 3 4v2"/></symbol><symbol id="i-hand" viewBox="0 0 24 24"><path d="M8 12V5a2 2 0 0 1 4 0v6-8a2 2 0 0 1 4 0v9-6a2 2 0 0 1 4 0v8c0 5-3 8-8 8h-1c-2 0-3-1-4-3l-3-5a2 2 0 0 1 4-2z"/></symbol><symbol id="i-book" viewBox="0 0 24 24"><path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H20v17H6.5A2.5 2.5 0 0 0 4 21.5z"/><path d="M4 4.5v17M8 6h8M8 10h7"/></symbol><symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-11V5l-8-3-8 3v6c0 7 8 11 8 11z"/><path d="m9 12 2 2 4-4"/></symbol><symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol><symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol><symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 3 2.8 19a1.5 1.5 0 0 0 1.3 2.2h15.8a1.5 1.5 0 0 0 1.3-2.2z"/><path d="M12 9v4m0 4h.01"/></symbol><symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 5 5"/></symbol><symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol><symbol id="i-note" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h8"/></symbol><symbol id="i-heart" viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1.1L12 21l7.8-7.5 1.1-1.1a5.5 5.5 0 0 0-.1-7.8z"/></symbol><symbol id="i-building" viewBox="0 0 24 24"><rect x="3" y="3" width="13" height="18" rx="1"/><path d="M16 9h5v12h-5M7 7h2m3 0h1M7 11h2m3 0h1M7 15h2m3 0h1M8 21v-3h3v3"/></symbol></svg>
 <div id="loginScreen" class="login-screen"><form id="loginForm" class="login-card"><a href="index.html" class="login-brand">ClinicConsilium</a><div class="eyebrow">Restricted workspace</div><h1>Administrator sign in</h1><p>Use an account that has been created in Supabase and explicitly added to the administrator allowlist.</p><label for="loginEmail">Email address</label><input id="loginEmail" type="email" autocomplete="username" required maxlength="254"><label for="loginPassword">Password</label><input id="loginPassword" type="password" autocomplete="current-password" required><button id="loginBtn" class="primary" type="submit">Sign in securely</button><p id="loginMessage" class="login-message" role="status" hidden></p><small>Authorized administrators only. No patient clinical records are supported in this initial release.</small></form></div>\n<div class="shell">
