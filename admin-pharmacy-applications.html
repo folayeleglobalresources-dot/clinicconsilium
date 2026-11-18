@@ -9,7 +9,20 @@ button{background:linear-gradient(120deg,var(--navy),var(--teal));color:#fff;bor
 .panel{background:#fff;border:1px solid var(--line);border-radius:18px;padding:14px;overflow:auto;max-height:70vh}table{width:100%;border-collapse:collapse;font-size:14px}th,td{text-align:left;padding:9px 8px;border-bottom:1px solid #eef2f6}tr[data-id]{cursor:pointer}tr[data-id]:hover,tr.sel{background:#eefaf8}
 .pill{display:inline-block;padding:2px 10px;border-radius:99px;font-size:12px;font-weight:700;background:#e6eef8;color:var(--navy)}.pill.approved{background:#d8f3ef;color:#0A7C72}.pill.rejected,.pill.suspended{background:#fde8e8;color:#9b1c1c}.pill.under_review{background:#fff4d6;color:#8a5a00}
 dl{display:grid;grid-template-columns:130px 1fr;gap:6px 12px;margin:0 0 14px;font-size:14px}dt{color:#52657d}dd{margin:0;word-break:break-word}label{display:block;font-weight:600;margin:10px 0 4px}textarea{width:100%;min-height:110px}
-#msg{margin-top:10px;font-weight:600}.err{color:#9b1c1c}.ok{color:#0A7C72}</style></head><body>
+#msg{margin-top:10px;font-weight:600}.err{color:#9b1c1c}.ok{color:#0A7C72}</style><style id="sitewide-contrast-guard">
+body{color:#102B24!important}
+.hero{background-color:#F2F8F5!important;color:#102B24!important}
+.hero h1,.hero h1 span,.hero h1 em,.hero h1 strong,.hero h1 b{color:#043D2E!important;-webkit-text-fill-color:#043D2E!important;background:transparent!important;text-shadow:none!important}
+.hero .eyebrow,.hero .eyebrow span{color:#075E45!important;-webkit-text-fill-color:#075E45!important}
+.hero p,.hero .lead,.hero .hero-copy,.hero .trust-note{color:#344F43!important}
+.section:not(.dark):not(.ink) h2,.section:not(.dark):not(.ink) h3,.card h3,.feature-band h2{color:#043D2E!important}
+.section:not(.dark):not(.ink) p,.card p,.feature-band p,.checks li{color:#344F43!important}
+.btn.primary,.button.primary{background:#075E45!important;color:#fff!important;-webkit-text-fill-color:#fff!important}
+.btn.secondary,.button.secondary{background:#fff!important;color:#043D2E!important;border-color:#9DB9A9!important}
+footer{background:#043D2E!important;color:#E5F0EA!important}
+footer p,footer a,footer .disclaimer,footer .foot-bottom{color:#E5F0EA!important}footer .foot-col b{color:#fff!important}footer a:hover{color:#D9EF9B!important}
+:focus-visible{outline:3px solid #075E45!important;outline-offset:3px!important}
+</style></head><body>
 <header><img src="assets/clinicconsilium-logo-optimized.png" alt="ClinicConsilium"><a href="admin-dashboard.html">← Back to admin dashboard</a></header>
 <main><h1>Pharmacy &amp; supplier applications</h1><p class="sub">Review partner applications submitted through the Pharmaceutical Store page.</p>
 <div class="note"><strong>Approving an application does not publish a pharmacy.</strong> Public listings, licence verification and medicine availability remain separate, later steps. Medicine sales are not active.</div>
