@@ -90,6 +90,19 @@ footer .foot-bottom a{color:#D6E8DE!important;margin-left:16px!important}
  footer .disclaimer{font-size:10px!important}
  footer .foot-bottom{font-size:10px!important;flex-wrap:wrap!important}
 }
+
+/* Header behaviour matches the homepage: clean desktop navigation, mobile-only menu */
+header.header{background:#FFFFFF!important;background-color:#FFFFFF!important;background-image:none!important;border-bottom:1px solid #DCE8E1!important}
+header.header .menu{display:none!important;margin-left:auto!important}
+header.header .links{display:flex!important;position:static!important;box-shadow:none!important;border:0!important;padding:0!important}
+@media(max-width:800px){
+ .announcement .wrap{min-height:27px!important;height:30px!important;justify-content:center!important;text-align:center!important}
+ .announcement .wrap span:first-child{display:none!important}
+ header.header .menu{display:block!important}
+ header.header .links{display:none!important;position:absolute!important;top:100%!important;left:0!important;right:0!important;background:#FFFFFF!important;padding:20px 24px 26px!important;box-shadow:0 18px 30px #102b3b1a!important;flex-direction:column!important;align-items:stretch!important;border-bottom:1px solid #DCE8E1!important}
+ header.header .links.open{display:flex!important}
+ header.header .links a{font-size:14px!important;padding:7px 0!important}
+}
 </style>
 </head>
 <body>
