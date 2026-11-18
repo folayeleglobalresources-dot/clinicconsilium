@@ -1,0 +1,12 @@
+alter table public.enquiries add column if not exists owner_email text, add column if not exists assigned_by_email text, add column if not exists follow_up_at timestamptz;
+create index if not exists enquiries_owner_created_idx on public.enquiries(owner_email,created_at desc);
+create index if not exists enquiries_follow_up_idx on public.enquiries(follow_up_at) where follow_up_at is not null and status not in ('closed','spam');
+create table if not exists public.enquiry_activity(id uuid primary key default gen_random_uuid(),enquiry_id uuid not null references public.enquiries(id) on delete cascade,actor_email text not null,event_type text not null check(event_type in ('status_changed','assigned','follow_up_changed','note_updated')),details jsonb not null default '{}'::jsonb,created_at timestamptz not null default now());
+create index if not exists enquiry_activity_timeline_idx on public.enquiry_activity(enquiry_id,created_at desc);
+alter table public.enquiry_activity enable row level security;revoke all on public.enquiry_activity from anon,authenticated;grant select,insert on public.enquiry_activity to service_role;revoke update,delete on public.enquiry_activity from service_role;
+create or replace function public.prevent_enquiry_activity_mutation() returns trigger language plpgsql set search_path='' as $$ begin raise exception 'Enquiry activity is append-only'; end; $$;
+drop trigger if exists enquiry_activity_append_only on public.enquiry_activity;
+create trigger enquiry_activity_append_only before update or delete on public.enquiry_activity for each row execute function public.prevent_enquiry_activity_mutation();
+comment on table public.enquiry_activity is 'Append-only operational history for general enquiries. Must never contain clinical or sensitive health information.';
+comment on column public.enquiries.owner_email is 'Operational case owner email; not a clinical-care assignment.';
+comment on column public.enquiries.follow_up_at is 'Operational follow-up due timestamp for general enquiries only.';
