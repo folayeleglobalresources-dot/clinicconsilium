@@ -11,9 +11,9 @@ This workspace manages website general enquiries and partner-interest submission
 Add `CLINICCONSILIUM_STAFF_EMAILS` in Vercel Project Settings → Environment Variables for the required deployment environments, then redeploy. Do not commit the list or place it in browser code.
 
 ## Operations
-Enquiries support an owner, assigning administrator, follow-up timestamp, status and internal operational notes. The database RPC updates the enquiry and writes corresponding history events in one transaction. The activity table is append-only. Existing records are preserved; events before this migration are not reconstructed.
+Enquiries support an owner, assigning administrator, follow-up timestamp, status and internal operational notes. The database RPC updates the enquiry and writes corresponding history events in one transaction. The activity table is append-only and has an explicit deny policy for direct browser roles. Existing records are preserved; events before this migration are not reconstructed.
 
 The dashboard shows the latest 500 matching enquiries, not lifetime totals. Administrator views include the shared queue; staff views are scoped to their own assignments. Follow-up alerts are operational reminders, not clinical triage or emergency monitoring.
 
 ## Deployment requirements
-Keep `SUPABASE_URL`, `SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY` and `CLINICCONSILIUM_ADMIN_EMAILS` configured in Vercel. The service-role key must remain server-only. Add staff emails only after those team members have confirmed Auth accounts.
+Keep `SUPABASE_URL`, `SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY` and `CLINICCONSILIUM_ADMIN_EMAILS` configured in Vercel. The API verifies user sessions with the anon key and uses the service-role key only for server-side database operations. Add staff emails only after those team members have confirmed Auth accounts.
