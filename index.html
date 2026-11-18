@@ -62,6 +62,57 @@ body{background:linear-gradient(135deg,#075E45 0%,#064F3C 46%,#043D2E 100%);back
 .section.ink{background:linear-gradient(135deg,#032D22 0%,#043D2E 100%)}
 .last-call{background:linear-gradient(115deg,#D9EF9B 0%,#C6E8C8 55%,#D8EEE5 100%)}
 @media(max-width:800px){.header{background:linear-gradient(110deg,#075E45F7 0%,#043D2EF2 100%)}}
+
+/* Homepage refresh — compact shell and accessible light surfaces */
+:root{--ink:#0F2A22;--ink2:#075E45;--teal:#075E45;--mint:#DCEFE5;--lime:#D9EF9B;--paper:#F2F8F5;--white:#FFFFFF;--muted:#405A50;--line:#D5E5DC;--blue:#EAF4EE}
+html{scroll-padding-top:72px}
+body{background:#FFFFFF;color:#0F2A22}
+.announcement{background:#043D2E;color:#FFFFFF;font-size:13px}
+.announcement .wrap{min-height:32px;height:32px}
+.announcement b{color:#D9EF9B}
+.header{position:sticky;top:0;background:#FFFFFF;border-bottom:1px solid #DCE8E1;backdrop-filter:blur(12px)}
+.nav{min-height:72px;height:72px;gap:20px}
+.brand img{width:auto;height:auto;max-height:48px;max-width:190px;object-fit:contain}
+.links{gap:18px}
+.links a{font-size:13px;color:#173B2D;white-space:nowrap}
+.links a:hover{color:#075E45}
+.nav .btn{min-height:38px;padding:0 14px}
+.menu{width:42px;height:42px;background:#F2F8F5;border-color:#D5E5DC}
+.hero{padding:58px 0 68px;background:linear-gradient(125deg,#F2F8F5 0%,#FFFFFF 58%,#E8F4ED 100%);color:#0F2A22}
+.hero:before{background:#B9DEC8;opacity:.28}.hero:after{background:#D9EF9B;opacity:.18}
+.kicker{color:#075E45}.hero h1{color:#0F2A22}.hero h1 span{color:#075E45}
+.hero-copy,.micro-proof{color:#405A50}
+.section{color:#0F2A22;background:#FFFFFF}
+.section.white{background:#F2F8F5;color:#0F2A22}
+.section:not(.white):not(.ink) .section-head p,.section:not(.white):not(.ink) .how-intro p,.section:not(.white):not(.ink) .partner-copy p,.section:not(.white):not(.ink) .faq-intro p,.section:not(.white):not(.ink) .faq-list details p,.section:not(.white):not(.ink) .step p{color:#405A50}
+.section:not(.white):not(.ink) .eyebrow,.eyebrow{color:#075E45}
+.section:not(.white):not(.ink) .step{border-color:#D5E5DC}
+.section:not(.white):not(.ink) .faq-list details{border-color:#D5E5DC}
+.section:not(.white):not(.ink) .faq-list summary{color:#0F2A22}
+.section:not(.white):not(.ink) .faq-list summary:after{color:#075E45}
+.path:nth-child(1),.path:nth-child(2),.path:nth-child(3),.path:nth-child(4){background:#F2F8F5;color:#0F2A22}
+.path:nth-child(5){background:#075E45;color:#FFFFFF}
+.path p{color:#405A50}.path:nth-child(5) p{color:#E0F0E7}
+.path-icon{background:#FFFFFF;color:#075E45}
+.status{background:#FFFFFF;color:#173B2D}
+.exchange{background:#F2F8F5}.exchange-copy p{color:#405A50}.exchange-art{background:#E8F4ED}
+.partner-link{background:#FFFFFF;color:#173B2D;border-color:#D5E5DC}
+.insight{background:#FFFFFF}.insight-copy p{color:#405A50}
+.last-call{padding:52px 0;background:#075E45;color:#FFFFFF}
+.last-call h2{color:#FFFFFF}.last-call p{color:#E0F0E7}
+.last-call .btn.dark{background:#FFFFFF;color:#043D2E;box-shadow:none}
+footer{background:#043D2E;color:#D6E8DE;padding:40px 0!important}
+.foot-top{grid-template-columns:1.25fr repeat(3,1fr);gap:24px}
+.foot-brand img{width:auto;max-width:190px;height:auto;max-height:56px;object-fit:contain;background:transparent;padding:0;border-radius:0;margin-bottom:12px}
+.foot-brand p{font-size:12px;color:#D6E8DE}
+.foot-col b{font-size:12px;margin-bottom:10px}
+.foot-col a{font-size:12px;padding:3px 0;color:#D6E8DE}
+.disclaimer{margin-top:18px;padding:0;background:transparent;border-radius:0;color:#D6E8DE;font-size:10px;line-height:1.5}
+.foot-bottom{margin-top:14px;padding-top:12px;color:#D6E8DE}
+@media(max-width:1000px){.links{gap:12px}.links a{font-size:12px}.nav{gap:12px}}
+@media(max-width:800px){.nav{min-height:60px;height:60px}.header{background:#FFFFFF}.links{background:#FFFFFF}.links a{font-size:14px}.hero{padding:48px 0 60px}.foot-top{grid-template-columns:1fr 1fr}.last-call{padding:42px 0}}
+@media(max-width:540px){.brand img{max-height:44px;max-width:170px}.announcement{font-size:12px}.announcement .wrap{min-height:30px;height:30px}.foot-top{grid-template-columns:1fr 1fr;gap:22px 16px}.foot-brand{grid-column:1/-1}.foot-brand img{max-height:52px}.disclaimer{font-size:10px}.foot-bottom{font-size:10px}}
+
 </style>
 </head>
 <body>
@@ -70,7 +121,7 @@ body{background:linear-gradient(135deg,#075E45 0%,#064F3C 46%,#043D2E 100%);back
 <header class="header"><div class="wrap nav">
 <a class="brand" href="index.html" aria-label="ClinicConsilium home"><img src="assets/clinicconsilium-logo-optimized.png" alt="ClinicConsilium — Trusted Healthcare. Without Borders."></a>
 <button class="menu" id="menuToggle" aria-label="Open navigation" aria-expanded="false" aria-controls="mainNav">☰</button>
-<nav class="links" id="mainNav" aria-label="Main navigation"><a href="#pathways">Care pathways</a><a href="#how">How it works</a><a href="#partners">For partners</a><a href="#insights">Health insights</a><a href="about.html">About</a><a class="btn dark" href="contact.html">Make an enquiry <span>↗</span></a></nav>
+<nav class="links" id="mainNav" aria-label="Main navigation"><a href="index.html" aria-current="page">Home</a><a href="services.html">Services</a><a href="how-it-works.html">How it works</a><a href="providers.html">For providers</a><a href="international-care.html">International care</a><a href="about.html">About</a><a href="contact.html">Contact</a></nav>
 </div></header>
 <main id="main">
 <section class="hero"><div class="wrap hero-grid">
