@@ -942,4 +942,35 @@ window.addEventListener('hashchange',()=>{const key=location.hash.slice(1);if(pr
 showPreviewRoute(previewRoutes[location.hash.slice(1)]?location.hash.slice(1):'overview',false);
 
 </script>
+
+<script id="reliable-sidebar-accordion-fix">
+/* Isolated navigation controller: deliberately independent of the dashboard demo script. */
+(function(){
+  function initialiseSidebarAccordions(){
+    document.querySelectorAll('aside .nav-group').forEach(function(group){
+      var trigger=group.querySelector(':scope > .nav-caption');
+      var panel=group.querySelector(':scope > .nav');
+      if(!trigger || !panel) return;
+      trigger.setAttribute('aria-expanded','true');
+      trigger.setAttribute('aria-controls', panel.id || (panel.id='sidebar-panel-'+Array.prototype.indexOf.call(group.parentElement.children,group)));
+      panel.hidden=false;
+      group.classList.remove('collapsed');
+    });
+    document.addEventListener('click',function(event){
+      var trigger=event.target.closest('aside .nav-group > .nav-caption');
+      if(!trigger) return;
+      event.preventDefault();
+      var group=trigger.parentElement;
+      var panel=group.querySelector(':scope > .nav');
+      if(!panel) return;
+      var willOpen=panel.hidden || group.classList.contains('collapsed');
+      panel.hidden=!willOpen;
+      group.classList.toggle('collapsed',!willOpen);
+      trigger.setAttribute('aria-expanded',String(willOpen));
+    });
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',initialiseSidebarAccordions,{once:true});
+  else initialiseSidebarAccordions();
+})();
+</script>
 </body></html>
