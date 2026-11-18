@@ -327,6 +327,30 @@ tbody tr:hover{background:#F7FBF8!important}
 @media(max-width:1050px){.platform-launch-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.module-cards{grid-template-columns:1fr}.module-card{min-height:0}}
 @media(max-width:700px){.platform-hub,.platform-module{padding:15px}.platform-module-head{flex-direction:column;gap:10px}.platform-stats{grid-template-columns:repeat(2,minmax(0,1fr))}.platform-launch-grid{grid-template-columns:1fr}.module-foot{flex-direction:column}}
 
+
+/* Fixed navigation rail with selection-aware accordion groups */
+@media(min-width:721px){
+ .shell{grid-template-columns:268px minmax(0,1fr)!important}
+ aside{position:sticky!important;top:0!important;height:100vh!important;min-height:100vh!important;overflow-y:auto!important;align-self:start!important;overscroll-behavior:contain}
+}
+aside{scrollbar-width:thin;scrollbar-color:#ffffff40 transparent}
+.nav-group{display:grid;gap:5px}
+.nav-caption{width:100%;display:flex;align-items:center;justify-content:space-between;gap:10px;border:0;background:transparent;text-align:left;cursor:pointer;font:inherit;padding:7px 12px;color:#C5AECF!important}
+.nav-chevron{width:14px;height:14px;flex-shrink:0;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;transition:transform .2s ease}
+.nav-group:not(.is-open) .nav-chevron{transform:rotate(-90deg)}
+.nav-group:not(.is-open) .nav{display:none}
+.nav-group .nav{padding-bottom:5px}
+.nav-group.is-open .nav-caption{color:#fff!important}
+@media(max-width:720px){
+ aside{position:relative!important;top:auto!important;height:auto!important;min-height:0!important;overflow:visible!important}
+ .nav-group{min-width:max-content}
+ .nav-group .nav{display:flex;flex-direction:column;position:absolute;z-index:15;top:100%;left:12px;right:12px;padding:9px;background:#172A45;border:1px solid #ffffff30;border-radius:13px;box-shadow:0 14px 30px #0d1b2d40}
+ .nav-group:not(.is-open) .nav{display:none}
+ .nav-caption{padding:5px 9px!important;font-size:9px!important;letter-spacing:1px!important;white-space:nowrap}
+ .nav-chevron{width:12px;height:12px}
+ .nav{overflow:visible}
+}
+@media(prefers-reduced-motion:reduce){.nav-chevron{transition:none}}
 </style>
 <style id="sitewide-contrast-guard">
 body{color:#102B24!important}
@@ -347,18 +371,18 @@ footer p,footer a,footer .disclaimer,footer .foot-bottom{color:#E5F0EA!important
 <div class="shell authenticated">
 <aside aria-label="Care coordination navigation">
 <a class="brand" href="index.html" aria-label="ClinicConsilium home"><img src="assets/clinicconsilium-logo-optimized.png" alt="ClinicConsilium" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><span class="brandfallback" style="display:none">Clinic<span>Consilium</span></span></a>
-<div><div class="nav-caption">Platform operations</div><nav class="nav" aria-label="Platform operations">
+<div class="nav-group"><button class="nav-caption" type="button" aria-expanded="true">Platform operations<svg class="nav-chevron" viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></button><nav class="nav" aria-label="Platform operations">
 <a class="active" href="#overview"><svg><use href="#i-grid"/></svg> Command centre</a>
 <a href="#queue"><svg><use href="#i-inbox"/></svg> Enquiry triage <span class="count" id="newCount">0</span></a>
 <a href="#journey"><svg><use href="#i-route"/></svg> Care pathways</a>
 </nav></div>
-<div><div class="nav-caption">Network directory</div><nav class="nav" aria-label="Network management">
+<div class="nav-group"><button class="nav-caption" type="button" aria-expanded="true">Network directory<svg class="nav-chevron" viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></button><nav class="nav" aria-label="Network management">
 <a href="admin-pharmacy-applications.html"><svg><use href="#i-building"/></svg> Pharmacy applications</a>
 <a href="providers.html"><svg><use href="#i-users"/></svg> Professionals</a>
 <a href="partnerships.html"><svg><use href="#i-building"/></svg> Care partners</a>
 <a href="insights.html"><svg><use href="#i-book"/></svg> Health information</a>
 </nav></div>
-<div><div class="nav-caption">Company command centre</div><nav class="nav" aria-label="Company platform management">
+<div class="nav-group"><button class="nav-caption" type="button" aria-expanded="true">Company command centre<svg class="nav-chevron" viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></button><nav class="nav" aria-label="Company platform management">
 <a href="#platform-overview"><svg><use href="#i-grid"/></svg> Platform overview</a>
 <a href="#platform-patients"><svg><use href="#i-heart"/></svg> Patient oversight</a>
 <a href="#platform-facilities"><svg><use href="#i-building"/></svg> Hospitals &amp; clinics</a>
@@ -370,7 +394,7 @@ footer p,footer a,footer .disclaimer,footer .foot-bottom{color:#E5F0EA!important
 <a href="#platform-access"><svg><use href="#i-users"/></svg> Team &amp; permissions</a>
 <a href="#platform-audit"><svg><use href="#i-book"/></svg> Audit &amp; security</a>
 </nav></div>
-<div><div class="nav-caption">Security &amp; governance</div><nav class="nav"><a href="trust-security.html"><svg><use href="#i-shield"/></svg> Trust &amp; access</a></nav></div>
+<div class="nav-group"><button class="nav-caption" type="button" aria-expanded="true">Security &amp; governance<svg class="nav-chevron" viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></button><nav class="nav"><a href="trust-security.html"><svg><use href="#i-shield"/></svg> Trust &amp; access</a></nav></div>
 <div class="aside-bottom"><div class="tiny-mark"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v18M3 12h18"/><circle cx="12" cy="12" r="9"/></svg></div><strong>Care before complexity.</strong>A dedicated workspace for coordinating access to trusted healthcare.</div>
 </aside>
 <main class="main">
@@ -539,7 +563,33 @@ async function saveRecord(){notify('This is a read-only preview. Changes are not
 async function signOut(showMessage=true){if(supabaseClient)await supabaseClient.auth.signOut();session=null;records=[];allRecords=[];setSignedIn(false);if(showMessage)setLoginMessage('You have signed out.');tbody.replaceChildren()}
 async function signIn(event){event.preventDefault();const btn=document.getElementById('loginBtn');btn.disabled=true;setLoginMessage('');try{const email=document.getElementById('loginEmail').value.trim(),password=document.getElementById('loginPassword').value;const {data,error}=await supabaseClient.auth.signInWithPassword({email,password});if(error)throw error;session=data.session;const test=await api('/api/admin/enquiries');setSignedIn(true);document.querySelector('.profile strong').textContent=session.user.email;document.querySelector('.profile small').textContent='Authorized administrator';setLoginMessage('');await loadEnquiries()}catch(e){await signOut(false);setLoginMessage(e.message==='Invalid login credentials'?'Email or password is incorrect.':e.message||'Sign-in failed. Verify your account and administrator access.')}finally{btn.disabled=false}}
 async function init(){document.getElementById('today').textContent=new Date().toLocaleDateString(undefined,{weekday:'short',month:'short',day:'numeric',year:'numeric'});document.getElementById('year').textContent=new Date().getFullYear();try{const cfgResponse=await fetch('/api/admin/config',{cache:'no-store'});const cfg=await cfgResponse.json();if(!cfgResponse.ok)throw new Error('Admin sign-in configuration is not ready. Add SUPABASE_ANON_KEY in Vercel.');if(!window.supabase?.createClient)throw new Error('The sign-in library did not load. Refresh the page or check your connection.');supabaseClient=window.supabase.createClient(cfg.supabaseUrl,cfg.supabaseAnonKey);const {data}=await supabaseClient.auth.getSession();if(data.session){session=data.session;try{await api('/api/admin/enquiries');setSignedIn(true);document.querySelector('.profile strong').textContent=session.user.email;document.querySelector('.profile small').textContent='Authorized administrator';await loadEnquiries()}catch(_){await signOut(false)}}}catch(e){setLoginMessage(e.message)}}
-document.querySelectorAll('aside .nav a[href^="#"]').forEach(link=>link.addEventListener('click',()=>{document.querySelectorAll('aside .nav a').forEach(a=>a.classList.remove('active'));link.classList.add('active')}));
+
+const navGroups=[...document.querySelectorAll('aside .nav-group')];
+function setOpenGroup(activeGroup){
+ navGroups.forEach(group=>{
+  const open=group===activeGroup;
+  group.classList.toggle('is-open',open);
+  group.querySelector('.nav-caption')?.setAttribute('aria-expanded',String(open));
+ });
+}
+navGroups.forEach(group=>{
+ const heading=group.querySelector('.nav-caption');
+ const nav=group.querySelector('.nav');
+ if(nav)nav.id=nav.id||'nav-'+Math.random().toString(36).slice(2,8);
+ heading.setAttribute('aria-controls',nav.id);
+ group.classList.toggle('is-open',group.querySelector('.nav a.active')!==null);
+ heading.addEventListener('click',()=>{
+  const wasOpen=group.classList.contains('is-open');
+  if(wasOpen){group.classList.remove('is-open');heading.setAttribute('aria-expanded','false')}
+  else setOpenGroup(group);
+ });
+ group.querySelectorAll('.nav a[href^="#"]').forEach(link=>link.addEventListener('click',()=>{
+  document.querySelectorAll('aside .nav a').forEach(a=>a.classList.remove('active'));
+  link.classList.add('active');
+  setOpenGroup(group);
+ }));
+});
+
 document.getElementById('refreshBtn').addEventListener('click',loadEnquiries);tbody.addEventListener('click',e=>{const tr=e.target.closest('tr[data-id]');if(tr)openRecord(tr.dataset.id)});tbody.addEventListener('keydown',e=>{const tr=e.target.closest('tr[data-id]');if(tr&&(e.key==='Enter'||e.key===' ')){e.preventDefault();openRecord(tr.dataset.id)}});document.getElementById('closeDialog').addEventListener('click',closeRecord);document.getElementById('dialogShade').addEventListener('click',e=>{if(e.target.id==='dialogShade')closeRecord()});document.addEventListener('keydown',e=>{if(e.key==='Escape')closeRecord()});document.getElementById('applyStatus').addEventListener('click',saveRecord);let searchTimer;search.addEventListener('input',()=>{clearTimeout(searchTimer);searchTimer=setTimeout(loadEnquiries,350)});statusFilter.addEventListener('change',loadEnquiries);document.getElementById('exportCsv').addEventListener('click',()=>{const quote=v=>{let t=String(v??'');if(/^[=+\-@\t\r]/.test(t))t="'"+t;return '"'+t.replace(/"/g,'""')+'"'};const csv=[['Reference','Name','Email','Role','Type','Received','Status','Notification'],...filtered().map(r=>[r.id,r.name,r.email,r.role,r.enquiry_type,dateLabel(r.created_at),labelStatus[r.status]||r.status,r.email_delivery_status])].map(row=>row.map(quote).join(',')).join('\r\n');const url=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8;'}));const a=document.createElement('a');a.href=url;a.download='clinicconsilium-enquiries.csv';document.body.append(a);a.click();a.remove();URL.revokeObjectURL(url);notify('Exported the currently loaded enquiry records.')});
 const demoNow=new Date();
 const demoStamp=(hours)=>new Date(demoNow.getTime()-hours*3600000).toISOString();
