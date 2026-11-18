@@ -426,6 +426,63 @@ aside{scrollbar-width:thin;scrollbar-color:#ffffff40 transparent}
  .nav{overflow:visible}
 }
 @media(prefers-reduced-motion:reduce){.nav-chevron{transition:none}}
+
+/* Detailed command, triage and pathway workspaces */
+.detail-workspace{display:grid;gap:18px;margin-top:18px}
+.detail-hero{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:22px 24px;border:1px solid #DCE4EC;border-radius:18px;background:linear-gradient(120deg,#FFFFFF 0%,#F1F7FB 100%);box-shadow:0 10px 28px #164B3210}
+.detail-kicker{font-size:9px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:#0D9488}
+.detail-hero h2{font:800 21px/1.25 'Manrope','Inter',sans-serif;color:#173653;margin:7px 0}
+.detail-hero p{max-width:760px;color:#61758A;font-size:12px;line-height:1.7;margin:0}
+.detail-tag{display:inline-flex;align-items:center;gap:7px;padding:7px 10px;border:1px solid #CDE5E1;border-radius:999px;background:#F0FAF8;color:#08796F;font-size:9px;font-weight:800;white-space:nowrap}
+.detail-tag:before{content:'';width:6px;height:6px;border-radius:50%;background:#0D9488}
+.detail-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.detail-grid.two{grid-template-columns:repeat(2,minmax(0,1fr))}
+.detail-card{min-width:0;padding:17px 18px;border:1px solid #DCE4EC;border-radius:15px;background:#fff;box-shadow:0 7px 22px #164B3209}
+.detail-card .detail-icon{width:34px;height:34px;display:grid;place-items:center;border-radius:11px;background:#E7F2F6;color:#245A78;font-size:16px;margin-bottom:12px}
+.detail-card h3{font:800 12px 'Manrope','Inter',sans-serif;color:#183B58;margin:0 0 7px}
+.detail-card p{font-size:10px;line-height:1.65;color:#667B8D;margin:0}
+.detail-card ul{padding-left:16px;margin:10px 0 0;color:#526A7E;font-size:10px;line-height:1.8}
+.detail-card li+li{margin-top:3px}
+.detail-card .mini-label{display:block;color:#0D9488;font-size:9px;font-weight:800;letter-spacing:.7px;text-transform:uppercase;margin-bottom:7px}
+.detail-section-head{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;flex-wrap:wrap;margin:3px 0 0}
+.detail-section-head h3{font:800 15px 'Manrope','Inter',sans-serif;color:#173653;margin:0}
+.detail-section-head p{font-size:10px;color:#718396;margin:4px 0 0}
+.detail-stat-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.detail-stat{padding:14px 15px;border:1px solid #DCE4EC;border-radius:13px;background:#fff}
+.detail-stat strong{display:block;font:800 20px 'Manrope','Inter',sans-serif;color:#173653}
+.detail-stat span{display:block;font-size:9px;color:#667B8D;margin-top:4px;line-height:1.45}
+.detail-stat em{display:inline-block;font-style:normal;font-size:8px;font-weight:800;color:#8A6A34;background:#FFF4DE;border-radius:5px;padding:3px 6px;margin-top:8px}
+.detail-table-wrap{overflow:auto;border:1px solid #DCE4EC;border-radius:14px;background:#fff}
+.detail-table{width:100%;border-collapse:collapse;min-width:650px}
+.detail-table th{padding:11px 13px;background:#F0F5F8;color:#496277;font-size:8px;letter-spacing:.8px;text-transform:uppercase;text-align:left}
+.detail-table td{padding:12px 13px;border-top:1px solid #EAF0F4;color:#50677B;font-size:9px;line-height:1.55;white-space:normal;vertical-align:top}
+.detail-table td strong{color:#1B3D59;font-size:9px}
+.detail-step-list{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;counter-reset:steps}
+.detail-step{position:relative;padding:14px 13px 13px;border:1px solid #DCE4EC;border-radius:13px;background:#fff;counter-increment:steps}
+.detail-step:before{content:counter(steps,decimal-leading-zero);display:block;font:800 17px 'Manrope','Inter',sans-serif;color:#0D9488;margin-bottom:9px}
+.detail-step:not(:last-child):after{content:'→';position:absolute;right:-9px;top:21px;z-index:2;width:18px;height:18px;display:grid;place-items:center;border-radius:50%;background:#EAF5F3;color:#0D9488;font-size:11px;font-weight:800}
+.detail-step strong{display:block;font-size:10px;color:#1B3D59;margin-bottom:5px}
+.detail-step span{display:block;font-size:9px;line-height:1.55;color:#6A7F91}
+.detail-note{display:flex;gap:11px;padding:14px 16px;border:1px solid #CFE4E1;border-radius:13px;background:#F0F8F7;color:#496A69;font-size:10px;line-height:1.65}
+.detail-note b{color:#174C4A}
+.detail-note .note-mark{flex-shrink:0;width:25px;height:25px;display:grid;place-items:center;border-radius:8px;background:#D9EFEB;color:#08796F;font-weight:900}
+.detail-chip{display:inline-flex;padding:4px 7px;border-radius:6px;background:#EAF1F7;color:#315A83;font-size:8px;font-weight:800}
+.detail-chip.warn{background:#FFF2D9;color:#8C641D}
+.detail-chip.safe{background:#E5F4EB;color:#26704C}
+.pathway-card{padding:17px;border:1px solid #DCE4EC;border-radius:15px;background:#fff}
+.pathway-card-head{display:flex;align-items:flex-start;gap:11px;margin-bottom:12px}
+.pathway-card-head .detail-icon{flex-shrink:0;width:35px;height:35px;display:grid;place-items:center;border-radius:11px;background:#E7F2F6;color:#245A78}
+.pathway-card h3{font:800 12px 'Manrope','Inter',sans-serif;color:#183B58;margin:1px 0 4px}
+.pathway-card-head p{font-size:9px;line-height:1.55;color:#718396;margin:0}
+.pathway-stages{display:grid;gap:7px}
+.pathway-stage{display:grid;grid-template-columns:23px minmax(0,1fr);gap:8px;align-items:start;padding:8px 9px;background:#F6F9FB;border-radius:9px}
+.pathway-stage b{width:20px;height:20px;display:grid;place-items:center;border-radius:7px;background:#E2EFED;color:#08796F;font-size:8px}
+.pathway-stage strong{display:block;color:#2B4A63;font-size:9px;margin:1px 0 3px}
+.pathway-stage span{display:block;color:#718396;font-size:8px;line-height:1.5}
+.pathway-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+@media(max-width:1050px){.detail-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.detail-stat-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.detail-step-list{grid-template-columns:repeat(3,minmax(0,1fr))}.detail-step:not(:last-child):after{display:none}}
+@media(max-width:700px){.detail-grid,.detail-grid.two,.pathway-grid{grid-template-columns:1fr}.detail-hero{padding:17px}.detail-hero h2{font-size:18px}.detail-step-list{grid-template-columns:1fr 1fr}.detail-stat-grid{gap:8px}.detail-card{padding:15px}.detail-section-head{align-items:flex-start}}
+
 </style>
 <style id="sitewide-contrast-guard">
 body{color:#102B24!important}
@@ -583,6 +640,83 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
 </div>
 </div>
 
+
+<section class="detail-workspace dashboard-hidden" id="command-detail" aria-label="Detailed command centre">
+ <div class="detail-hero"><div><span class="detail-kicker">Executive operations · 01</span><h2>Run the platform with a clear operational picture</h2><p>Use this workspace to understand what is happening across ClinicConsilium, identify bottlenecks, assign ownership and keep service delivery aligned with the platform's privacy-first operating model.</p></div><span class="detail-tag">Management framework</span></div>
+ <div class="detail-stat-grid">
+  <article class="detail-stat"><strong>—</strong><span>Enquiries awaiting first review</span><em>Connect live queue</em></article>
+  <article class="detail-stat"><strong>—</strong><span>Partner applications in progress</span><em>Onboarding data pending</em></article>
+  <article class="detail-stat"><strong>—</strong><span>Open operational issues</span><em>Issue register pending</em></article>
+  <article class="detail-stat"><strong>—</strong><span>Service pathways activated</span><em>Workflow setup pending</em></article>
+ </div>
+ <div class="detail-section-head"><div><h3>Platform workstreams</h3><p>Separate operating areas with a clear owner and completion criteria.</p></div></div>
+ <div class="detail-grid">
+  <article class="detail-card"><span class="detail-icon">✉</span><span class="mini-label">01 · Access & intake</span><h3>Enquiries and first contact</h3><p>Keep the first interaction organised, acknowledged and routed to the right team.</p><ul><li>Monitor general and partnership enquiries</li><li>Track response ownership and due dates</li><li>Identify incomplete or duplicate submissions</li><li>Close the loop with a recorded outcome</li></ul></article>
+  <article class="detail-card"><span class="detail-icon">＋</span><span class="mini-label">02 · Care network</span><h3>Hospitals and professionals</h3><p>Build a dependable network of qualified providers before activating care services.</p><ul><li>Review facility and professional applications</li><li>Verify identity, licence and relevant credentials</li><li>Record scope, location and service availability</li><li>Approve, decline or request missing evidence</li></ul></article>
+  <article class="detail-card"><span class="detail-icon">▣</span><span class="mini-label">03 · Service partners</span><h3>Pharmacies and laboratories</h3><p>Manage partner readiness without implying that an unverified provider is available.</p><ul><li>Check registration and responsible contacts</li><li>Confirm service coverage and operating hours</li><li>Define fulfilment and escalation contacts</li><li>Review partner status periodically</li></ul></article>
+  <article class="detail-card"><span class="detail-icon">⇄</span><span class="mini-label">04 · Care coordination</span><h3>Referrals and appointments</h3><p>Coordinate requests between people and approved providers with clear hand-offs.</p><ul><li>Record referral reason at an appropriate level</li><li>Track acceptance, scheduling and completion</li><li>Notify the responsible person of delays</li><li>Record the operational outcome</li></ul></article>
+  <article class="detail-card"><span class="detail-icon">◷</span><span class="mini-label">05 · Service quality</span><h3>Response and issue management</h3><p>Spot delays and recurring friction before they affect confidence in the service.</p><ul><li>Review ageing enquiries and overdue actions</li><li>Log complaints and service interruptions</li><li>Assign an owner and target resolution date</li><li>Escalate unresolved or safety-related concerns</li></ul></article>
+  <article class="detail-card"><span class="detail-icon">⌑</span><span class="mini-label">06 · Governance</span><h3>Security, access and audit</h3><p>Protect sensitive information and maintain accountability for administrative actions.</p><ul><li>Use role-based access and multi-factor authentication</li><li>Review access grants and consent status</li><li>Keep audit records for sensitive actions</li><li>Apply retention and incident-response procedures</li></ul></article>
+ </div>
+ <div class="detail-section-head"><div><h3>Management review rhythm</h3><p>A practical cadence for keeping work visible and accountable.</p></div></div>
+ <div class="detail-grid two">
+  <article class="detail-card"><span class="mini-label">Daily control</span><h3>Start-of-day review</h3><ul><li>Check new enquiries, overdue responses and urgent escalations</li><li>Confirm each open item has a named owner and next action</li><li>Review provider or facility applications awaiting evidence</li><li>Check service interruptions and unresolved complaints</li></ul></article>
+  <article class="detail-card"><span class="mini-label">Weekly control</span><h3>Leadership and governance review</h3><ul><li>Review enquiry volumes, response times and closure reasons</li><li>Review partner verification and service coverage gaps</li><li>Check administrator access, audit exceptions and incidents</li><li>Agree improvement actions, owners and target dates</li></ul></article>
+ </div>
+ <div class="detail-note"><span class="note-mark">i</span><div><b>Data integrity rule:</b> the dashes above are intentionally unpopulated indicators, not zero counts. They should be connected to verified operational data before management reporting. This workspace must not expose unrestricted clinical records or replace a qualified professional's judgement.</div></div>
+</section>
+<section class="detail-workspace dashboard-hidden" id="triage-detail" aria-label="Detailed enquiry triage">
+ <div class="detail-hero"><div><span class="detail-kicker">Intake management · 02</span><h2>Turn every enquiry into an owned next step</h2><p>Enquiry triage is the controlled front door for general questions and partner interest. It helps the team acknowledge requests, identify the correct route, prioritise safely and maintain a clear record of what happens next.</p></div><span class="detail-tag">Operational workflow</span></div>
+ <div class="detail-step-list">
+  <div class="detail-step"><strong>Receive</strong><span>Capture the enquiry, timestamp, contact preference and submission source.</span></div>
+  <div class="detail-step"><strong>Check</strong><span>Review completeness, duplicates, contact details and consent or notice requirements.</span></div>
+  <div class="detail-step"><strong>Classify</strong><span>Choose the correct enquiry category and identify any urgent safety concern.</span></div>
+  <div class="detail-step"><strong>Assign</strong><span>Route to a named team member with a due date and next action.</span></div>
+  <div class="detail-step"><strong>Resolve</strong><span>Respond, record the outcome, close or escalate with an audit trail.</span></div>
+ </div>
+ <div class="detail-section-head"><div><h3>Enquiry categories and routing</h3><p>Use the category to determine the responsible team, not to make a clinical decision.</p></div></div>
+ <div class="detail-table-wrap"><table class="detail-table"><thead><tr><th>Category</th><th>Typical request</th><th>Initial routing</th><th>Required next step</th></tr></thead><tbody>
+  <tr><td><strong>General information</strong></td><td>How the platform works, access questions or public information.</td><td><span class="detail-chip">Customer support</span></td><td>Send an approved explanation or direct the person to the relevant public page.</td></tr>
+  <tr><td><strong>Professional interest</strong></td><td>Doctor or qualified professional wishes to join the network.</td><td><span class="detail-chip">Provider onboarding</span></td><td>Acknowledge interest, request required credentials through a secure process and begin verification.</td></tr>
+  <tr><td><strong>Facility interest</strong></td><td>Hospital or clinic asks about participating.</td><td><span class="detail-chip">Facility partnerships</span></td><td>Confirm facility details, registration, service scope and an authorised contact.</td></tr>
+  <tr><td><strong>Pharmacy / laboratory</strong></td><td>Medicine or diagnostic service partner enquiry.</td><td><span class="detail-chip">Partner operations</span></td><td>Explain onboarding requirements; do not promise fulfilment before verification.</td></tr>
+  <tr><td><strong>International care</strong></td><td>Request for information about treatment outside the country.</td><td><span class="detail-chip">International coordination</span></td><td>Clarify the information requested and route to an approved coordinator; no outcome guarantees.</td></tr>
+  <tr><td><strong>Complaint / safety concern</strong></td><td>Complaint, possible harm, safeguarding or urgent medical concern.</td><td><span class="detail-chip warn">Escalation owner</span></td><td>Follow the approved safety protocol immediately; emergency medical needs must be directed to local emergency services.</td></tr>
+ </tbody></table></div>
+ <div class="detail-section-head"><div><h3>Priority and response handling</h3><p>Operational priority is based on risk and time sensitivity; it is not a diagnosis or clinical urgency assessment.</p></div></div>
+ <div class="detail-grid">
+  <article class="detail-card"><span class="detail-chip warn">Immediate escalation</span><h3>Potential emergency or safety risk</h3><p>Do not leave an urgent safety message in the routine queue. Follow the organisation's approved escalation protocol and direct medical emergencies to local emergency services.</p><ul><li>Notify the designated escalation lead</li><li>Record only necessary facts</li><li>Document the action and time taken</li></ul></article>
+  <article class="detail-card"><span class="detail-chip">High priority</span><h3>Time-sensitive operational issue</h3><p>Examples include a scheduled appointment at risk, a partner service interruption or a complaint requiring prompt review.</p><ul><li>Assign an owner promptly</li><li>Set a clear response deadline</li><li>Escalate if the deadline is at risk</li></ul></article>
+  <article class="detail-card"><span class="detail-chip safe">Standard</span><h3>Routine information or interest</h3><p>General enquiries and partner applications can follow the normal review queue with acknowledgement and transparent next steps.</p><ul><li>Check completeness</li><li>Use approved response templates</li><li>Record the outcome and close reason</li></ul></article>
+ </div>
+ <div class="detail-section-head"><div><h3>Queue quality checklist</h3><p>Before an enquiry is marked complete, confirm the record is useful and appropriately limited.</p></div></div>
+ <div class="detail-grid two">
+  <article class="detail-card"><h3>Minimum record quality</h3><ul><li>Unique reference and received timestamp</li><li>Enquiry type, source and current status</li><li>Named owner, next action and due date</li><li>Response history and clear closure reason</li><li>Only the personal information needed to handle the request</li></ul></article>
+  <article class="detail-card"><h3>Safe handling rules</h3><ul><li>Do not request full medical records through a general enquiry form</li><li>Do not give diagnosis, prescribing or treatment advice from the admin desk</li><li>Do not share enquiry details with an unverified partner</li><li>Use approved secure channels for sensitive information</li><li>Restrict access and retain an audit trail for status changes</li></ul></article>
+ </div>
+ <div class="detail-note"><span class="note-mark">i</span><div><b>Current implementation boundary:</b> the existing queue is connected to general and partner enquiry records only. The routing matrix and priority guidance are operating instructions; response timers, assignment ownership and escalation notifications need dedicated workflow wiring before they can be treated as automated controls.</div></div>
+</section>
+<section class="detail-workspace dashboard-hidden" id="pathways-detail" aria-label="Detailed care pathways">
+ <div class="detail-hero"><div><span class="detail-kicker">Coordinated care journeys · 03</span><h2>Make every hand-off clear, safe and traceable</h2><p>Care pathways describe how a person or partner moves through the ClinicConsilium service. Each pathway should show who is responsible, what information is needed, what the next hand-off is and when the process is complete.</p></div><span class="detail-tag">Pathway design framework</span></div>
+ <div class="detail-note"><span class="note-mark">i</span><div><b>Important distinction:</b> these are proposed coordination workflows, not active clinical services. A pathway becomes operational only when qualified providers, verified partners, secure data handling, clinical governance and the relevant integrations are in place.</div></div>
+ <div class="pathway-grid">
+  <article class="pathway-card"><div class="pathway-card-head"><span class="detail-icon">♡</span><div><h3>Patient access and general support</h3><p>For a person seeking information or help navigating the platform.</p></div></div><div class="pathway-stages"><div class="pathway-stage"><b>1</b><div><strong>Discover and enquire</strong><span>Person reads public information and submits a general enquiry.</span></div></div><div class="pathway-stage"><b>2</b><div><strong>Identity and request check</strong><span>Support confirms contact details and clarifies the non-clinical request.</span></div></div><div class="pathway-stage"><b>3</b><div><strong>Route to the right service</strong><span>Provide approved information or refer to an available, verified service.</span></div></div><div class="pathway-stage"><b>4</b><div><strong>Confirm next step</strong><span>Explain who will follow up, through which channel and when.</span></div></div><div class="pathway-stage"><b>5</b><div><strong>Close or continue</strong><span>Record outcome and retain only necessary operational information.</span></div></div></div></article>
+  <article class="pathway-card"><div class="pathway-card-head"><span class="detail-icon">◉</span><div><h3>Virtual consultation coordination</h3><p>For a request to connect with a qualified healthcare professional.</p></div></div><div class="pathway-stages"><div class="pathway-stage"><b>1</b><div><strong>Consultation request</strong><span>Capture preferred times, contact details and broad service category.</span></div></div><div class="pathway-stage"><b>2</b><div><strong>Provider availability</strong><span>Match only with a verified professional whose scope fits the request.</span></div></div><div class="pathway-stage"><b>3</b><div><strong>Consent and booking</strong><span>Explain the service, privacy terms, fees and obtain required consent.</span></div></div><div class="pathway-stage"><b>4</b><div><strong>Secure consultation</strong><span>Qualified provider conducts and documents the clinical encounter.</span></div></div><div class="pathway-stage"><b>5</b><div><strong>Follow-up coordination</strong><span>Share next steps through approved channels and record appointment status.</span></div></div></div></article>
+  <article class="pathway-card"><div class="pathway-card-head"><span class="detail-icon">▤</span><div><h3>Medical records and information access</h3><p>For patient-controlled records and authorised sharing with a care team.</p></div></div><div class="pathway-stages"><div class="pathway-stage"><b>1</b><div><strong>Patient identity verification</strong><span>Confirm identity using an approved secure verification process.</span></div></div><div class="pathway-stage"><b>2</b><div><strong>Record availability</strong><span>Identify the record source and confirm that it is complete and attributable.</span></div></div><div class="pathway-stage"><b>3</b><div><strong>Purpose and consent</strong><span>Capture who may access which information, for what purpose and for how long.</span></div></div><div class="pathway-stage"><b>4</b><div><strong>Controlled access</strong><span>Grant time-limited, role-appropriate access and log every sensitive action.</span></div></div><div class="pathway-stage"><b>5</b><div><strong>Review and revoke</strong><span>Allow the patient to review sharing and revoke access where legally applicable.</span></div></div></div></article>
+  <article class="pathway-card"><div class="pathway-card-head"><span class="detail-icon">＋</span><div><h3>Medication support and pharmacy</h3><p>For medication information, reminders and verified pharmacy coordination.</p></div></div><div class="pathway-stages"><div class="pathway-stage"><b>1</b><div><strong>Patient request</strong><span>Capture the support request without treating it as a prescription.</span></div></div><div class="pathway-stage"><b>2</b><div><strong>Prescription validation</strong><span>Where dispensing is requested, a qualified professional validates a lawful prescription.</span></div></div><div class="pathway-stage"><b>3</b><div><strong>Verified pharmacy route</strong><span>Check partner authorisation, availability and fulfilment terms.</span></div></div><div class="pathway-stage"><b>4</b><div><strong>Dispensing and counselling</strong><span>Pharmacy professional handles dispensing and appropriate patient counselling.</span></div></div><div class="pathway-stage"><b>5</b><div><strong>Patient tracking</strong><span>Show permitted status and reminders; escalate medicine questions to a professional.</span></div></div></div></article>
+  <article class="pathway-card"><div class="pathway-card-head"><span class="detail-icon">⌕</span><div><h3>Laboratory and diagnostic coordination</h3><p>For test requests, appointment coordination and result hand-off.</p></div></div><div class="pathway-stages"><div class="pathway-stage"><b>1</b><div><strong>Request or referral</strong><span>Confirm the request originates from an appropriate qualified professional where required.</span></div></div><div class="pathway-stage"><b>2</b><div><strong>Accredited provider selection</strong><span>Check partner credentials, test availability, location and preparation guidance.</span></div></div><div class="pathway-stage"><b>3</b><div><strong>Booking and consent</strong><span>Confirm patient details, appointment and applicable charges.</span></div></div><div class="pathway-stage"><b>4</b><div><strong>Test and result validation</strong><span>Laboratory performs the test and releases an authorised result.</span></div></div><div class="pathway-stage"><b>5</b><div><strong>Secure result hand-off</strong><span>Deliver to the patient and authorised clinician with access logging.</span></div></div></div></article>
+  <article class="pathway-card"><div class="pathway-card-head"><span class="detail-icon">⇢</span><div><h3>Hospital referral and facility care</h3><p>For coordination between a patient, referring professional and facility.</p></div></div><div class="pathway-stages"><div class="pathway-stage"><b>1</b><div><strong>Referral received</strong><span>Capture referral purpose and required service category securely.</span></div></div><div class="pathway-stage"><b>2</b><div><strong>Facility suitability</strong><span>Confirm verified facility scope, location, capacity and acceptance criteria.</span></div></div><div class="pathway-stage"><b>3</b><div><strong>Patient authorisation</strong><span>Share only the minimum necessary referral information with consent or other lawful basis.</span></div></div><div class="pathway-stage"><b>4</b><div><strong>Appointment or admission</strong><span>Facility confirms arrangements and communicates instructions directly.</span></div></div><div class="pathway-stage"><b>5</b><div><strong>Continuity hand-off</strong><span>Record referral outcome and any authorised follow-up requirement.</span></div></div></div></article>
+  <article class="pathway-card"><div class="pathway-card-head"><span class="detail-icon">◎</span><div><h3>International care coordination</h3><p>For people exploring treatment or specialist care outside Nigeria.</p></div></div><div class="pathway-stages"><div class="pathway-stage"><b>1</b><div><strong>Initial enquiry</strong><span>Understand the requested specialty, destination and coordination needs.</span></div></div><div class="pathway-stage"><b>2</b><div><strong>Secure document review</strong><span>Obtain explicit permission and use a secure channel for relevant records.</span></div></div><div class="pathway-stage"><b>3</b><div><strong>Provider due diligence</strong><span>Check overseas provider identity, credentials, scope and service terms.</span></div></div><div class="pathway-stage"><b>4</b><div><strong>Options and cost clarity</strong><span>Present verified information, exclusions, estimates and patient responsibilities.</span></div></div><div class="pathway-stage"><b>5</b><div><strong>Travel and continuity</strong><span>Coordinate logistics and ensure follow-up planning with the patient's local care team.</span></div></div></div></article>
+  <article class="pathway-card"><div class="pathway-card-head"><span class="detail-icon">♧</span><div><h3>Provider and partner onboarding</h3><p>For hospitals, clinics, professionals, pharmacies and laboratories.</p></div></div><div class="pathway-stages"><div class="pathway-stage"><b>1</b><div><strong>Interest submitted</strong><span>Organisation or professional submits an onboarding enquiry.</span></div></div><div class="pathway-stage"><b>2</b><div><strong>Evidence collected</strong><span>Request registration, licences, identity and authorised contacts securely.</span></div></div><div class="pathway-stage"><b>3</b><div><strong>Verification completed</strong><span>Review credentials, scope, locations and any applicable regulatory requirements.</span></div></div><div class="pathway-stage"><b>4</b><div><strong>Agreement and setup</strong><span>Agree service terms, privacy duties, escalation contacts and operating process.</span></div></div><div class="pathway-stage"><b>5</b><div><strong>Activation and monitoring</strong><span>Activate only approved services and schedule periodic re-verification.</span></div></div></div></article>
+ </div>
+ <div class="detail-section-head"><div><h3>Required controls at every hand-off</h3><p>These are the common standards that should apply across all pathways.</p></div></div>
+ <div class="detail-grid">
+  <article class="detail-card"><span class="mini-label">Patient rights</span><h3>Identity, consent and transparency</h3><p>Verify the person, explain what will happen, record the appropriate consent or other lawful basis and make sharing understandable.</p></article>
+  <article class="detail-card"><span class="mini-label">Clinical responsibility</span><h3>Qualified professional ownership</h3><p>Diagnosis, prescribing, test interpretation and treatment decisions remain with appropriately qualified and authorised professionals.</p></article>
+  <article class="detail-card"><span class="mini-label">Operational assurance</span><h3>Traceability and escalation</h3><p>Every hand-off needs an owner, timestamp, status, next action and escalation route, with sensitive access recorded in an audit trail.</p></article>
+ </div>
+</section>
+
 <section class="platform-hub" id="platform-hub">
  <div class="platform-module-head"><div><div class="eyebrow">ClinicConsilium · company administration</div><h2>Platform management</h2><p>One command centre for the healthcare network, partner operations and platform governance.</p></div><span class="module-state">Preview · not connected</span></div>
  <div class="platform-stats">
@@ -717,6 +851,13 @@ async function signIn(event){event.preventDefault();const btn=document.getElemen
 async function init(){document.getElementById('today').textContent=new Date().toLocaleDateString(undefined,{weekday:'short',month:'short',day:'numeric',year:'numeric'});document.getElementById('year').textContent=new Date().getFullYear();try{const cfgResponse=await fetch('/api/admin/config',{cache:'no-store'});const cfg=await cfgResponse.json();if(!cfgResponse.ok)throw new Error('Admin sign-in configuration is not ready. Add SUPABASE_ANON_KEY in Vercel.');if(!window.supabase?.createClient)throw new Error('The sign-in library did not load. Refresh the page or check your connection.');supabaseClient=window.supabase.createClient(cfg.supabaseUrl,cfg.supabaseAnonKey);const {data}=await supabaseClient.auth.getSession();if(data.session){session=data.session;try{await api('/api/admin/enquiries');setSignedIn(true);document.querySelector('.profile strong').textContent=session.user.email;document.querySelector('.profile small').textContent='Authorized administrator';await loadEnquiries()}catch(_){await signOut(false)}}}catch(e){setLoginMessage(e.message)}}
 
 
+
+const detailViews=[...document.querySelectorAll('.detail-workspace')];
+detailViews.forEach(node=>{
+ const view=node.id==='command-detail'?'command':node.id==='triage-detail'?'triage':'pathways';
+ node.dataset.dashboardViews=view;
+});
+
 const navGroups=[...document.querySelectorAll('aside .nav-group')];
 const dashboardContent=document.querySelector('.content');
 const overviewGrid=document.querySelector('.overview-grid');
@@ -747,6 +888,7 @@ function setDashboardView(view,updateUrl=true){
  dashboardContent.dataset.activeView=view;
  overviewGrid.dataset.view=view;
  viewItems.forEach(([node,views])=>{if(node)node.classList.toggle('dashboard-hidden',!views.includes(view))});
+ detailViews.forEach(node=>node.classList.toggle('dashboard-hidden',node.dataset.dashboardViews!==view));
  const title=document.querySelector('.welcome h1');
  const description=document.querySelector('.welcome p');
  title.textContent=viewCopy[view].title;
