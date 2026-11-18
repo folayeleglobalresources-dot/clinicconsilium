@@ -47,6 +47,8 @@ module.exports=async(req,res)=>{
   const before=rows[0],user=await authUser(admin,id);
   if(!user.email_confirmed_at)return reply(res,409,{ok:false,error:'email_not_verified'});
   if(action==='mark_verified'&&before.requested_account_type!=='professional')return reply(res,400,{ok:false,error:'credential_review_not_required'});
+  if(action==='mark_verified'&&before.status!=='pending_review')return reply(res,409,{ok:false,error:'registration_not_reviewable'});
+  if(action==='approve'&&before.status!=='pending_review')return reply(res,409,{ok:false,error:'registration_not_reviewable'});
   if(action==='approve'&&before.requested_account_type==='professional'&&before.verification_status!=='verified')return reply(res,409,{ok:false,error:'professional_credentials_not_verified'});
   const patch={reviewed_by:admin.id,reviewed_at:new Date().toISOString(),updated_at:new Date().toISOString()};
   if(action==='mark_verified'){

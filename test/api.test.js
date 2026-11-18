@@ -162,3 +162,23 @@ test('registration review API rejects unconfirmed or non-admin users', async () 
   assert.equal(res.code, 403);
   assert.equal(res.body.error, 'admin_access_denied');
 });
+
+
+test('professional registration cannot be approved before credential verification', async () => {
+  adminEnv();
+  process.env.SUPABASE_ANON_KEY = 'anon';
+  const h = require('../api/admin/registrations.js');
+  let patchCalled = false;
+  global.fetch = async (url, opts = {}) => {
+    if (url.endsWith('/auth/v1/user')) return { ok: true, json: async () => ({ id: 'admin-id', email: 'boss@example.com', email_confirmed_at: '2026-01-01' }) };
+    if (url.includes('/rest/v1/account_registrations?user_id=')) return { ok: true, json: async () => [{ user_id: ID, email: 'doctor@example.com', full_name: 'Doctor', requested_account_type: 'professional', status: 'pending_review', verification_status: 'pending', approved_access_role: null }] };
+    if (url.endsWith('/auth/v1/admin/users/' + ID)) return { ok: true, json: async () => ({ id: ID, email: 'doctor@example.com', email_confirmed_at: '2026-01-01', app_metadata: {} }) };
+    if (url.includes('/rest/v1/account_registrations?user_id=') && opts.method === 'PATCH') patchCalled = true;
+    return { ok: true, json: async () => [] };
+  };
+  const res = mockRes();
+  await h(adminReq('PATCH', { user_id: ID, action: 'approve' }), res);
+  assert.equal(res.code, 409);
+  assert.equal(res.body.error, 'professional_credentials_not_verified');
+  assert.equal(patchCalled, false);
+});
