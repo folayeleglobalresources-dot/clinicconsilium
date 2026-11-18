@@ -157,6 +157,139 @@ tbody tr:hover{background:#F6F9FC!important}
 @media(max-width:760px){.shell{grid-template-columns:1fr}aside{position:relative!important;padding:12px!important;display:flex;flex-direction:row;align-items:center;gap:12px;overflow-x:auto}.brand{flex:0 0 145px}.brand img{max-width:145px}.nav-caption,.aside-bottom{display:none}.nav{display:flex;flex-direction:row;flex-wrap:nowrap;overflow-x:auto}.nav a{white-space:nowrap;flex-shrink:0}.topbar{padding:0 14px}.content{padding:15px 12px 30px}.welcome{padding:22px 20px!important}.welcome:after{right:-100px}.overview-grid{grid-template-columns:1fr!important}}
 @media(max-width:480px){.topbar{height:58px}.welcome{display:block}.welcome-right{margin-top:15px}.metrics{grid-template-columns:repeat(2,minmax(0,1fr))!important}.metric{padding:13px!important}.metric strong{font-size:24px!important}.card{border-radius:9px!important}}
 
+
+/* ClinicConsilium Command Centre — premium operations interface */
+:root{
+ --brand:#075E45;--brand-deep:#043D2E;--brand-mid:#0B8060;--brand-soft:#E7F3ED;
+ --canvas:#F4F7F5;--surface:#FFFFFF;--ink:#172B24;--muted:#66766F;--line:#E2EAE5;
+ --mint:#D9EF9B;--success:#18794E;--success-bg:#E7F5EC;--warning:#A66B13;--warning-bg:#FFF4DE;
+ --danger:#B54747;--danger-bg:#FDECEC;--info:#356B9A;--info-bg:#EAF2FA;
+ --shadow:0 2px 12px rgba(16,43,32,.045);--radius:15px;
+}
+html{scroll-behavior:smooth}
+body{background:var(--canvas)!important;color:var(--ink)!important;font-family:Inter,"DM Sans",system-ui,sans-serif!important}
+.shell{grid-template-columns:258px minmax(0,1fr)!important}
+aside{background:var(--brand-deep)!important;color:#E9F4EE!important;padding:25px 17px 18px!important;gap:26px!important;border-right:1px solid #043629}
+.brand{padding:3px 10px 20px!important;border-bottom:1px solid #ffffff20!important}
+.brand img{width:174px!important;max-height:54px!important;filter:brightness(0) invert(1)!important}
+.brandfallback{color:#fff!important}.brandfallback span{color:var(--mint)!important}
+.nav-caption{color:#9DB9AA!important;font-size:9px!important;letter-spacing:1.55px!important;margin:0 0 9px!important;padding:0 12px!important}
+.nav{gap:4px!important}
+.nav a{color:#C8D9D0!important;border-radius:9px!important;padding:10px 12px!important;font-size:12px!important;font-weight:550!important;gap:11px!important;transition:background .16s ease,color .16s ease,transform .16s ease!important}
+.nav a svg{width:17px!important;height:17px!important;stroke-width:1.7!important}
+.nav a:hover{background:#ffffff12!important;color:#fff!important;transform:translateX(2px)}
+.nav a.active{background:#E7F3ED!important;color:var(--brand-deep)!important;box-shadow:none!important;font-weight:700!important}
+.nav a.active svg{color:var(--brand)!important}
+.nav .count{background:var(--mint)!important;color:#23422F!important;border-radius:6px!important;font-weight:800!important}
+.aside-bottom{background:#ffffff0A!important;border:1px solid #ffffff1b!important;border-radius:12px!important;padding:14px!important;color:#B8CEC2!important}
+.aside-bottom strong{color:#fff!important;font-size:12px!important}
+.aside-bottom .tiny-mark{background:#ffffff12!important;color:var(--mint)!important;border-radius:9px!important}
+.main{min-width:0!important}
+.topbar{height:68px!important;padding:0 34px!important;background:rgba(255,255,255,.94)!important;border-bottom:1px solid var(--line)!important;backdrop-filter:blur(12px)}
+.crumb{font-size:11px!important;color:#819087!important}.crumb b{color:var(--ink)!important}
+.env{border-radius:7px!important;background:#F0F4F1!important;border:1px solid #E0E9E3!important;color:#567064!important;font-size:10px!important;padding:6px 9px!important}
+.bell{border-radius:9px!important;background:#fff!important;border-color:var(--line)!important;color:var(--brand)!important;width:35px!important;height:35px!important}
+.profile-avatar{background:var(--brand-soft)!important;color:var(--brand)!important;border-radius:10px!important}
+.profile strong{color:var(--ink)!important}.profile small{color:var(--muted)!important}
+.content{max-width:1600px!important;padding:32px 36px 42px!important}
+.welcome{margin-bottom:22px!important;align-items:center!important}
+.eyebrow{color:var(--brand-mid)!important;font-size:9px!important;letter-spacing:1.65px!important}
+.welcome h1{font-family:Inter,"Plus Jakarta Sans",sans-serif!important;font-size:clamp(27px,2.7vw,35px)!important;font-weight:750!important;letter-spacing:-1.25px!important;color:var(--ink)!important;margin:7px 0 6px!important}
+.welcome p{font-size:12px!important;color:var(--muted)!important}
+.date{border:1px solid var(--line)!important;border-radius:8px!important;background:#fff!important;color:#607168!important;padding:9px 12px!important}
+.primary,button.primary{background:var(--brand)!important;border:1px solid var(--brand)!important;border-radius:8px!important;padding:10px 14px!important;color:#fff!important;font-size:11px!important;font-weight:700!important;box-shadow:0 2px 5px #075e451c!important}
+.primary:hover,button.primary:hover{background:var(--brand-deep)!important}
+.notice{background:#EFF7F2!important;border:1px solid #D6E9DD!important;border-radius:11px!important;color:#486458!important;padding:12px 15px!important;margin-bottom:20px!important;font-size:11px!important}
+.notice strong{color:var(--brand-deep)!important}
+.notice-icon{background:#DCEFE3!important;border-radius:8px!important;color:var(--brand)!important}
+.overview-grid{grid-template-columns:minmax(0,1.7fr) minmax(275px,.8fr)!important;gap:17px!important}
+.main-stack,.right-stack{gap:17px!important}
+.section-heading{margin-bottom:11px!important}
+.section-heading h2,.card-head h2,.queue-head h2{font-family:Inter,"Plus Jakarta Sans",sans-serif!important;color:var(--ink)!important;font-size:13px!important;font-weight:750!important;letter-spacing:-.2px!important}
+.section-heading p,.card-head p,.queue-head p{color:#7A8981!important;font-size:10px!important}
+.metrics{grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:10px!important}
+.metric{min-height:130px!important;padding:15px 15px 14px!important;border:1px solid var(--line)!important;border-radius:12px!important;background:#fff!important;box-shadow:var(--shadow)!important}
+.metric:after{display:none!important}
+.metric-top{font-size:10px!important;color:#6E7E75!important;font-weight:650!important;align-items:flex-start!important}
+.metric-icon{width:29px!important;height:29px!important;border-radius:8px!important;background:var(--brand-soft)!important;color:var(--brand)!important}
+.metric:nth-child(2) .metric-icon,.metric:nth-child(3) .metric-icon,.metric:nth-child(4) .metric-icon{background:var(--brand-soft)!important;color:var(--brand)!important}
+.metric-icon svg{width:16px!important;height:16px!important}
+.metric strong{font-family:Inter,"Plus Jakarta Sans",sans-serif!important;font-size:30px!important;font-weight:750!important;letter-spacing:-1px!important;color:var(--ink)!important;margin:11px 0 3px!important}
+.metric small{font-size:9px!important;color:#849189!important}
+.metric small b{color:var(--success)!important}
+.card{border:1px solid var(--line)!important;border-radius:13px!important;background:#fff!important;box-shadow:var(--shadow)!important}
+.card-head{padding:15px 17px!important;border-bottom:1px solid var(--line)!important}
+.queue-head{padding:15px 17px 13px!important}
+.queue-filters input,.queue-filters select{background:#fff!important;border:1px solid var(--line)!important;border-radius:8px!important;padding:8px 10px!important;color:var(--ink)!important;font-size:10px!important}
+.queue-filters input:focus,.queue-filters select:focus{outline:2px solid #B7DCC8!important;border-color:#75B695!important}
+th{background:#F7FAF8!important;color:#829188!important;font-size:9px!important;letter-spacing:.8px!important}
+th,td{padding:12px 15px!important;border-bottom:1px solid #EDF2EE!important}
+td{font-size:10px!important;color:#40534A!important}
+tbody tr:hover{background:#F7FBF8!important}
+.case-avatar{background:#EAF3EE!important;color:var(--brand)!important;border-radius:9px!important}
+.case strong{color:#20372D!important}
+.case small{color:#8A9890!important}
+.status{border-radius:6px!important;font-size:9px!important;padding:5px 7px!important}
+.s-new{background:var(--info-bg)!important;color:var(--info)!important}
+.s-review{background:#F0EDFA!important;color:#6954A1!important}
+.s-wait{background:var(--warning-bg)!important;color:var(--warning)!important}
+.s-done{background:var(--success-bg)!important;color:var(--success)!important}
+.table-foot{border-top:1px solid var(--line)!important;color:#819087!important;padding:11px 16px!important}
+.plain-link{color:var(--brand)!important;font-weight:700!important}
+.activity-list{padding:2px 17px 8px!important}
+.activity{grid-template-columns:32px minmax(0,1fr) auto!important;gap:10px!important;padding:12px 0!important;border-bottom:1px solid #EEF2EF!important}
+.activity-icon{width:30px!important;height:30px!important;border-radius:8px!important;background:var(--brand-soft)!important;color:var(--brand)!important}
+.activity:nth-child(2) .activity-icon,.activity:nth-child(3) .activity-icon,.activity:nth-child(4) .activity-icon{background:var(--brand-soft)!important;color:var(--brand)!important}
+.activity p{font-size:10px!important;color:#2D4036!important}
+.activity small,.activity time{color:#89968F!important;font-size:9px!important}
+.journey{padding:16px 17px 18px!important}
+.journey-intro strong{font-size:26px!important;color:var(--ink)!important}
+.journey-bar span{height:7px!important;background:#E7EEE9!important}
+.journey-bar span:nth-child(1){background:#0B8060!important}.journey-bar span:nth-child(2){background:#8AB9A0!important}.journey-bar span:nth-child(3){background:#B8D4C2!important}
+.journey-key div{font-size:10px!important;color:#4C6055!important}
+.journey-key div:nth-child(2) .dot{background:#8AB9A0!important}.journey-key div:nth-child(3) .dot{background:#B8D4C2!important}
+.shortcuts{gap:8px!important;padding:13px!important}
+.shortcut{min-height:95px!important;border:1px solid var(--line)!important;background:#FBFDFC!important;border-radius:10px!important;padding:11px!important;gap:7px!important}
+.shortcut:hover{border-color:#A8D1B8!important;background:#F2F8F4!important}
+.shortcut-icon,.shortcut:nth-child(2) .shortcut-icon,.shortcut:nth-child(3) .shortcut-icon,.shortcut:nth-child(4) .shortcut-icon{width:29px!important;height:29px!important;border-radius:8px!important;background:var(--brand-soft)!important;color:var(--brand)!important}
+.shortcut strong{font-size:10px!important;color:#2A4034!important}.shortcut small{font-size:9px!important;color:#829087!important}
+.footer{color:#8A9890!important;border-top:1px solid var(--line)!important;padding-top:16px!important;margin-top:23px!important}
+.dialog-shade{background:rgba(10,34,24,.48)!important;backdrop-filter:blur(3px)}
+.dialog{border-radius:15px!important}.dialog-head,.dialog-body{padding:19px!important}
+.dialog-head{border-bottom:1px solid var(--line)!important}.dialog-head h2{color:var(--ink)!important}
+.field{background:#F5F8F6!important;border-radius:8px!important}.field strong{color:#2E4438!important}
+.secondary{border:1px solid var(--line)!important;border-radius:8px!important;color:var(--brand)!important;background:#fff!important}
+.dialog-actions select{border:1px solid var(--line)!important;border-radius:8px!important}
+.toast{background:var(--brand-deep)!important;border-radius:9px!important}
+.login-screen{background:radial-gradient(circle at 15% 10%,#E5F2EA 0,transparent 36%),linear-gradient(135deg,#F4F7F5,#FFFFFF)!important}
+.login-card{border:1px solid var(--line)!important;border-radius:16px!important;box-shadow:0 18px 55px rgba(7,94,69,.10)!important;padding:34px!important}
+.login-brand{color:var(--brand)!important;font-size:22px!important}
+.login-card h1{color:var(--ink)!important;font-size:25px!important}
+.login-card label{color:#3E584A!important}
+.login-card input{border:1px solid var(--line)!important;border-radius:8px!important}
+.login-card .primary{background:var(--brand)!important}
+.login-message{background:#FDECEC!important;color:#A13D3D!important}
+@media(max-width:1180px){.metrics{grid-template-columns:repeat(2,minmax(0,1fr))!important}.overview-grid{grid-template-columns:1fr!important}.right-stack{grid-template-columns:1fr 1fr!important}}
+@media(max-width:720px){
+ .shell{display:block!important}
+ aside{padding:12px 13px 9px!important;gap:10px!important}
+ .brand{padding:0 4px 8px!important}.brand img{width:150px!important;max-height:39px!important}
+ .nav-caption,.aside-bottom{display:none!important}
+ .nav{display:flex!important;overflow-x:auto!important;gap:4px!important}
+ .nav a{flex-shrink:0!important;padding:8px 9px!important;font-size:10px!important}
+ .topbar{height:56px!important;padding:0 14px!important}
+ .content{padding:20px 14px 27px!important}
+ .welcome h1{font-size:27px!important}
+ .metrics{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:8px!important}
+ .metric{min-height:118px!important;padding:12px!important}
+ .metric strong{font-size:27px!important}
+ .right-stack{grid-template-columns:1fr!important}
+ .queue-filters{width:100%!important}.queue-filters input{max-width:none!important;flex:1!important}
+ .table-wrap{max-width:calc(100vw - 30px)!important}
+ .login-card{padding:24px!important}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto!important}}
+
 </style>
 <style id="sitewide-contrast-guard">
 body{color:#102B24!important}
@@ -177,28 +310,28 @@ footer p,footer a,footer .disclaimer,footer .foot-bottom{color:#E5F0EA!important
 <div id="loginScreen" class="login-screen"><form id="loginForm" class="login-card"><a href="index.html" class="login-brand">ClinicConsilium</a><div class="eyebrow">Restricted workspace</div><h1>Administrator sign in</h1><p>Use an account that has been created in Supabase and explicitly added to the administrator allowlist.</p><label for="loginEmail">Email address</label><input id="loginEmail" type="email" autocomplete="username" required maxlength="254"><label for="loginPassword">Password</label><input id="loginPassword" type="password" autocomplete="current-password" required><button id="loginBtn" class="primary" type="submit">Sign in securely</button><p id="loginMessage" class="login-message" role="status" hidden></p><small>Authorized administrators only. No patient clinical records are supported in this initial release.</small></form></div>\n<div class="shell">
 <aside aria-label="Care coordination navigation">
 <a class="brand" href="index.html" aria-label="ClinicConsilium home"><img src="assets/clinicconsilium-logo-optimized.png" alt="ClinicConsilium" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><span class="brandfallback" style="display:none">Clinic<span>Consilium</span></span></a>
-<div><div class="nav-caption">Care operations</div><nav class="nav" aria-label="Care operations">
+<div><div class="nav-caption">Platform operations</div><nav class="nav" aria-label="Platform operations">
 <a class="active" href="#overview"><svg><use href="#i-grid"/></svg> Command centre</a>
 <a href="#queue"><svg><use href="#i-inbox"/></svg> Enquiry triage <span class="count" id="newCount">0</span></a>
 <a href="#journey"><svg><use href="#i-route"/></svg> Care pathways</a>
 </nav></div>
-<div><div class="nav-caption">Network</div><nav class="nav" aria-label="Network management">
+<div><div class="nav-caption">Network directory</div><nav class="nav" aria-label="Network management">
 <a href="admin-pharmacy-applications.html"><svg><use href="#i-building"/></svg> Pharmacy applications</a>
 <a href="providers.html"><svg><use href="#i-users"/></svg> Professionals</a>
 <a href="partnerships.html"><svg><use href="#i-building"/></svg> Care partners</a>
 <a href="insights.html"><svg><use href="#i-book"/></svg> Health information</a>
 </nav></div>
-<div><div class="nav-caption">Governance</div><nav class="nav"><a href="trust-security.html"><svg><use href="#i-shield"/></svg> Trust &amp; access</a></nav></div>
+<div><div class="nav-caption">Security &amp; governance</div><nav class="nav"><a href="trust-security.html"><svg><use href="#i-shield"/></svg> Trust &amp; access</a></nav></div>
 <div class="aside-bottom"><div class="tiny-mark"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v18M3 12h18"/><circle cx="12" cy="12" r="9"/></svg></div><strong>Care before complexity.</strong>A dedicated workspace for coordinating access to trusted healthcare.</div>
 </aside>
 <main class="main">
-<header class="topbar"><div class="crumb">Workspace&nbsp; / &nbsp;<b>Administration</b></div><div class="top-right"><span class="env">Sign-in required</span><button id="refreshBtn" class="bell" type="button" aria-label="Refresh enquiries" title="Refresh enquiries">↻</button><button class="bell" type="button" aria-label="Notifications" onclick="notify('No live notifications are connected.')"><svg><use href="#i-alert"/></svg></button><div class="profile"><div class="profile-avatar">AD</div><div><strong>Administrator</strong><small>Platform operations</small></div></div><button id="logoutBtn" class="secondary" type="button" hidden>Sign out</button></div></header>
+<header class="topbar"><div class="crumb">ClinicConsilium&nbsp; / &nbsp;<b>Platform operations</b></div><div class="top-right"><span class="env">Sign-in required</span><button id="refreshBtn" class="bell" type="button" aria-label="Refresh enquiries" title="Refresh enquiries">↻</button><button class="bell" type="button" aria-label="Notifications" onclick="notify('No live notifications are connected.')"><svg><use href="#i-alert"/></svg></button><div class="profile"><div class="profile-avatar">AD</div><div><strong>Administrator</strong><small>Platform operations</small></div></div><button id="logoutBtn" class="secondary" type="button" hidden>Sign out</button></div></header>
 <div class="content" id="overview">
-<div class="welcome"><div><div class="eyebrow">Platform administration</div><h1>Admin dashboard</h1><p>Review general enquiries and partner interest from one secure workspace.</p></div><div class="welcome-right"><div class="date" id="today"></div><button class="primary" type="button" onclick="document.getElementById('queue').scrollIntoView({behavior:'smooth'})"><svg><use href="#i-inbox"/></svg> Review care queue</button></div></div>
+<div class="welcome"><div><div class="eyebrow">Platform administration</div><h1>Platform command centre</h1><p>A central operations workspace for reviewing enquiries and coordinating the growing ClinicConsilium network.</p></div><div class="welcome-right"><div class="date" id="today"></div><button class="primary" type="button" onclick="document.getElementById('queue').scrollIntoView({behavior:'smooth'})"><svg><use href="#i-inbox"/></svg> Review care queue</button></div></div>
 <div class="notice" role="note"><span class="notice-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><use href="#i-alert"/></svg></span><div><strong>Secure access required</strong>Sign in with an authorized administrator account to load live general enquiries. This Phase 0 workspace must not be used for patient clinical information.</div></div>
 <div class="overview-grid">
 <div class="main-stack">
-<section><div class="section-heading"><div><h2>Today's overview</h2><p>A snapshot of the coordination workload</p></div></div><div class="metrics">
+<section><div class="section-heading"><div><h2>Today's overview</h2><p>A live snapshot of the enquiry workload</p></div></div><div class="metrics">
 <article class="metric"><div class="metric-top">Open enquiries <span class="metric-icon"><svg><use href="#i-inbox"/></svg></span></div><strong id="metricOpen">0</strong><small>New enquiries requiring initial review</small></article>
 <article class="metric"><div class="metric-top">Awaiting a next step <span class="metric-icon"><svg><use href="#i-route"/></svg></span></div><strong id="metricNext">0</strong><small>Enquiries that need a next step</small></article>
 <article class="metric"><div class="metric-top">Provider reviews <span class="metric-icon"><svg><use href="#i-users"/></svg></span></div><strong id="metricProvider">0</strong><small>Healthcare professional interest submissions</small></article>
