@@ -1,102 +1,207 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#043D2E"><meta name="description" content="Understand the intended steps for exploring healthcare options and navigating provider conversations with ClinicConsilium."><meta name="robots" content="index,follow"><title>How ClinicConsilium Works | ClinicConsilium</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@600;700;800&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="assets/design.css"><style>
-/* Keep the shared homepage header and footer layout intact. */
-.header{position:sticky!important;top:0!important;z-index:50!important;display:block!important;background:#FFFFFF!important;backdrop-filter:blur(16px)!important;border-bottom:1px solid #DCE8E1!important}
-.header .wrap{width:min(1220px,calc(100% - 48px))!important;margin:0 auto!important}
-.header .nav{position:relative!important;top:auto!important;min-height:72px!important;height:72px!important;display:flex!important;align-items:center!important;justify-content:flex-start!important;gap:28px!important;padding:0!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;backdrop-filter:none!important}
-.header .brand{display:flex!important;align-items:center!important;flex-shrink:0!important;margin:0!important;padding:0!important}
-.header .brand img{display:block!important;width:auto!important;height:auto!important;max-width:190px!important;max-height:48px!important;object-fit:contain!important}
-.header .links{position:static!important;display:flex!important;align-items:center!important;justify-content:flex-end!important;gap:18px!important;margin-left:auto!important;padding:0!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;flex-direction:row!important}
-.header .links a{display:inline-flex!important;align-items:center!important;padding:0!important;border:0!important;background:transparent!important;color:#173B2D!important;font-size:13px!important;font-weight:700!important;white-space:nowrap!important}
-.header .links a:hover{color:#075E45!important}
-.header .menu{display:none!important;margin-left:auto!important;width:42px!important;height:42px!important;padding:0!important;border:1px solid #D5E5DC!important;border-radius:10px!important;background:#F2F8F5!important;color:#043D2E!important;font-size:20px!important}
-footer{display:block!important;background:#043D2E!important;color:#D6E8DE!important;padding:40px 0!important;border:0!important}
-footer .wrap{width:min(1220px,calc(100% - 48px))!important;margin:0 auto!important}
-footer .foot-top{display:grid!important;grid-template-columns:1.25fr repeat(3,1fr)!important;gap:24px!important;padding:0 0 18px!important}
-footer .foot-brand{display:block!important;max-width:none!important}
-footer .foot-brand img{display:block!important;width:auto!important;max-width:190px!important;height:auto!important;max-height:56px!important;object-fit:contain!important;background:transparent!important;padding:0!important;border-radius:0!important;margin:0 0 12px!important}
-footer .foot-brand p{max-width:250px!important;margin:0!important;color:#D6E8DE!important;font-size:12px!important;line-height:1.6!important}
-footer .foot-col{display:block!important}
-footer .foot-col b{display:block!important;margin:0 0 10px!important;color:#FFFFFF!important;font-size:12px!important}
-footer .foot-col a{display:block!important;padding:3px 0!important;color:#D6E8DE!important;font-size:12px!important}
-footer .foot-col a:hover{color:#D9EF9B!important}
-footer .disclaimer{display:block!important;max-width:none!important;margin:18px 0 0!important;padding:0!important;border:0!important;border-radius:0!important;background:transparent!important;color:#D6E8DE!important;font-size:10px!important;line-height:1.5!important}
-footer .foot-bottom{display:flex!important;justify-content:space-between!important;gap:14px!important;flex-wrap:wrap!important;margin:14px 0 0!important;padding:12px 0 0!important;border-top:1px solid #FFFFFF20!important;color:#D6E8DE!important;font-size:10px!important}
-footer .foot-bottom a{margin-left:14px!important;color:#D6E8DE!important}
-#main .hero{position:relative!important;overflow:hidden!important;padding:58px 0 68px!important;background:linear-gradient(125deg,#F2F8F5 0%,#FFFFFF 58%,#E8F4ED 100%)!important;color:#0F2A22!important}
-#main .hero:before{display:none!important}
-#main .hero:after{background:#D9EF9B!important;opacity:.18!important}
-#main .hero-grid{position:relative!important;z-index:1!important;display:grid!important;grid-template-columns:1.02fr .98fr!important;gap:58px!important;align-items:center!important}
-#main .hero h1{margin:18px 0 20px!important;color:#043D2E!important;font-size:clamp(43px,5.4vw,68px)!important;line-height:1.06!important}
-#main .hero h1 em{color:#075E45!important;background:none!important;-webkit-text-fill-color:#075E45!important}
-#main .hero p.hero-copy{display:block!important;max-width:570px!important;color:#405A50!important;font-size:16px!important}
-#main .hero .eyebrow{color:#075E45!important;background:#EAF4EE!important}
-#main .hero .actions{display:flex!important;gap:12px!important;flex-wrap:wrap!important;margin:27px 0 21px!important}
-#main .hero .button{display:inline-flex!important;align-items:center!important;justify-content:center!important;min-height:46px!important;padding:12px 18px!important;border-radius:11px!important;font-size:12px!important;font-weight:800!important}
-#main .hero .button.primary{background:#075E45!important;color:#FFFFFF!important}
-#main .hero .button.secondary{background:#FFFFFF!important;border:1px solid #C8DFD1!important;color:#043D2E!important}
-#main .hero .trust-note{display:flex!important;align-items:center!important;gap:9px!important;color:#405A50!important;border:0!important;background:transparent!important;font-size:11px!important}
-#main .hero .trust-icon{display:grid!important;place-items:center!important;width:26px!important;height:26px!important;border-radius:50%!important;background:#DCEFE5!important;color:#043D2E!important}
-#main .hero-media{position:relative!important;min-width:0!important}
-#main .hero-media img{position:relative!important;z-index:1!important;width:100%!important;height:470px!important;object-fit:cover!important;border-radius:24px!important;box-shadow:0 28px 70px #123b6d27!important}
-#main .image-caption{position:absolute!important;left:-22px!important;bottom:24px!important;z-index:2!important;max-width:240px!important;padding:15px 18px!important;border:1px solid #D5E5DC!important;border-radius:15px!important;background:#FFFFFF!important;color:#405A50!important;font-size:12px!important;box-shadow:0 12px 30px #102b3b14!important}
-#main .image-caption strong{display:block!important;color:#043D2E!important}
-#main .section{padding:78px 0!important;background:#FFFFFF!important;color:#0F2A22!important}
-#main .section.tint{background:#F2F8F5!important}
-#main .section-head{max-width:730px!important;margin:0 0 34px!important}
-#main .section-head h2{margin:13px 0!important;color:#043D2E!important;font-size:clamp(31px,4vw,45px)!important;line-height:1.15!important}
-#main .section-head p{margin:0!important;color:#405A50!important;font-size:15px!important}
-#main .grid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:18px!important}
-#main .card{height:100%!important;padding:25px!important;border:1px solid #D5E5DC!important;border-radius:17px!important;background:#FFFFFF!important;box-shadow:0 8px 26px #102b3b08!important}
-#main .card:before{display:none!important}
-#main .card .number{display:grid!important;place-items:center!important;width:38px!important;height:38px!important;margin-bottom:17px!important;border-radius:12px!important;background:#EAF4EE!important;color:#075E45!important;font-size:11px!important;font-weight:900!important;box-shadow:none!important}
-#main .card h3{margin:0 0 10px!important;color:#043D2E!important;font-size:22px!important;line-height:1.22!important}
-#main .card p{margin:0!important;color:#405A50!important;font-size:13px!important}
-#main .feature-band{display:grid!important;grid-template-columns:.9fr 1.1fr!important;gap:42px!important;align-items:center!important;padding:28px!important;border:1px solid #D5E5DC!important;border-radius:24px!important;background:#FFFFFF!important}
-#main .feature-band img{width:100%!important;height:340px!important;object-fit:cover!important;border-radius:17px!important}
-#main .feature-band h2{margin:12px 0!important;color:#043D2E!important;font-size:clamp(29px,3vw,40px)!important}
-#main .feature-band p,#main .checks li{color:#405A50!important}
-#main .cta-wrap{padding:0 0 76px!important}
-#main .cta{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:28px!important;padding:42px!important;border-radius:24px!important;background:linear-gradient(115deg,#075E45,#043D2E)!important;color:#FFFFFF!important}
-#main .cta h2{margin:0 0 10px!important;color:#FFFFFF!important}
-#main .cta p{color:#E0F0E7!important}
-@media(max-width:1000px){.header .nav{gap:12px!important}.header .links{gap:12px!important}.header .links a{font-size:12px!important}}
-@media(max-width:800px){
- .header .wrap,footer .wrap{width:min(100% - 32px,1220px)!important}
- .header .nav{height:60px!important;min-height:60px!important}
- .header .brand img{max-height:44px!important;max-width:170px!important}
- .header .menu{display:block!important}
- .header .links{display:none!important;position:absolute!important;left:0!important;right:0!important;top:60px!important;z-index:60!important;flex-direction:column!important;align-items:stretch!important;gap:0!important;padding:12px!important;border:1px solid #D5E5DC!important;border-radius:14px!important;background:#FFFFFF!important;box-shadow:0 18px 40px #102b3b18!important}
- .header .links.open{display:flex!important}
- .header .links a{display:block!important;padding:12px 8px!important;border-bottom:1px solid #EDF2EE!important;font-size:14px!important}
- .header .links a:last-child{border-bottom:0!important}
- #main .hero{padding:42px 0 44px!important}
- #main .hero-grid{grid-template-columns:1fr!important;gap:27px!important}
- #main .hero h1{font-size:clamp(42px,12vw,58px)!important}
- #main .hero-media img{height:310px!important;border-radius:19px!important}
- #main .image-caption{left:12px!important;bottom:12px!important}
- #main .section{padding:54px 0!important}
- #main .grid{grid-template-columns:1fr!important}
- #main .card{padding:22px!important}
- #main .feature-band{grid-template-columns:1fr!important;padding:18px!important;gap:22px!important}
- #main .feature-band img{height:250px!important}
- #main .cta-wrap{padding-bottom:48px!important}
- #main .cta{padding:28px!important;align-items:flex-start!important;flex-direction:column!important}
- footer .foot-top{grid-template-columns:1fr 1fr!important;gap:22px 16px!important}
- footer .foot-brand{grid-column:1/-1!important}
- footer .foot-brand img{max-height:52px!important}
- footer .foot-bottom{flex-direction:column!important}
-}
-@media(max-width:540px){.announcement{font-size:12px!important}.announcement .wrap{min-height:30px!important;height:30px!important}footer .disclaimer{font-size:10px!important}}
-</style></head><body>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>How It Works | ClinicConsilium</title>
+<meta name="description" content="Learn how ClinicConsilium is designed to help people explore healthcare information, prepare questions and understand their next steps.">
+<meta name="theme-color" content="#043D2E">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#043D2E;--ink2:#075E45;--teal:#075E45;--mint:#D8EEE5;--lime:#D9EF9B;--paper:#EAF5EF;--white:#FFFFFF;--muted:#587064;--line:#C8DFD1;--blue:#E3F1E9;--coral:#E99B7E;--shadow:0 24px 70px #102b3b18;--radius:26px;--ease:cubic-bezier(.2,.75,.25,1)}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:100px}body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.65 'DM Sans',sans-serif;-webkit-font-smoothing:antialiased}img{display:block;max-width:100%}a{color:inherit;text-decoration:none}button{font:inherit}.wrap{width:min(1220px,calc(100% - 48px));margin:auto}
+h1,h2,h3,h4{font-family:Sora,sans-serif;letter-spacing:-.045em;line-height:1.08;margin:0}p{margin:0}.skip{position:absolute;left:-999px;top:10px;background:#fff;padding:12px;z-index:99}.skip:focus{left:12px}
+.announcement{background:#043D2E;color:#d7e8e3;font-size:11px;letter-spacing:.03em}.announcement .wrap{min-height:30px;display:flex;align-items:center;justify-content:space-between;gap:16px}.announcement b{color:var(--lime);font-weight:700}
+.header{position:sticky;top:0;z-index:50;background:#EAF5EFED;backdrop-filter:blur(16px);border-bottom:1px solid #102b3b12}.nav{min-height:68px;display:flex;align-items:center;gap:28px}.brand img{width:155px;height:auto}.links{display:flex;align-items:center;gap:27px;margin-left:auto}.links a{font-size:13px;font-weight:700;color:#40565e;transition:color .2s}.links a:hover{color:var(--teal)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 22px;border-radius:999px;font-size:14px;font-weight:700;transition:transform .25s var(--ease),box-shadow .25s,background .25s;border:1px solid transparent}.btn:hover{transform:translateY(-3px)}.btn.dark{background:var(--ink);color:white;box-shadow:0 12px 28px #102b3b22}.btn.dark:hover{background:var(--teal)}.btn.light{border-color:#b7c7c0;color:var(--ink);background:transparent}.btn.light:hover{background:white}.btn.lime{background:var(--lime);color:var(--ink)}.nav .btn{min-height:40px;padding:0 16px;font-size:12px}
+.menu{display:none;margin-left:auto;border:1px solid var(--line);background:white;border-radius:50%;width:46px;height:46px;font-size:20px;color:var(--ink)}
+.hero{position:relative;overflow:hidden;padding:66px 0 82px;background:var(--paper)}.hero:before{content:"";position:absolute;width:620px;height:620px;border-radius:50%;background:var(--mint);filter:blur(1px);opacity:.42;right:-260px;top:-320px}.hero:after{content:"";position:absolute;width:300px;height:300px;border-radius:50%;background:var(--lime);opacity:.25;left:-210px;bottom:-220px}
+.hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:1.02fr .98fr;gap:65px;align-items:center}.kicker{display:inline-flex;align-items:center;gap:10px;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#25796f}.kicker:before{content:"";width:25px;height:2px;background:var(--teal)}
+h1{font-size:clamp(50px,6.2vw,86px);font-weight:600;max-width:720px;margin:24px 0 25px}.hero h1 span{color:var(--teal)}.hero-copy{max-width:540px;color:#596d73;font-size:18px;line-height:1.7}.hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin:32px 0 27px}.micro-proof{display:flex;gap:20px;flex-wrap:wrap;color:#63767a;font-size:12px;font-weight:600}.micro-proof span{display:flex;align-items:center;gap:7px}.micro-proof i{width:7px;height:7px;background:var(--teal);border-radius:50%}
+.visual{position:relative;min-width:0}.hero-photo{position:relative;overflow:hidden;border-radius:34px 34px 140px 34px;background:var(--blue);aspect-ratio: .95;box-shadow:var(--shadow)}.hero-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1s ease}.hero-photo img.active{opacity:1}.photo-label{position:absolute;left:22px;bottom:22px;padding:12px 16px;border-radius:15px;background:#102b3be8;color:#fff;font-size:12px;font-weight:600;z-index:2}.photo-label span{display:block;color:var(--lime);font-size:10px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:3px}
+.orbit-card{position:absolute;z-index:3;background:white;padding:17px 19px;border-radius:18px;box-shadow:0 18px 50px #102b3b20}.orbit-card b{display:block;font:600 13px Sora}.orbit-card small{color:var(--muted);font-size:11px}.orbit-one{left:-35px;top:14%}.orbit-two{right:-22px;bottom:13%;background:var(--lime)}.orbit-icon{display:inline-grid;place-items:center;width:28px;height:28px;background:#e2f7ed;border-radius:9px;color:#147b6c;margin-right:7px}
+.section{padding:104px 0}.section.white{background:#D8EEE5}.section.ink{background:var(--ink);color:#fff}.section-head{display:flex;align-items:end;justify-content:space-between;gap:30px;margin-bottom:44px}.section-head>div{max-width:690px}.eyebrow{font-size:11px;text-transform:uppercase;letter-spacing:.15em;color:var(--teal);font-weight:800}.section h2{font-size:clamp(34px,4.5vw,57px);font-weight:600;margin:14px 0 15px}.section-head p{color:var(--muted);font-size:16px;max-width:460px}.ink .section-head p{color:#afc4c2}.ink .eyebrow{color:var(--lime)}
+.pathways{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}.path{position:relative;min-height:260px;border-radius:24px;padding:27px;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;transition:transform .3s var(--ease),box-shadow .3s}.path:hover{transform:translateY(-6px);box-shadow:var(--shadow)}.path:nth-child(1){grid-column:span 5;background:var(--blue)}.path:nth-child(2){grid-column:span 4;background:#D8EEE5}.path:nth-child(3){grid-column:span 3;background:#f6e5dc}.path:nth-child(4){grid-column:span 4;background:#E3F1E9}.path:nth-child(5){grid-column:span 8;background:var(--ink);color:white}
+.path-top{display:flex;align-items:center;justify-content:space-between}.path-no{font:600 12px Sora;opacity:.55}.path-icon{width:46px;height:46px;border-radius:15px;background:#ffffffa8;display:grid;place-items:center;font-size:22px}.path h3{font-size:25px;max-width:300px;margin:22px 0 9px}.path p{font-size:13px;color:#53686d;max-width:360px}.path:nth-child(5) p{color:#bfd0cd}.path-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:24px}.status{display:inline-flex;align-items:center;gap:7px;border-radius:999px;padding:7px 11px;background:#ffffffa6;font-size:10px;font-weight:800;letter-spacing:.04em;text-transform:uppercase}.status:before{content:"";width:6px;height:6px;border-radius:50%;background:#a0a9a5}.status.live:before{background:#159d78}.path-arrow{font-size:21px}
+.how-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:70px;align-items:start}.how-intro{position:sticky;top:130px}.how-intro p{color:var(--muted);font-size:17px;margin:18px 0 27px;max-width:410px}.steps{display:grid;gap:0}.step{display:grid;grid-template-columns:58px 1fr;gap:22px;padding:23px 0;border-bottom:1px solid var(--line)}.step:first-child{padding-top:0}.step-num{width:48px;height:48px;display:grid;place-items:center;background:var(--mint);color:var(--ink);border-radius:16px;font:700 15px Sora}.step h3{font-size:19px;margin:2px 0 8px}.step p{font-size:14px;color:var(--muted);max-width:480px}
+.exchange{display:grid;grid-template-columns:1fr 1fr;border-radius:32px;overflow:hidden;background:var(--mint)}.exchange-copy{padding:60px}.exchange-copy h2{font-size:clamp(34px,4vw,52px);margin:16px 0}.exchange-copy p{color:#4e6968;max-width:480px}.exchange-art{position:relative;min-height:430px;background:var(--blue);overflow:hidden}.exchange-art img{width:100%;height:100%;position:absolute;inset:0;object-fit:cover}.exchange-note{position:absolute;bottom:22px;left:22px;background:var(--ink);color:white;border-radius:14px;padding:13px 17px;font-size:11px}.exchange-note b{display:block;color:var(--lime);font:600 13px Sora;margin-bottom:3px}
+.partners{display:grid;grid-template-columns:1fr 1fr;gap:55px;align-items:center}.partner-photo{position:relative;border-radius:28px 110px 28px 28px;overflow:hidden;aspect-ratio:1.12;background:var(--blue)}.partner-photo img{width:100%;height:100%;object-fit:cover}.partner-copy p{color:var(--muted);font-size:16px;margin:18px 0 25px;max-width:500px}.partner-links{display:grid;grid-template-columns:1fr 1fr;gap:10px}.partner-link{padding:16px;border:1px solid var(--line);border-radius:15px;font-size:13px;font-weight:700;display:flex;justify-content:space-between;align-items:center;background:#EAF5EF}.partner-link:hover{border-color:var(--teal)}
+.insights{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.insight{background:var(--paper);border-radius:22px;overflow:hidden}.insight img{width:100%;aspect-ratio:1.45;object-fit:cover}.insight-copy{padding:20px}.insight-copy span{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--teal);font-weight:800}.insight h3{font-size:19px;margin:8px 0}.insight p{font-size:13px;color:var(--muted)}
+.trust-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:13px}.trust-card{padding:23px;border:1px solid #ffffff25;border-radius:19px;background:#ffffff09}.trust-card b{display:block;font:600 16px Sora;color:var(--lime);margin-bottom:10px}.trust-card p{color:#bfd0cd;font-size:13px}
+.faq-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:60px}.faq-intro p{color:var(--muted);margin-top:15px;max-width:340px}.faq-list details{border-bottom:1px solid var(--line);padding:17px 0}.faq-list summary{list-style:none;cursor:pointer;font:600 16px Sora;display:flex;justify-content:space-between;gap:15px}.faq-list summary::-webkit-details-marker{display:none}.faq-list summary:after{content:"+";font-size:22px;color:var(--teal)}.faq-list details[open] summary:after{content:"−"}.faq-list details p{padding:13px 30px 0 0;color:var(--muted);font-size:14px}
+.last-call{padding:80px 0;background:var(--lime)}.last-call .wrap{display:flex;align-items:center;justify-content:space-between;gap:35px}.last-call h2{font-size:clamp(32px,4vw,52px);max-width:670px}.last-call p{font-size:14px;color:#53645a;margin-top:12px}
+footer{background:#043D2E;color:#c1d8c9;padding:42px 0 18px}.foot-top{display:grid;grid-template-columns:1.4fr repeat(3,1fr);gap:28px}.foot-brand img{width:155px;background:white;padding:8px;border-radius:12px;margin-bottom:16px}.foot-brand p{font-size:13px;max-width:250px}.foot-col b{display:block;color:white;font:600 13px Sora;margin-bottom:15px}.foot-col a{display:block;font-size:12px;padding:5px 0;color:#b5c9c5}.foot-col a:hover{color:var(--lime)}.disclaimer{margin-top:26px;padding:16px 18px;border-radius:12px;background:#ffffff0b;color:#a9bfba;font-size:11px;line-height:1.7}.foot-bottom{border-top:1px solid #ffffff20;margin-top:18px;padding-top:14px;display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap;font-size:11px}.foot-bottom a{margin-left:14px}
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s var(--ease),transform .7s var(--ease)}.reveal.visible{opacity:1;transform:none}
+@media(max-width:1000px){.links{gap:15px}.links a{font-size:12px}.brand img{width:165px}.hero-grid{gap:40px}.path:nth-child(n){grid-column:span 6}.path:nth-child(5){grid-column:span 12}.trust-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:800px){.announcement .wrap{min-height:27px;justify-content:center;text-align:center}.announcement .wrap span:first-child{display:none}.nav{min-height:64px}.menu{display:block}.links{display:none;position:absolute;top:100%;left:0;right:0;background:var(--paper);padding:20px 24px 26px;box-shadow:0 18px 30px #102b3b1a;flex-direction:column;align-items:stretch}.links.open{display:flex}.links a{font-size:14px;padding:7px 0}.links .btn{margin-top:6px}.hero{padding:54px 0 70px}.hero-grid,.how-grid,.partners,.faq-grid{grid-template-columns:1fr}.hero-grid{gap:55px}.hero-photo{aspect-ratio:1.15;border-radius:28px 28px 100px 28px}.orbit-one{left:12px}.orbit-two{right:10px}.section{padding:76px 0}.section-head{display:block}.section-head p{margin-top:12px}.how-intro{position:static}.exchange{grid-template-columns:1fr}.exchange-art{min-height:330px}.exchange-copy{padding:38px}.partners{gap:35px}.partner-photo{max-height:430px}.insights{grid-template-columns:1fr 1fr}.last-call .wrap{display:block}.last-call .btn{margin-top:25px}.foot-top{grid-template-columns:1fr 1fr}}
+@media(max-width:540px){.wrap{width:calc(100% - 34px)}.brand img{width:140px}.hero h1{font-size:48px}.hero-copy{font-size:16px}.hero-actions{display:grid}.hero-actions .btn{width:100%}.micro-proof{gap:10px 15px}.orbit-card{padding:12px 13px}.orbit-card b{font-size:11px}.orbit-card small{font-size:9px}.orbit-one{top:8%}.orbit-two{bottom:8%}.pathways{grid-template-columns:1fr}.path:nth-child(n){grid-column:auto;min-height:225px}.path:nth-child(5){grid-column:auto}.steps .step{grid-template-columns:48px 1fr;gap:15px}.step-num{width:42px;height:42px}.exchange-copy{padding:30px 24px}.partner-links{grid-template-columns:1fr}.insights{grid-template-columns:1fr}.trust-grid{grid-template-columns:1fr}.foot-top{grid-template-columns:1fr}.last-call{padding:62px 0}.foot-bottom{display:block}.foot-bottom a{margin:12px 12px 0 0}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+
+/* Emerald Green site background treatment */
+body{background:linear-gradient(135deg,#075E45 0%,#064F3C 46%,#043D2E 100%);background-attachment:fixed;color:#fff}
+.header{background:linear-gradient(110deg,#075E45F2 0%,#043D2EEB 100%);border-bottom:1px solid #ffffff22}
+.links a{color:#E1F1E8}.links a:hover{color:var(--lime)}
+.menu{background:#D8EEE5}
+.hero{background:linear-gradient(125deg,#075E45 0%,#064B39 52%,#043D2E 100%)}
+.hero:before{background:#D8EEE5;opacity:.16}.hero:after{background:#D9EF9B;opacity:.12}
+.kicker{color:#D9EF9B}.hero-copy,.micro-proof{color:#D5E8DE}
+.hero h1 span{color:#D9EF9B}
+.section:not(.white):not(.ink){color:#fff}
+.section:not(.white):not(.ink) .section-head p,
+.section:not(.white):not(.ink) .how-intro p,
+.section:not(.white):not(.ink) .partner-copy p,
+.section:not(.white):not(.ink) .faq-intro p,
+.section:not(.white):not(.ink) .faq-list details p,
+.section:not(.white):not(.ink) .step p{color:#D5E8DE}
+.section:not(.white):not(.ink) .eyebrow{color:#D9EF9B}
+.section:not(.white):not(.ink) .step{border-color:#ffffff35}
+.section:not(.white):not(.ink) .faq-list details{border-color:#ffffff35}
+.section:not(.white):not(.ink) .faq-list summary{color:#fff}
+.section:not(.white):not(.ink) .faq-list summary:after{color:#D9EF9B}
+.section.white{background:linear-gradient(135deg,#E5F3EA 0%,#D8EEE5 55%,#C8E5D6 100%);color:#043D2E}
+.section.ink{background:linear-gradient(135deg,#032D22 0%,#043D2E 100%)}
+.last-call{background:linear-gradient(115deg,#D9EF9B 0%,#C6E8C8 55%,#D8EEE5 100%)}
+@media(max-width:800px){.header{background:linear-gradient(110deg,#075E45F7 0%,#043D2EF2 100%)}}
+
+/* Homepage refresh — compact shell and accessible light surfaces */
+:root{--ink:#0F2A22;--ink2:#075E45;--teal:#075E45;--mint:#DCEFE5;--lime:#D9EF9B;--paper:#F2F8F5;--white:#FFFFFF;--muted:#405A50;--line:#D5E5DC;--blue:#EAF4EE}
+html{scroll-padding-top:72px}
+body{background:#FFFFFF;color:#0F2A22}
+.announcement{background:#043D2E;color:#FFFFFF;font-size:13px}
+.announcement .wrap{min-height:32px;height:32px}
+.announcement b{color:#D9EF9B}
+.header{position:sticky;top:0;background:#FFFFFF;border-bottom:1px solid #DCE8E1;backdrop-filter:blur(12px)}
+.nav{min-height:72px;height:72px;gap:20px}
+.brand img{width:auto;height:auto;max-height:48px;max-width:190px;object-fit:contain}
+.links{gap:18px}
+.links a{font-size:13px;color:#173B2D;white-space:nowrap}
+.links a:hover{color:#075E45}
+.nav .btn{min-height:38px;padding:0 14px}
+.menu{width:42px;height:42px;background:#F2F8F5;border-color:#D5E5DC}
+.hero{padding:58px 0 68px;background:linear-gradient(125deg,#F2F8F5 0%,#FFFFFF 58%,#E8F4ED 100%);color:#0F2A22}
+.hero:before{background:#B9DEC8;opacity:.28}.hero:after{background:#D9EF9B;opacity:.18}
+.kicker{color:#075E45}.hero h1{color:#0F2A22}.hero h1 span{color:#075E45}
+.hero-copy,.micro-proof{color:#405A50}
+.section{color:#0F2A22;background:#FFFFFF}
+.section.white{background:#F2F8F5;color:#0F2A22}
+.section:not(.white):not(.ink) .section-head p,.section:not(.white):not(.ink) .how-intro p,.section:not(.white):not(.ink) .partner-copy p,.section:not(.white):not(.ink) .faq-intro p,.section:not(.white):not(.ink) .faq-list details p,.section:not(.white):not(.ink) .step p{color:#405A50}
+.section:not(.white):not(.ink) .eyebrow,.eyebrow{color:#075E45}
+.section:not(.white):not(.ink) .step{border-color:#D5E5DC}
+.section:not(.white):not(.ink) .faq-list details{border-color:#D5E5DC}
+.section:not(.white):not(.ink) .faq-list summary{color:#0F2A22}
+.section:not(.white):not(.ink) .faq-list summary:after{color:#075E45}
+.path:nth-child(1),.path:nth-child(2),.path:nth-child(3),.path:nth-child(4){background:#F2F8F5;color:#0F2A22}
+.path:nth-child(5){background:#075E45;color:#FFFFFF}
+.path p{color:#405A50}.path:nth-child(5) p{color:#E0F0E7}
+.path-icon{background:#FFFFFF;color:#075E45}
+.status{background:#FFFFFF;color:#173B2D}
+.exchange{background:#F2F8F5}.exchange-copy p{color:#405A50}.exchange-art{background:#E8F4ED}
+.partner-link{background:#FFFFFF;color:#173B2D;border-color:#D5E5DC}
+.insight{background:#FFFFFF}.insight-copy p{color:#405A50}
+.last-call{padding:52px 0;background:#075E45;color:#FFFFFF}
+.last-call h2{color:#FFFFFF}.last-call p{color:#E0F0E7}
+.last-call .btn.dark{background:#FFFFFF;color:#043D2E;box-shadow:none}
+footer{background:#043D2E;color:#D6E8DE;padding:40px 0!important}
+.foot-top{grid-template-columns:1.25fr repeat(3,1fr);gap:24px}
+.foot-brand img{width:auto;max-width:190px;height:auto;max-height:56px;object-fit:contain;background:transparent;padding:0;border-radius:0;margin-bottom:12px}
+.foot-brand p{font-size:12px;color:#D6E8DE}
+.foot-col b{font-size:12px;margin-bottom:10px}
+.foot-col a{font-size:12px;padding:3px 0;color:#D6E8DE}
+.disclaimer{margin-top:18px;padding:0;background:transparent;border-radius:0;color:#D6E8DE;font-size:10px;line-height:1.5}
+.foot-bottom{margin-top:14px;padding-top:12px;color:#D6E8DE}
+@media(max-width:1000px){.links{gap:12px}.links a{font-size:12px}.nav{gap:12px}}
+@media(max-width:800px){.nav{min-height:60px;height:60px}.header{background:#FFFFFF}.links{background:#FFFFFF}.links a{font-size:14px}.hero{padding:48px 0 60px}.foot-top{grid-template-columns:1fr 1fr}.last-call{padding:42px 0}}
+@media(max-width:540px){.brand img{max-height:44px;max-width:170px}.announcement{font-size:12px}.announcement .wrap{min-height:30px;height:30px}.foot-top{grid-template-columns:1fr 1fr;gap:22px 16px}.foot-brand{grid-column:1/-1}.foot-brand img{max-height:52px}.disclaimer{font-size:10px}.foot-bottom{font-size:10px}}
+
+
+/* How it works page — layout built on the homepage design system */
+.journey-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.journey-card{min-height:260px;padding:26px 23px;border:1px solid #D5E5DC;border-radius:22px;background:#FFFFFF;box-shadow:0 12px 34px #102b3b0a}
+.journey-number{display:grid;place-items:center;width:42px;height:42px;border-radius:14px;background:#DCEFE5;color:#043D2E;font:700 14px Sora;margin-bottom:20px}
+.journey-label{font-size:10px;font-weight:800;letter-spacing:.13em;text-transform:uppercase;color:#075E45}
+.journey-card h3{font:600 20px/1.25 Sora,sans-serif;margin:8px 0 10px;color:#043D2E}
+.journey-card p{font-size:13px;line-height:1.7;color:#405A50}
+.prep-layout{display:grid;grid-template-columns:.85fr 1.15fr;gap:70px;align-items:start}
+.prep-copy h2,.safety-panel h2{font-size:clamp(34px,4.5vw,54px);margin:14px 0;color:#043D2E}
+.prep-copy p,.safety-panel>div:first-child>p{max-width:430px;color:#405A50;font-size:16px}
+.prep-list{border-top:1px solid #D5E5DC}
+.prep-item{display:grid;grid-template-columns:44px 1fr;gap:18px;padding:20px 0;border-bottom:1px solid #D5E5DC}
+.prep-item>span{display:grid;place-items:center;width:38px;height:38px;border-radius:12px;background:#EAF4EE;color:#075E45;font:700 12px Sora}
+.prep-item h3{font:600 17px/1.3 Sora,sans-serif;color:#043D2E;margin:2px 0 7px}
+.prep-item p{color:#405A50;font-size:13px}
+.safety-panel{display:grid;grid-template-columns:.9fr 1.1fr;gap:60px;padding:48px;border-radius:28px;background:#EAF4EE}
+.safety-panel .btn{margin-top:25px}
+.safety-points{display:grid;gap:0}
+.safety-points>div{padding:17px 0;border-bottom:1px solid #C8DFD1}
+.safety-points>div:first-child{padding-top:0}
+.safety-points>div:last-child{border-bottom:0;padding-bottom:0}
+.safety-points b{font:600 15px Sora;color:#043D2E}
+.safety-points p{margin-top:6px;color:#405A50;font-size:13px}
+.last-call{padding:58px 0;background:#075E45;color:#FFFFFF}
+.last-call h2{color:#FFFFFF}.last-call p{color:#E0F0E7}
+.last-call .btn.dark{background:#FFFFFF;color:#043D2E;box-shadow:none}
+@media(max-width:1000px){.journey-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.prep-layout{gap:38px}}
+@media(max-width:800px){.journey-grid,.prep-layout,.safety-panel{grid-template-columns:1fr}.journey-card{min-height:0}.safety-panel{padding:30px;gap:30px}.last-call{padding:44px 0}}
+@media(max-width:540px){.journey-grid{grid-template-columns:1fr}.prep-item{grid-template-columns:40px 1fr}.safety-panel{padding:25px 21px}.hero h1{font-size:clamp(43px,12vw,54px)}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
 <div class="announcement"><div class="wrap"><span>ClinicConsilium · Trusted Healthcare. Without Borders.</span><b>Building a more connected healthcare journey · Nigeria first</b></div></div>
 <header class="header"><div class="wrap nav">
 <a class="brand" href="index.html" aria-label="ClinicConsilium home"><img src="assets/clinicconsilium-logo-optimized.png" alt="ClinicConsilium — Trusted Healthcare. Without Borders."></a>
 <button class="menu" id="menuToggle" aria-label="Open navigation" aria-expanded="false" aria-controls="mainNav">☰</button>
 <nav class="links" id="mainNav" aria-label="Main navigation"><a href="index.html" aria-current="page">Home</a><a href="services.html">Services</a><a href="how-it-works.html">How it works</a><a href="providers.html">For providers</a><a href="international-care.html">International care</a><a href="about.html">About</a><a href="contact.html">Contact</a></nav>
 </div></header>
-<main><section class="hero"><div class="wrap hero-grid"><div><span class="eyebrow">HOW IT WORKS</span><h1>From questions to next steps—with <em>more clarity.</em></h1><p class="hero-copy">Healthcare journeys can involve multiple organisations and decisions. ClinicConsilium is designed to help people understand the navigation process one step at a time.</p><div class="actions"><a class="button primary" href="services.html">Explore services ↗</a><a class="button secondary" href="contact.html">Contact the team →</a></div><div class="trust-note"><span class="trust-icon" aria-hidden="true">✓</span><span>Privacy-conscious approach · Clear information · Responsible care navigation</span></div></div><div class="hero-media"><img src="https://images.unsplash.com/photo-1551076805-e1869033e561?auto=format&fit=crop&w=1200&q=85" alt="Doctor speaking with a patient during a consultation" fetchpriority="high"><div class="image-caption"><strong>Care, connected.</strong>Information to help you prepare for the next conversation.</div></div></div></section><section class="section " ><div class="wrap"><div class="section-head"><span class="eyebrow">A simple pathway</span><h2>Four steps to navigate with confidence</h2><p>The exact process will depend on the service and provider involved. These steps describe the intended approach, not a guarantee that every workflow is currently available.</p></div><div class="grid"><article class="card"><div class="number">01 · Explore</div><h3>Explore your options</h3><p>Start with general health information and identify the type of care or support you are looking for.</p></article><article class="card"><div class="number">02 · Prepare</div><h3>Prepare your questions</h3><p>Write down what you want to ask. Check which documents a provider needs before sharing anything sensitive.</p></article><article class="card"><div class="number">03 · Connect</div><h3>Contact the right provider</h3><p>Confirm eligibility, availability, fees, referral requirements and the next steps directly with the organisation.</p></article><article class="card"><div class="number">04 · Confirm and follow up</div><h3>Confirm and follow up</h3><p>Keep a note of agreed next steps and follow-up arrangements. Clinical decisions should remain with qualified professionals.</p></article></div></div></section><section class="section tint" ><div class="wrap"><div class="section-head"><span class="eyebrow">Prepare before you enquire</span><h2>A little preparation can make conversations clearer</h2><p>Before contacting a provider, consider what you need to know and what information is appropriate to share.</p></div><div class="grid"><article class="card"><div class="number">01</div><h3>Your main question</h3><p>Write down what you want to understand or arrange.</p></article><article class="card"><div class="number">02</div><h3>Relevant documents</h3><p>Ask the provider which records or referral documents are required before sending anything.</p></article><article class="card"><div class="number">03</div><h3>Costs and timing</h3><p>Confirm estimates, additional fees, waiting times and payment terms directly with the provider.</p></article><article class="card"><div class="number">04</div><h3>Privacy and contact</h3><p>Use verified contact channels and avoid sending unnecessary personal or medical information.</p></article></div></div></section><section class="section " ><div class="wrap"><div class="section-head"><span class="eyebrow">Important boundaries</span><h2>Your safety comes first</h2><p>ClinicConsilium does not replace a clinician, emergency service or the provider’s own assessment. If symptoms are severe or urgent, seek emergency medical help immediately.</p></div><div class="grid"><article class="card"><div class="number">01</div><h3>Medical decisions</h3><p>Discuss diagnosis, treatment and medicines with a qualified healthcare professional.</p></article><article class="card"><div class="number">02</div><h3>Provider availability</h3><p>A connection or enquiry does not confirm a booking or acceptance.</p></article><article class="card"><div class="number">03</div><h3>Questions or concerns</h3><p>Contact us for platform-related questions or use the appropriate enquiry route.</p></article></div></div></section><section class="section tint"><div class="wrap feature-band"><img src="https://images.unsplash.com/photo-1532938911079-1b06ac7ceec7?auto=format&fit=crop&w=1000&q=85" alt="Healthcare environment supporting the care journey" loading="lazy"><div><span class="eyebrow">A responsible approach</span><h2>Clear expectations are part of better care.</h2><p>We are building ClinicConsilium around useful information, transparent service boundaries and responsible connections. We do not replace qualified clinicians, emergency services or the decisions of patients and their care teams.</p><ul class="checks"><li>Confirm provider details, availability and fees directly.</li><li>Share personal or health information only through appropriate channels.</li><li>Seek qualified clinical advice for diagnosis and treatment decisions.</li></ul><a class="button secondary" href="safety.html">Read our safety guidance ↗</a></div></div></section>
-<section class="cta-wrap"><div class="wrap"><div class="cta"><div class="cta-copy"><h2>Have a question about ClinicConsilium?</h2><p>Contact the team for platform questions, provider interest or partnership enquiries. Please do not use website enquiries for urgent medical needs.</p></div><a class="button primary" href="contact.html">Contact ClinicConsilium ↗</a></div></div></section></main>
+<main id="main">
+<section class="hero">
+ <div class="wrap hero-grid">
+  <div>
+   <div class="kicker">How your journey works</div>
+   <h1>From questions to next steps—with <span>more clarity.</span></h1>
+   <p class="hero-copy">Healthcare journeys can involve multiple organisations and decisions. ClinicConsilium is designed to help people understand the navigation process one step at a time.</p>
+   <div class="hero-actions"><a class="btn dark" href="services.html">Explore services <span>↗</span></a><a class="btn light" href="contact.html">Contact the team →</a></div>
+   <div class="micro-proof"><span><i></i>Privacy-conscious approach</span><span><i></i>Clear information</span><span><i></i>Responsible care navigation</span></div>
+  </div>
+  <div class="visual">
+   <div class="hero-photo"><img class="active" src="https://images.unsplash.com/photo-1551076805-e1869033e561?auto=format&fit=crop&w=1200&q=85" alt="Doctor speaking with a patient during a consultation" fetchpriority="high"><div class="photo-label"><span>Care, connected</span>Information to help you prepare for your next conversation</div></div>
+  </div>
+ </div>
+</section>
+<section class="section white">
+ <div class="wrap">
+  <div class="section-head"><div><div class="eyebrow">A simple pathway</div><h2>Four steps to navigate with confidence.</h2></div><p>The exact process depends on the service and provider involved. These steps explain our intended approach; not every workflow is available today.</p></div>
+  <div class="journey-grid">
+   <article class="journey-card"><div class="journey-number">01</div><div class="journey-label">Explore</div><h3>Explore your options</h3><p>Start with general health information and identify the type of care or support you are looking for.</p></article>
+   <article class="journey-card"><div class="journey-number">02</div><div class="journey-label">Prepare</div><h3>Prepare your questions</h3><p>Write down what you want to ask. Check which documents a provider needs before sharing anything sensitive.</p></article>
+   <article class="journey-card"><div class="journey-number">03</div><div class="journey-label">Connect</div><h3>Contact the right provider</h3><p>Confirm eligibility, availability, fees, referral requirements and next steps directly with the organisation.</p></article>
+   <article class="journey-card"><div class="journey-number">04</div><div class="journey-label">Follow up</div><h3>Confirm what happens next</h3><p>Keep a note of agreed next steps and follow-up arrangements. Clinical decisions remain with qualified professionals.</p></article>
+  </div>
+ </div>
+</section>
+<section class="section">
+ <div class="wrap prep-layout">
+  <div class="prep-copy"><div class="eyebrow">Before you enquire</div><h2>A little preparation can make conversations clearer.</h2><p>Before contacting a provider, consider what you need to know and what information is appropriate to share.</p></div>
+  <div class="prep-list">
+   <div class="prep-item"><span>01</span><div><h3>Write down your main question</h3><p>Be clear about what you want to understand, arrange or ask.</p></div></div>
+   <div class="prep-item"><span>02</span><div><h3>Ask about required documents</h3><p>Confirm which records or referral documents are needed before sending anything.</p></div></div>
+   <div class="prep-item"><span>03</span><div><h3>Confirm costs and timing</h3><p>Ask about fees, waiting times, payment terms and any additional requirements.</p></div></div>
+   <div class="prep-item"><span>04</span><div><h3>Protect your information</h3><p>Use appropriate, verified channels and avoid sharing unnecessary personal or medical information.</p></div></div>
+  </div>
+ </div>
+</section>
+<section class="section white">
+ <div class="wrap safety-panel">
+  <div><div class="eyebrow">Important boundaries</div><h2>Your safety comes first.</h2><p>ClinicConsilium does not replace a clinician, emergency service or a provider’s own assessment. For urgent or severe symptoms, seek emergency medical help immediately.</p><a class="btn dark" href="safety.html">Read our safety guidance ↗</a></div>
+  <div class="safety-points">
+   <div><b>Medical decisions</b><p>Discuss diagnosis, treatment and medicines with a qualified healthcare professional.</p></div>
+   <div><b>Provider availability</b><p>An enquiry does not confirm a booking, acceptance or availability of a service.</p></div>
+   <div><b>Platform questions</b><p>Contact our team for questions about ClinicConsilium and its developing services.</p></div>
+  </div>
+ </div>
+</section>
+<section class="last-call"><div class="wrap"><div><h2>Have a question about ClinicConsilium?</h2><p>Contact the team for platform questions, provider interest or partnership enquiries.</p></div><a class="btn dark" href="contact.html">Contact ClinicConsilium ↗</a></div></section>
+</main>
 <footer><div class="wrap"><div class="foot-top">
 <div class="foot-brand"><img src="assets/clinicconsilium-logo-optimized.png" alt="ClinicConsilium"><p>Trusted Healthcare. Without Borders.<br>Trusted care, connected.</p></div>
 <div class="foot-col"><b>Explore</b><a href="#pathways">Care pathways</a><a href="how-it-works.html">How it works</a><a href="insights.html">Health insights</a><a href="faq.html">FAQ</a></div>
@@ -106,4 +211,7 @@ footer .foot-bottom a{margin-left:14px!important;color:#D6E8DE!important}
 <div class="disclaimer">ClinicConsilium is a healthcare access and coordination platform in development. It is not a hospital, pharmacy or emergency service and does not provide diagnosis or treatment. Service availability may change as development progresses. Photographs are illustrative and do not imply partnership or endorsement. Image credit: Ninthgrid via Unsplash (Unsplash License).</div>
 <div class="foot-bottom"><span>© ClinicConsilium</span><span><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="accessibility.html">Accessibility</a></span></div>
 </div></footer>
-<script>const menuButton=document.querySelector('.menu');const navLinks=document.querySelector('.links');if(menuButton&&navLinks){menuButton.addEventListener('click',()=>{const open=navLinks.classList.toggle('open');menuButton.setAttribute('aria-expanded',String(open));menuButton.textContent=open?'Close ×':'Menu ☰'});navLinks.addEventListener('click',e=>{if(e.target.closest('a')){navLinks.classList.remove('open');menuButton.setAttribute('aria-expanded','false');menuButton.textContent='Menu ☰'}})}</script><script src="assets/design.js" defer></script></body></html>
+<script>
+(function(){var btn=document.getElementById('menuToggle'),nav=document.getElementById('mainNav');btn.addEventListener('click',function(){var open=nav.classList.toggle('open');btn.setAttribute('aria-expanded',String(open));btn.setAttribute('aria-label',open?'Close navigation':'Open navigation')});nav.addEventListener('click',function(e){if(e.target.closest('a')){nav.classList.remove('open');btn.setAttribute('aria-expanded','false')}});var slides=[].slice.call(document.querySelectorAll('.hero-photo img'));if(slides.length>1&&!window.matchMedia('(prefers-reduced-motion: reduce)').matches){var i=0;window.setInterval(function(){slides[i].classList.remove('active');i=(i+1)%slides.length;slides[i].classList.add('active')},5200)}var els=document.querySelectorAll('.reveal');if(!('IntersectionObserver'in window)){els.forEach(function(el){el.classList.add('visible')});return}var io=new IntersectionObserver(function(entries){entries.forEach(function(entry){if(entry.isIntersecting){entry.target.classList.add('visible');io.unobserve(entry.target)}})},{threshold:.12});els.forEach(function(el){io.observe(el)});setTimeout(function(){els.forEach(function(el){el.classList.add('visible')})},4000)})();
+</script>
+</body></html>
