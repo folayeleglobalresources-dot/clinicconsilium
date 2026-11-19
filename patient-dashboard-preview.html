@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#123B6D">
+<meta name="theme-color" content="#075E45">
 <meta name="robots" content="noindex,follow">
-<title>Patient Dashboard | ClinicConsilium</title>\n<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+<title>Patient Dashboard | ClinicConsilium</title>\n<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <meta name="description" content="A preview of the planned ClinicConsilium patient workspace for consultations, medications, health records, appointments and care coordination.">
 <style>
 :root{--green:#075E45;--deep:#043D2E;--accent:#0B8060;--ink:#102B24;--muted:#526B60;--line:#DCE9E1;--bg:#F4F8F5;--pale:#EAF4EE;--white:#fff;--lime:#D9EF9B;--amber:#805B18;--amber-bg:#FFF7E8;--shadow:0 12px 34px rgba(4,61,46,.06)}
@@ -137,68 +137,97 @@ body{background:var(--bg);color:var(--ink);font-family:'DM Sans',sans-serif}
 @media(max-width:720px){.sidebar{background:#3154D1}.nav-icon{background:#ffffff20}}
 
 </style>
+<style id="patient-redesign-v1">
+:root{--green:#075E45;--deep:#043D2E;--mid:#0B7A5A;--page:#F2F8F5;--surface:#fff;--border:#DCE8E2;--ink:#0F2A22;--muted:#55706A;--lime:#D9EF9B;--warning:#9A6200;--warning-bg:#FFF1CC;--danger:#B42318;--danger-bg:#FDE7E4;--success-bg:#DDF3EA;--info:#1D5FA8;--info-bg:#E3EEFB;--shadow:0 8px 28px rgba(4,61,46,.055)}
+html{scroll-behavior:smooth}body{background:var(--page);color:var(--ink);font:15px/1.6 Inter,Arial,sans-serif}h1,h2,h3,strong{font-family:Manrope,Inter,Arial,sans-serif}
+.topline{height:32px;padding:0 24px;background:var(--deep);font-size:11px;color:#E5F0EA}.topline strong{color:var(--lime);font-size:10px}
+.workspace{grid-template-columns:232px minmax(0,1fr);min-height:calc(100vh - 32px)}.sidebar{background:#fff;border-right:1px solid var(--border);padding:22px 14px;gap:22px}
+.brand{padding:4px 8px 17px;border-bottom:1px solid var(--border)}.brand img{height:40px!important;max-height:40px;max-width:190px;filter:none!important;object-fit:contain}
+.nav-label{color:var(--muted);font-size:11px;letter-spacing:.12em;padding:0 10px}.side-nav{gap:5px}
+.side-nav button{min-height:44px;display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:12px;color:#24463B;font-size:14px;font-weight:600;text-align:left}
+.side-nav button:hover{background:#F2F8F5;color:var(--deep)}.side-nav button.active{background:#EAF5EF;color:var(--deep);box-shadow:inset 3px 0 var(--green);font-weight:800}
+.nav-icon{width:30px;height:30px;flex:0 0 30px;border-radius:9px;background:#F2F8F5;color:var(--green);font-size:15px}.side-nav button.active .nav-icon{background:#DDF3EA;color:var(--deep)}
+.nav-planned{margin-left:auto;padding:2px 6px;border-radius:99px;background:#EEF3EF;color:#55706A;font-size:10px;font-weight:700}
+.sidebar-note{border-color:var(--border);padding:15px 8px 0}.sidebar-note p{font-size:12px;color:var(--muted)}.sidebar-note a{font-size:12px;color:var(--green)}
+.preview-pill{background:var(--warning-bg);border-color:#E7D39A;color:#744B00;font-size:10px}
+.main{min-width:0}.topbar{height:56px;padding:0 26px;background:#fff;border-color:var(--border)}.crumb{font-size:13px;color:var(--muted)}.crumb strong{color:var(--ink)}
+.top-status{background:var(--warning-bg);border-color:#E7D39A;color:#744B00;font-size:11px;padding:6px 10px}
+.avatar{width:36px;height:36px;border-radius:50%;background:#DDF3EA;color:var(--deep);font-size:13px}.profile-chip strong{font-size:13px;color:var(--ink)}.profile-chip small{font-size:11px;color:var(--muted)}
+.mobile-menu{width:42px;height:42px;border-radius:12px;color:var(--deep)}.content{max-width:1500px;padding:24px 26px 48px}.view[hidden]{display:none}
+.patient-greeting{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;padding:30px 32px;margin-bottom:18px;border:1px solid #D6E8DC;border-radius:20px;background:linear-gradient(115deg,#EAF5EF 0%,#fff 65%,#F3F8F4 100%);box-shadow:var(--shadow)}
+.greeting-copy{max-width:760px}.greeting-overline{margin:7px 0 0;color:var(--muted);font-size:14px}.patient-greeting h1{font-size:clamp(30px,3vw,40px);line-height:1.16;letter-spacing:-1.2px;color:var(--deep);margin:7px 0 9px}
+.patient-greeting .greeting-name{color:var(--green)}.patient-greeting .greeting-copy>p:last-child{max-width:680px;margin:0;color:#3F5C50;font-size:15px}
+.greeting-actions{display:flex;gap:10px;flex-wrap:wrap}.button{min-height:44px;padding:10px 16px;border-radius:11px;font-size:13px;font-weight:750}.button.primary{background:var(--green);border-color:var(--green);color:#fff}.button.primary:hover{background:var(--deep)}.button.secondary{background:#fff;border-color:#AFC8B9;color:var(--deep)}
+.patient-emergency,.patient-privacy-note{display:flex;align-items:center;gap:13px;padding:15px 18px;border-radius:15px;margin-bottom:12px}.patient-emergency{background:var(--danger-bg);border:1px solid #F2C7C3;color:#7E251E}
+.emergency-symbol{width:30px;height:30px;display:grid;place-items:center;flex:0 0 30px;border-radius:50%;background:#F8D9D6;color:var(--danger);font-weight:900}
+.patient-emergency strong,.patient-privacy-note strong{display:block;font-size:14px}.patient-emergency span:not(.emergency-symbol),.patient-privacy-note span:not(.privacy-symbol){display:block;font-size:13px}
+.patient-privacy-note{background:#fff;border:1px solid var(--border);color:var(--ink)}.privacy-symbol{width:30px;height:30px;display:grid;place-items:center;flex:0 0 30px;border-radius:10px;background:#EAF5EF;color:var(--green);font-size:18px}
+.patient-privacy-note a{margin-left:auto;color:var(--green);font-size:12px;font-weight:800;white-space:nowrap}
+.patient-section{margin:25px 0}.patient-section-head{display:flex;justify-content:space-between;align-items:flex-end;gap:15px;margin-bottom:14px}
+.patient-section-head h2{margin:4px 0;color:var(--deep);font-size:23px;letter-spacing:-.5px}.patient-section-head p{margin:0;color:var(--muted);font-size:14px}.journey-note{color:var(--muted);font-size:12px}
+.journey-track{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.journey-step{display:flex;align-items:flex-start;gap:11px;padding:17px 15px;background:#fff;border:1px solid var(--border);border-radius:16px;min-width:0}
+.journey-dot{width:28px;height:28px;flex:0 0 28px;display:grid;place-items:center;border-radius:50%;background:var(--lime);color:var(--deep);font-size:12px;font-weight:850}
+.journey-step strong{display:block;color:var(--deep);font-size:14px;line-height:1.35}.journey-step p{margin:5px 0 0;color:var(--muted);font-size:12px;line-height:1.5}
+.patient-action-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px}.patient-action-card{min-width:0;min-height:190px;display:flex;flex-direction:column;align-items:flex-start;text-align:left;padding:20px;background:#fff;border:1px solid var(--border);border-radius:18px;box-shadow:var(--shadow);color:var(--ink);cursor:pointer;transition:transform .15s,border-color .15s,box-shadow .15s}
+.patient-action-card:hover{transform:translateY(-2px);border-color:#A9C9B7;box-shadow:0 12px 28px rgba(4,61,46,.09)}.action-icon{width:42px;height:42px;display:grid;place-items:center;border-radius:13px;background:#EAF5EF;color:var(--green);font-size:20px;margin-bottom:15px}
+.patient-action-card strong{font-size:17px;color:var(--deep)}.patient-action-card>span:not(.action-icon){font-size:13px;color:var(--muted);line-height:1.5;margin-top:6px}.patient-action-card .action-link{margin-top:auto!important;padding-top:15px;color:var(--green)!important;font-weight:800}
+.patient-panels{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:24px 0}.patient-panel{min-width:0;padding:20px;background:#fff;border:1px solid var(--border);border-radius:18px;box-shadow:var(--shadow)}
+.patient-panel-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px}.patient-panel-head h2{margin:0;color:var(--deep);font-size:17px}.patient-panel-head p{margin:4px 0 0;color:var(--muted);font-size:12px}
+.subtle-link{border:0;background:transparent;color:var(--green);font-size:12px;font-weight:800;cursor:pointer}.notification-count{display:grid;place-items:center;min-width:28px;height:28px;border-radius:50%;background:#EAF5EF;color:var(--deep);font-size:12px;font-weight:800}
+.patient-empty{min-height:145px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:20px;border:1px dashed #C6DCCF;border-radius:14px;background:#FAFCFA}.patient-empty .empty-icon{width:38px;height:38px;margin-bottom:9px}
+.patient-empty strong{color:var(--deep);font-size:14px}.patient-empty p{max-width:360px;margin:5px 0 0;color:var(--muted);font-size:12px}
+.patient-disclaimer{padding:14px 16px;border-radius:13px;background:#EAF5EF;color:#3F5C50;font-size:12px}.patient-disclaimer strong{color:var(--deep)}
+.consent-preview{padding:18px;margin:0 0 18px;border:1px solid var(--border);border-radius:16px;background:#fff}.consent-preview h2{margin:0 0 4px;color:var(--deep);font-size:17px}.consent-preview>p{margin:0 0 12px;color:var(--muted);font-size:13px}
+.consent-row{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:12px 0;border-top:1px solid var(--border)}.consent-row strong{display:block;font-size:13px;color:var(--ink)}.consent-row small{display:block;color:var(--muted);font-size:12px}
+.consent-switch{width:44px;height:26px;appearance:none;border:1px solid #B8C9BF;border-radius:99px;background:#E7EEE9;position:relative;flex:0 0 44px;opacity:1}.consent-switch:after{content:"";position:absolute;width:18px;height:18px;left:3px;top:3px;border-radius:50%;background:#fff;box-shadow:0 1px 3px #0002}.consent-switch:disabled{cursor:not-allowed}
+.patient-preview:after{content:"PREVIEW";position:fixed;right:18px;bottom:78px;z-index:30;pointer-events:none;transform:rotate(-16deg);font:800 48px Manrope,Arial,sans-serif;letter-spacing:.12em;color:rgba(4,61,46,.10)}
+@media(max-width:1100px){.workspace{grid-template-columns:76px minmax(0,1fr)}.sidebar{padding:18px 9px}.brand{justify-content:center;padding:3px 0 15px}.brand img{width:40px;height:40px!important;object-fit:contain}.nav-label,.side-nav button>span:not(.nav-icon),.sidebar-note{display:none}.side-nav button{justify-content:center;padding:7px}.nav-icon{margin:0}.content{padding:20px}.journey-track{grid-template-columns:repeat(2,minmax(0,1fr))}.patient-action-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:767px){.workspace{display:block}.sidebar{position:fixed;z-index:40;left:0;right:0;top:auto;bottom:0;height:auto;padding:7px 8px max(7px,env(safe-area-inset-bottom));border-right:0;border-top:1px solid var(--border);box-shadow:0 -8px 24px rgba(4,61,46,.08)}.brand,.nav-label,.sidebar-note{display:none}.side-nav{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:2px}.side-nav button{display:flex;min-width:0;min-height:54px;flex-direction:column;justify-content:center;gap:2px;padding:4px 2px;border-radius:10px;font-size:10px;line-height:1.2;white-space:normal;text-align:center}.side-nav button:nth-child(n+6){display:none}.side-nav button>span:not(.nav-icon){display:block!important}.side-nav button .nav-icon{width:25px;height:25px;flex-basis:25px;font-size:14px}.side-nav button.active{box-shadow:inset 0 2px var(--green)}.main{padding-bottom:76px}.topbar{height:56px;padding:0 12px}.top-actions{gap:7px}.top-status{font-size:10px;padding:5px 7px}.profile-chip{gap:6px}.profile-chip strong{font-size:11px}.profile-chip small{display:none}.avatar{width:32px;height:32px}.content{padding:15px 14px 28px}.patient-greeting{display:block;padding:23px 20px;border-radius:17px}.patient-greeting h1{font-size:31px}.patient-greeting .greeting-copy>p:last-child{font-size:14px}.greeting-actions{margin-top:17px}.patient-emergency,.patient-privacy-note{align-items:flex-start;padding:13px}.patient-privacy-note{flex-wrap:wrap}.patient-privacy-note a{margin-left:43px}.patient-section{margin:21px 0}.patient-section-head{display:block}.journey-note{display:block;margin-top:8px}.journey-track{grid-template-columns:1fr;gap:8px}.journey-step{padding:13px}.patient-action-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.patient-action-card{min-height:180px;padding:14px;border-radius:15px}.patient-action-card strong{font-size:15px}.patient-action-card>span:not(.action-icon){font-size:12px}.patient-panels{grid-template-columns:1fr;gap:10px}.patient-panel{padding:16px}.patient-section-head h2{font-size:21px}}
+@media(max-width:390px){.content{padding-inline:12px}.patient-action-grid{grid-template-columns:1fr}.patient-action-card{min-height:150px}.top-status{display:none}.patient-greeting h1{font-size:28px}}
+</style>
 </head>
-<body>
+<body class="patient-preview">
 <div class="app-shell">
-<div class="topline"><span>ClinicConsilium · Trusted Healthcare. Without Borders.</span><strong>WORKSPACE PREVIEW · NO LIVE PATIENT DATA</strong></div>
+<div class="topline"><span>ClinicConsilium · Trusted Healthcare. Without Borders.</span><strong>PREVIEW WORKSPACE · SAMPLE DATA</strong></div>
 <div class="workspace">
 <aside class="sidebar" id="sidebar">
 <a class="brand" href="index.html" aria-label="ClinicConsilium home"><img src="assets/clinicconsilium-logo-optimized.png" alt="ClinicConsilium — Trusted Healthcare. Without Borders."></a>
 <div><div class="nav-label">MY HEALTH SPACE</div><nav class="side-nav" aria-label="Patient dashboard navigation">
-<button class="active" type="button" data-view="overview"><span class="nav-icon">⌂</span>Overview</button>
-<button type="button" data-view="virtual"><span class="nav-icon">▣</span>Virtual consultations</button>
-<button type="button" data-view="services"><span class="nav-icon">⌖</span>Find care & services</button>
-<button type="button" data-view="appointments"><span class="nav-icon">◷</span>Appointments</button>
-<button type="button" data-view="medications"><span class="nav-icon">✚</span>My medications</button>
-<button type="button" data-view="records"><span class="nav-icon">▤</span>Medical records</button>
-<button type="button" data-view="timeline"><span class="nav-icon">↗</span>Health timeline</button>
-<button type="button" data-view="guides"><span class="nav-icon">▧</span>Health guides</button>
-<button type="button" data-view="coordination"><span class="nav-icon">⇄</span>Care coordination</button>
-<button type="button" data-view="messages"><span class="nav-icon">✉</span>Messages</button>
-<button type="button" data-view="family"><span class="nav-icon">♧</span>Family health</button>
-<button type="button" data-view="privacy"><span class="nav-icon">◇</span>Privacy & sharing</button>
-<button type="button" data-view="settings"><span class="nav-icon">⚙</span>Settings</button>
+<button class="active" type="button" data-view="overview"><span class="nav-icon">⌂</span><span>Overview</span></button>
+<button type="button" data-view="coordination"><span class="nav-icon">↗</span><span>My enquiries</span></button>
+<button type="button" data-view="services"><span class="nav-icon">⌖</span><span>Find care</span></button>
+<button type="button" data-view="records"><span class="nav-icon">▤</span><span>Documents</span></button>
+<button type="button" data-view="messages"><span class="nav-icon">✉</span><span>Messages</span></button>
+<button type="button" data-view="records"><span class="nav-icon">▣</span><span>Medical records</span><span class="nav-planned">Planned</span></button>
+<button type="button" data-view="privacy"><span class="nav-icon">◇</span><span>Consent and sharing</span><span class="nav-planned">Planned</span></button>
+<button type="button" data-view="settings"><span class="nav-icon">⚙</span><span>Settings and privacy</span></button>
 </nav></div>
-<div class="sidebar-note"><span class="preview-pill">● PREVIEW MODE</span><p>Accounts, medical records, bookings and clinical services are not connected. Do not enter real patient information.</p><a href="portals.html">← View all workspaces</a></div>
+<div class="sidebar-note"><span class="preview-pill">● PREVIEW · SAMPLE DATA</span><p>Accounts, medical records, bookings and clinical services are not connected. Do not enter real patient information.</p><a href="portals.html">← View all workspaces</a></div>
 </aside>
 <main class="main">
-<header class="topbar"><div style="display:flex;align-items:center;gap:11px"><button class="mobile-menu" id="menuBtn" type="button" aria-label="Open dashboard navigation" aria-expanded="false">☰</button><div class="crumb">My workspace / <strong id="crumbTitle">Overview</strong></div></div><div class="top-actions"><span class="top-status">Preview · Not connected</span><div class="profile-chip"><span class="avatar">CC</span><div><strong>Patient workspace</strong><small>Personal health space preview</small></div></div></div></header>
+<header class="topbar"><div style="display:flex;align-items:center;gap:11px"><button class="mobile-menu" id="menuBtn" type="button" aria-label="Open dashboard navigation" aria-expanded="false">☰</button><div class="crumb">My workspace / <strong id="crumbTitle">Overview</strong></div></div><div class="top-actions"><span class="top-status">Preview, sample data</span><div class="profile-chip"><span class="avatar">CC</span><div><strong>Patient workspace</strong><small>Personal health space preview</small></div></div></div></header>
 <div class="content">
 <section class="view" id="view-overview" data-section="overview">
-<div class="hero"><div class="hero-copy"><span class="eyebrow">Your healthcare journey</span><h1>Your health, thoughtfully connected.</h1><p>A personal space designed to bring consultations, medication routines, health information and your medical history together as ClinicConsilium grows.</p></div><div class="hero-actions"><button class="button primary" type="button" data-open-view="virtual">Explore virtual care <span>→</span></button><button class="button secondary" type="button" data-open-view="records">Explore health records</button></div></div>
-<div class="notice"><span class="notice-icon">!</span><div><strong>This is a design preview, not an active patient account.</strong>Secure sign-in, appointment booking, video consultations, medication reminders and medical-record storage are not connected. Do not upload or enter real medical information here.</div></div>
-<div class="stats">
-<article class="stat"><div class="stat-top"><span>Appointments</span><span class="stat-icon">◷</span></div><div class="stat-value">—</div><div class="stat-foot">Booking will be enabled in a future release</div></article>
-<article class="stat"><div class="stat-top"><span>Medication plans</span><span class="stat-icon">✚</span></div><div class="stat-value">—</div><div class="stat-foot">No medication data is stored in this preview</div></article>
-<article class="stat"><div class="stat-top"><span>Health documents</span><span class="stat-icon">▤</span></div><div class="stat-value">—</div><div class="stat-foot">Secure record storage is not enabled</div></article>
-<article class="stat"><div class="stat-top"><span>Care requests</span><span class="stat-icon">⇄</span></div><div class="stat-value">—</div><div class="stat-foot">No live requests or referrals are connected</div></article>
+<div class="patient-greeting"><div class="greeting-copy"><span class="eyebrow">YOUR HEALTHCARE JOURNEY</span><p class="greeting-overline">A calmer way to organise your care</p><h1>Good morning<span class="greeting-name">, there</span>.</h1><p>Welcome to your personal health space. Find trusted care information, follow your enquiries and keep important documents organised as ClinicConsilium grows.</p></div><div class="greeting-actions"><button class="button primary" type="button" data-open-view="services">Find care <span aria-hidden="true">→</span></button><button class="button secondary" type="button" data-open-view="coordination">View my enquiries</button></div></div>
+<div class="patient-emergency" role="note"><span class="emergency-symbol" aria-hidden="true">!</span><div><strong>Need urgent medical help?</strong><span>Do not wait for a response here. Contact local emergency services or go to the nearest emergency department.</span></div></div>
+<div class="patient-privacy-note"><span class="privacy-symbol" aria-hidden="true">◇</span><div><strong>Your health information deserves protection.</strong><span>Only share personal medical information through approved, secure channels. This workspace is not currently storing medical records or permissions.</span></div><a href="trust-security.html">How we protect information</a></div>
+<section class="patient-section journey-section" aria-labelledby="journey-title"><div class="patient-section-head"><div><span class="eyebrow">YOUR JOURNEY</span><h2 id="journey-title">What happens next</h2><p>Your enquiry pathway, from first contact to coordinated follow-up.</p></div><span class="journey-note">Your journey will update as your enquiry progresses</span></div><div class="journey-track">
+<article class="journey-step"><span class="journey-dot">1</span><div><strong>Enquiry sent</strong><p>Tell us what kind of care or support you are looking for.</p></div></article>
+<article class="journey-step"><span class="journey-dot">2</span><div><strong>Under review</strong><p>The enquiry team reviews the information you provide.</p></div></article>
+<article class="journey-step"><span class="journey-dot">3</span><div><strong>Coordinator contacts you</strong><p>A next step is shared when follow-up is appropriate.</p></div></article>
+<article class="journey-step"><span class="journey-dot">4</span><div><strong>Next step</strong><p>Receive guidance about the relevant care pathway.</p></div></article>
+</div></section>
+<section class="patient-section" aria-labelledby="actions-title"><div class="patient-section-head"><div><span class="eyebrow">QUICK ACCESS</span><h2 id="actions-title">What would you like to do?</h2><p>Start with the area that matters to you today.</p></div></div><div class="patient-action-grid">
+<button class="patient-action-card" type="button" data-open-view="services"><span class="action-icon">⌖</span><strong>Find care</strong><span>Explore care services and trusted healthcare information.</span><span class="action-link">Explore services →</span></button>
+<button class="patient-action-card" type="button" data-open-view="coordination"><span class="action-icon">↗</span><strong>My enquiries</strong><span>See how enquiries and follow-up coordination are planned to work.</span><span class="action-link">View enquiries →</span></button>
+<button class="patient-action-card" type="button" data-open-view="records"><span class="action-icon">▤</span><strong>My documents</strong><span>Learn about the documents area planned for your health space.</span><span class="action-link">View documents →</span></button>
+<button class="patient-action-card" type="button" data-open-view="messages"><span class="action-icon">✉</span><strong>Messages</strong><span>See where secure communication with your care team will appear.</span><span class="action-link">Open messages →</span></button>
+</div></section>
+<div class="patient-panels">
+<section class="patient-panel" aria-labelledby="appointments-title"><div class="patient-panel-head"><div><h2 id="appointments-title">Upcoming appointments</h2><p>Your scheduled consultations and follow-ups.</p></div><button type="button" class="subtle-link" data-open-view="appointments">Appointments →</button></div><div class="patient-empty"><span class="empty-icon">◷</span><strong>No appointments to show</strong><p>Appointments will appear here when booking is available and connected to your account.</p></div></section>
+<section class="patient-panel" aria-labelledby="notifications-title"><div class="patient-panel-head"><div><h2>Notifications</h2><p>Important updates about your care journey.</p></div><span class="notification-count">0</span></div><div class="patient-empty"><span class="empty-icon">♧</span><strong>You’re all caught up</strong><p>There are no notifications yet. Relevant updates will appear here when the service is active.</p></div></section>
 </div>
-<div class="two-col">
-<div>
-<div class="panel"><div class="panel-head"><div><h2>Your healthcare tools</h2><p>Explore the areas planned for your personal health space</p></div><span class="status planned">Product preview</span></div><div class="feature-grid">
-<article class="feature"><span class="feature-icon">▣</span><h3>Virtual consultations</h3><p>Discover participating professionals and attend secure video or audio consultations.</p><span class="status">Planned · Not enabled</span><button class="button secondary" type="button" data-open-view="virtual">Explore feature →</button></article>
-<article class="feature"><span class="feature-icon">✚</span><h3>Medication tracker</h3><p>Organise prescribed medication schedules, reminders and medication history.</p><span class="status">Planned · Not enabled</span><button class="button secondary" type="button" data-open-view="medications">Explore feature →</button></article>
-<article class="feature"><span class="feature-icon">▤</span><h3>Personal medical records</h3><p>Keep reports, test results, prescriptions and consultation summaries in one protected record.</p><span class="status">Planned · Security first</span><button class="button secondary" type="button" data-open-view="records">Explore feature →</button></article>
-<article class="feature"><span class="feature-icon">◷</span><h3>Appointments</h3><p>Manage upcoming consultations, follow-ups and appointment history.</p><span class="status">Planned · Not enabled</span><button class="button secondary" type="button" data-open-view="appointments">Explore feature →</button></article>
-<article class="feature"><span class="feature-icon">▧</span><h3>Health education</h3><p>Read public health information and prepare informed questions for professionals.</p><span class="status public">Public guides available</span><a class="button secondary" href="insights.html">Read health guides →</a></article>
-<article class="feature"><span class="feature-icon">⇄</span><h3>Care coordination</h3><p>Follow referrals, care steps and updates shared by participating providers.</p><span class="status">Planned · Not enabled</span><button class="button secondary" type="button" data-open-view="coordination">Explore feature →</button></article>
-<article class="feature"><span class="feature-icon">⌖</span><h3>Find healthcare services</h3><p>Explore pharmacies, hospitals, emergency support, laboratories and other care services.</p><span class="status">Directory in development</span><button class="button secondary" type="button" data-open-view="services">Find a service →</button></article>
-</div></div>
-<div class="panel"><div class="panel-head"><div><h2>Health journey</h2><p>A single timeline for your healthcare activities</p></div><a class="text-link" href="#" data-open-view="timeline">View timeline →</a></div><div class="empty"><div class="empty-icon">↗</div><strong>Your health timeline will appear here</strong><p>Consultations, tests, treatment updates and follow-ups will be shown when secure records and provider integrations are available.</p></div></div>
-</div>
-<div>
-<div class="panel"><div class="panel-head"><div><h2>Next steps</h2><p>How the connected care experience is intended to work</p></div></div><div class="timeline">
-<div class="timeline-item"><span class="timeline-dot">1</span><div><strong>Find the right care</strong><p>Explore care information and participating professionals.</p></div></div>
-<div class="timeline-item"><span class="timeline-dot">2</span><div><strong>Connect with a professional</strong><p>Request or book an appointment when the service is available.</p></div></div>
-<div class="timeline-item"><span class="timeline-dot">3</span><div><strong>Keep your information organised</strong><p>Build a patient-controlled health record with appropriate permissions.</p></div></div>
-<div class="timeline-item"><span class="timeline-dot">4</span><div><strong>Stay on top of follow-ups</strong><p>Track care steps and reminders shared by your care team.</p></div></div>
-</div><div class="callout"><strong>Need general information?</strong><br>Explore our public services and health education pages. They do not replace professional medical advice.</div></div>
-<div class="panel"><div class="panel-head"><div><h2>Explore ClinicConsilium</h2><p>Public information and resources</p></div></div><div class="resource-list">
-<a class="resource" href="providers.html"><span class="resource-icon">♙</span><span><strong>Healthcare professionals</strong><p>Learn about the planned provider network.</p></span></a>
-<a class="resource" href="international-care.html"><span class="resource-icon">◎</span><span><strong>International care</strong><p>Explore information about cross-border care.</p></span></a>
-<a class="resource" href="safety.html"><span class="resource-icon">◇</span><span><strong>Safety and trust</strong><p>Read about our approach to responsible care.</p></span></a>
-</div></div>
-</div></div>
+<div class="patient-disclaimer"><strong>Important:</strong> ClinicConsilium is an access and care-coordination platform. Information here does not replace professional medical advice, diagnosis or emergency care.</div>
 </section>
 
 <section class="view" id="view-virtual" data-section="virtual" hidden>
@@ -354,6 +383,10 @@ body{background:var(--bg);color:var(--ink);font-family:'DM Sans',sans-serif}
 <section class="view" id="view-privacy" data-section="privacy" hidden>
 <div class="hero"><div class="hero-copy"><span class="eyebrow">Your information, your permissions</span><h1>Privacy and record sharing</h1><p>Understand how access to personal health information should be requested, granted, reviewed and recorded.</p></div><span class="status">Planned · Security first</span></div>
 <div class="notice"><span class="notice-icon">!</span><div><strong>Consent and access controls are not active in this preview.</strong>No medical information is stored here and no sharing permissions can be granted through this page.</div></div>
+<div class="consent-preview"><h2>Who can see what?</h2><p>Consent controls are planned. These switches are illustrative only and cannot be changed in this preview.</p>
+<label class="consent-row"><span><strong>Assigned care coordinator</strong><small>Enquiry details needed to coordinate your request</small></span><input class="consent-switch" type="checkbox" disabled></label>
+<label class="consent-row"><span><strong>Healthcare professional</strong><small>Relevant information shared for an authorised care purpose</small></span><input class="consent-switch" type="checkbox" disabled></label>
+<label class="consent-row"><span><strong>Facility or care partner</strong><small>Only information needed for a requested service</small></span><input class="consent-switch" type="checkbox" disabled></label></div>
 <div class="feature-grid">
 <article class="feature"><span class="feature-icon">◇</span><h3>Permission management</h3><p>Review and manage authorised access for defined purposes.</p><span class="status">Planned</span></article>
 <article class="feature"><span class="feature-icon">◷</span><h3>Access history</h3><p>See which authorised person or organisation accessed a record and when.</p><span class="status">Planned</span></article>
