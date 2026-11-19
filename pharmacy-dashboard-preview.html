@@ -290,4 +290,5 @@ document.querySelectorAll('[data-medicine-search]').forEach(input=>input.addEven
 document.querySelectorAll('[data-availability-filter]').forEach(select=>select.addEventListener('change',()=>{const panel=select.closest('.catalogue-panel');const term=panel.querySelector('[data-medicine-search]')?.value.trim().toLowerCase()||'';panel.querySelectorAll('.medicine-row').forEach(row=>{const matchesStatus=select.value==='all'||select.value===row.dataset.status;const matchesTerm=row.textContent.toLowerCase().includes(term);row.hidden=!(matchesStatus&&matchesTerm)})}));
 document.querySelectorAll('[data-preview-csv]').forEach(input=>input.addEventListener('change',()=>{const toast=document.getElementById('toast');toast.textContent=input.files?.[0]?'Preview only — file selected, not uploaded.':'No file selected.';toast.classList.add('show');setTimeout(()=>toast.classList.remove('show'),2600)}));
 document.querySelectorAll('[data-preview-upload]').forEach(button=>button.addEventListener('click',()=>{const toast=document.getElementById('toast');toast.textContent='CSV upload is not active. No file was sent or stored.';toast.classList.add('show');setTimeout(()=>toast.classList.remove('show'),2600)}));})();})();
-</script></body></html>
+</script><link rel="stylesheet" href="assets/dashboard-shell.css">
+</body></html>
