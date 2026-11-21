@@ -427,7 +427,7 @@ html{scroll-behavior:smooth}body{background:var(--page);color:var(--ink);font:15
   crumb.textContent=target.querySelector('h1')?.textContent||'Overview';
   sidebar.classList.remove('open');
   menu?.setAttribute('aria-expanded','false');
-  window.scrollTo({top:0,behavior:'smooth'});
+  document.querySelector('main.main')?.scrollTo({top:0,behavior:'smooth'});
  }
  buttons.forEach(button=>button.addEventListener('click',()=>show(button.dataset.view)));
  const serviceSearch=document.getElementById('serviceSearch');
