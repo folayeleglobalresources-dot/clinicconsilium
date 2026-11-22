@@ -1,0 +1,14 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /account.html
+Disallow: /admin-*
+Disallow: /*-dashboard.html
+Disallow: /*-dashboard-preview.html
+Disallow: /patient-dashboard-preview.html
+Disallow: /professional-dashboard-preview.html
+Disallow: /facility-dashboard-preview.html
+Disallow: /pharmacy-dashboard-preview.html
+Disallow: /coordination-dashboard-preview.html
+
+Sitemap: https://clinicconsilium.vercel.app/sitemap.xml

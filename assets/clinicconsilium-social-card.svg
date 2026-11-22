@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+<title id="title">ClinicConsilium — Trusted Healthcare. Without Borders.</title><desc id="desc">ClinicConsilium connects people with healthcare information, professionals and coordinated care pathways.</desc>
+<defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#043D2E"/><stop offset="1" stop-color="#0B8060"/></linearGradient><pattern id="grid" width="44" height="44" patternUnits="userSpaceOnUse"><path d="M44 0H0V44" fill="none" stroke="#fff" stroke-opacity=".055"/></pattern></defs>
+<rect width="1200" height="630" fill="url(#bg)"/><rect width="1200" height="630" fill="url(#grid)"/>
+<circle cx="1080" cy="70" r="250" fill="#fff" opacity=".045"/><circle cx="1040" cy="570" r="260" fill="#fff" opacity=".035"/>
+<rect x="78" y="70" width="1044" height="490" rx="34" fill="#F2F8F5" opacity=".98"/>
+<image x="130" y="128" width="300" height="130" preserveAspectRatio="xMidYMid meet" xlink:href="https://clinicconsilium.vercel.app/assets/clinicconsilium-logo-optimized.png"/>
+<rect x="130" y="300" width="78" height="8" rx="4" fill="#0B8060"/>
+<text x="130" y="376" fill="#043D2E" font-family="Arial,Helvetica,sans-serif" font-size="54" font-weight="700">Trusted Healthcare.</text>
+<text x="130" y="442" fill="#043D2E" font-family="Arial,Helvetica,sans-serif" font-size="54" font-weight="700">Without Borders.</text>
+<text x="132" y="492" fill="#52685E" font-family="Arial,Helvetica,sans-serif" font-size="23">Healthcare information • Professional connections • Coordinated care</text>
+<text x="132" y="530" fill="#075E45" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="700">CLINICCONSILIUM</text>
+</svg>
