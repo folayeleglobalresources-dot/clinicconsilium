@@ -1,0 +1,35 @@
+/* ClinicConsilium shared public-site tokens */
+:root {
+  --primary: #075E45;
+  --dark: #043D2E;
+  --accent: #0B8060;
+  --tint: #F2F8F5;
+  --text: #102B24;
+  --muted: #52685E;
+  --line: #D8E6DE;
+  --white: #FFFFFF;
+  --shadow: 0 24px 70px #075E4514;
+  --radius: 22px;
+  --ease: cubic-bezier(.2,.7,.2,1);
+  /* Compatibility aliases for existing public-page components */
+  --navy: var(--dark); --navy2: var(--dark); --ink: var(--text); --ink2: var(--primary);
+  --teal: var(--accent); --teal-soft: #E4F1E9; --grey: var(--tint); --paper: var(--tint);
+  --green: var(--primary); --deep: var(--dark); --pale: var(--tint); --mint: #E4F1E9;
+  --lime: #D9EF9B; --blue: #E4F1E9; --coral: #D98A6B;
+  --g: var(--primary); --g2: var(--accent); --gold: var(--accent); --cream: var(--tint);
+  --cc-green: var(--primary); --cc-deep: var(--dark); --cc-pale: var(--tint); --cc-soft: #E4F1E9;
+  --cc-ink: var(--text); --cc-muted: var(--muted); --cc-line: var(--line); --cc-lime: #D9EF9B;
+  --page-ink: var(--text); --page-muted: var(--muted); --page-green: var(--primary); --page-deep: var(--dark);
+  --page-pale: var(--tint); --page-line: var(--line);
+  --ph-ink: var(--text); --ph-muted: var(--muted); --ph-green: var(--primary); --ph-deep: var(--dark);
+  --ph-soft: var(--tint); --ph-line: var(--line); --ph-accent: var(--accent);
+  --privacy-ink: var(--text); --privacy-green: var(--dark); --privacy-main: var(--primary);
+  --privacy-muted: var(--muted); --privacy-pale: var(--tint); --privacy-line: var(--line);
+  --ts-ink: var(--text); --ts-deep: var(--dark); --ts-green: var(--primary); --ts-accent: var(--accent);
+  --ts-muted: var(--muted); --ts-line: var(--line); --ts-pale: var(--tint);
+  --grad: linear-gradient(120deg, var(--primary), var(--dark));
+  --glow: 0 18px 50px #075E4533;
+}
+html { color-scheme: light; }
+body { color: var(--text); }
+a { text-decoration-color: color-mix(in srgb, var(--accent) 35%, transparent); }
