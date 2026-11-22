@@ -224,16 +224,20 @@ test('coordination dashboard requires active platform role assignment', async ()
 });
 
 
-test('enquiries returns a human-readable reference number', async () => {
+test('enquiries returns a reference and does not attempt email without configuration', async () => {
   process.env.SUPABASE_URL = 'https://example.supabase.co';
   process.env.SUPABASE_SERVICE_ROLE_KEY = 'test-key';
   delete process.env.RESEND_API_KEY;
   delete process.env.CLINICCONSILIUM_FROM_EMAIL;
+  delete process.env.CLINICCONSILIUM_ENQUIRY_TO;
+  let insertedBody, resendCalls = 0, patchCalls = 0;
   global.fetch = async (url, options = {}) => {
     if (url.endsWith('/rest/v1/enquiries') && options.method === 'POST') {
+      insertedBody = JSON.parse(options.body);
       return { ok: true, json: async () => [{ id: ID, reference_number: 'CC-2026-000001' }] };
     }
-    if (url.includes('/rest/v1/enquiries?id=eq.')) return { ok: true };
+    if (url === 'https://api.resend.com/emails') { resendCalls++; return { ok: true, json: async () => ({ id: 'unexpected' }) }; }
+    if (url.includes('/rest/v1/enquiries?id=eq.')) { patchCalls++; return { ok: true }; }
     throw new Error('unexpected request');
   };
   const h = require('../api/enquiries.js');
@@ -241,6 +245,43 @@ test('enquiries returns a human-readable reference number', async () => {
   await h(req({ name: 'Test Person', email: 'a@b.co', role: 'Partnership enquiry', interest: 'General enquiry' }), res);
   assert.equal(res.code, 200);
   assert.equal(res.body.reference, 'CC-2026-000001');
+  assert.equal(insertedBody.email_delivery_status, 'not_configured');
+  assert.equal(resendCalls, 0);
+  assert.equal(patchCalls, 0);
+});
+
+test('Resend notification stores accepted status and provider email id', async () => {
+  process.env.SUPABASE_URL = 'https://example.supabase.co';
+  process.env.SUPABASE_SERVICE_ROLE_KEY = 'test-key';
+  process.env.RESEND_API_KEY = 're_test_key';
+  process.env.CLINICCONSILIUM_FROM_EMAIL = 'ClinicConsilium <notifications@example.com>';
+  process.env.CLINICCONSILIUM_ENQUIRY_TO = 'team@example.com';
+  let insertedBody, resendRequest, patchBody;
+  global.fetch = async (url, options = {}) => {
+    if (url.endsWith('/rest/v1/enquiries') && options.method === 'POST') {
+      insertedBody = JSON.parse(options.body);
+      return { ok: true, json: async () => [{ id: ID, reference_number: 'CC-2026-000002' }] };
+    }
+    if (url === 'https://api.resend.com/emails') {
+      resendRequest = { headers: options.headers, body: JSON.parse(options.body) };
+      return { ok: true, json: async () => ({ id: 'resend-email-123' }) };
+    }
+    if (url.includes('/rest/v1/enquiries?id=eq.')) {
+      patchBody = JSON.parse(options.body);
+      return { ok: true };
+    }
+    throw new Error('unexpected request');
+  };
+  const h = require('../api/enquiries.js');
+  const res = mockRes();
+  await h(req({ name: 'Test Person', email: 'a@b.co', role: 'Partnership enquiry', interest: 'General enquiry' }), res);
+  assert.equal(res.code, 200);
+  assert.equal(insertedBody.email_delivery_status, 'pending');
+  assert.equal(res.body.reference, 'CC-2026-000002');
+  assert.equal(resendRequest.body.to[0], 'team@example.com');
+  assert.equal(resendRequest.headers['Idempotency-Key'], 'clinicconsilium-enquiry/' + ID);
+  assert.equal(patchBody.email_delivery_status, 'sent');
+  assert.equal(patchBody.email_delivery_reference, 'resend-email-123');
 });
 
 test('admin enquiry search includes the public reference number', async () => {

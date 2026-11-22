@@ -123,6 +123,11 @@ module.exports = async (req, res) => {
     return reply(res, 503, { ok: false, error: 'database_configuration_invalid' });
   }
 
+  const resendApiKey = clean(process.env.RESEND_API_KEY, 500);
+  const resendSender = clean(process.env.CLINICCONSILIUM_FROM_EMAIL, 254);
+  const resendRecipient = clean(process.env.CLINICCONSILIUM_ENQUIRY_TO, 254).toLowerCase();
+  const emailConfigured = Boolean(resendApiKey && resendSender && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(resendRecipient));
+
   let saved;
   try {
     const insertResponse = await fetch(supabaseUrl + '/rest/v1/enquiries', {
@@ -135,7 +140,7 @@ module.exports = async (req, res) => {
         interest,
         enquiry_type: enquiryType(role),
         source: 'website',
-        email_delivery_status: 'pending'
+        email_delivery_status: emailConfigured ? 'pending' : 'not_configured'
       })
     });
     if (!insertResponse.ok) {
@@ -158,12 +163,10 @@ module.exports = async (req, res) => {
     });
   }
 
-  let deliveryStatus = 'not_configured';
-  const apiKey = process.env.RESEND_API_KEY;
-  const recipient = process.env.CLINICCONSILIUM_ENQUIRY_TO || 'clinicconsilium@gmail.com';
-  const sender = process.env.CLINICCONSILIUM_FROM_EMAIL;
+  let deliveryStatus = emailConfigured ? 'pending' : 'not_configured';
+  let deliveryReference = null;
 
-  if (apiKey && sender) {
+  if (emailConfigured) {
     const text = [
       'New ClinicConsilium enquiry',
       '',
@@ -182,29 +185,37 @@ module.exports = async (req, res) => {
       const response = await fetch('https://api.resend.com/emails', {
         method: 'POST',
         headers: {
-          Authorization: 'Bearer ' + apiKey,
-          'Content-Type': 'application/json'
+          Authorization: 'Bearer ' + resendApiKey,
+          'Content-Type': 'application/json',
+          'Idempotency-Key': 'clinicconsilium-enquiry/' + saved.id
         },
         body: JSON.stringify({
-          from: sender,
-          to: [recipient],
+          from: resendSender,
+          to: [resendRecipient],
           reply_to: email,
           subject: 'ClinicConsilium — ' + role,
           text
         })
       });
-      deliveryStatus = response.ok ? 'sent' : 'failed';
+      const result = await response.json().catch(() => ({}));
+      if (response.ok && typeof result.id === 'string' && result.id.length <= 160) {
+        deliveryStatus = 'sent';
+        deliveryReference = result.id;
+      } else {
+        deliveryStatus = 'failed';
+      }
     } catch (_) {
       deliveryStatus = 'failed';
     }
-  }
 
-  if (deliveryStatus !== 'pending') {
     try {
       await fetch(supabaseUrl + '/rest/v1/enquiries?id=eq.' + encodeURIComponent(saved.id), {
         method: 'PATCH',
         headers: supabaseHeaders(serviceKey, { Prefer: 'return=minimal' }),
-        body: JSON.stringify({ email_delivery_status: deliveryStatus })
+        body: JSON.stringify({
+          email_delivery_status: deliveryStatus,
+          email_delivery_reference: deliveryReference
+        })
       });
     } catch (_) {
       // The saved enquiry remains available even if notification status could not be updated.
@@ -214,13 +225,13 @@ module.exports = async (req, res) => {
   if (deliveryStatus === 'sent') {
     return reply(res, 200, {
       ok: true,
-      message: 'Your general enquiry has been received and the team has been notified.',
+      message: 'Your enquiry has been received and the team notification was accepted by our email provider.',
       reference: saved.reference_number
     });
   }
   return reply(res, 200, {
     ok: true,
-    message: 'Your general enquiry has been safely received. Email notifications are not yet active.',
+    message: deliveryStatus === 'failed' ? 'Your enquiry has been safely received, but the team notification could not be sent.' : 'Your enquiry has been safely received. Email notifications are not configured yet.',
     reference: saved.reference_number,
     notification: deliveryStatus
   });
