@@ -33,3 +33,49 @@
 html { color-scheme: light; }
 body { color: var(--text); }
 a { text-decoration-color: color-mix(in srgb, var(--accent) 35%, transparent); }
+
+
+/* Public page header and hero contrast — shared light treatment */
+.nav, header.nav, .header {
+  background: #FFFFFF !important;
+  color: var(--text) !important;
+  border-bottom: 1px solid var(--line) !important;
+  box-shadow: 0 8px 28px #043D2E0A !important;
+}
+.nav .links, header.nav .links, .header .links { color: var(--text) !important; }
+.nav .links a, header.nav .links a, .header .links a {
+  color: #28463A !important;
+}
+.nav .links a:hover, header.nav .links a:hover, .header .links a:hover,
+.nav .links a[aria-current="page"] { color: var(--primary) !important; }
+.nav .links .button.primary, header.nav .links .button.primary {
+  color: #FFFFFF !important;
+}
+.menu {
+  color: var(--dark) !important;
+  background: #FFFFFF !important;
+  border-color: var(--line) !important;
+}
+.hero, .contact-hero {
+  background: linear-gradient(112deg, #F2F8F5 0%, #FFFFFF 58%, #E4F1E9 100%) !important;
+  color: var(--text) !important;
+}
+.hero h1, .hero h1 span, .hero h1 em, .hero h1 strong, .hero h1 b,
+.contact-hero h1, .contact-hero h1 span, .contact-hero h1 em {
+  color: var(--dark) !important;
+  -webkit-text-fill-color: var(--dark) !important;
+  background: none !important;
+  text-shadow: none !important;
+}
+.hero h1 em, .contact-hero h1 em {
+  color: var(--primary) !important;
+  -webkit-text-fill-color: var(--primary) !important;
+}
+.hero p, .hero .hero-copy, .hero .lead, .contact-hero p,
+.contact-hero .hero-copy, .contact-hero .lead {
+  color: #405A50 !important;
+}
+.hero .eyebrow, .contact-hero .eyebrow {
+  color: var(--primary) !important;
+  -webkit-text-fill-color: var(--primary) !important;
+}
