@@ -222,3 +222,43 @@ test('coordination dashboard requires active platform role assignment', async ()
  const res=mockRes();await h({method:'POST',headers:{authorization:'Bearer token'},body:{workspace:'coordination'}},res);
  assert.equal(res.code,403);assert.equal(res.body.error,'platform_role_required');
 });
+
+
+test('enquiries returns a human-readable reference number', async () => {
+  process.env.SUPABASE_URL = 'https://example.supabase.co';
+  process.env.SUPABASE_SERVICE_ROLE_KEY = 'test-key';
+  delete process.env.RESEND_API_KEY;
+  delete process.env.CLINICCONSILIUM_FROM_EMAIL;
+  global.fetch = async (url, options = {}) => {
+    if (url.endsWith('/rest/v1/enquiries') && options.method === 'POST') {
+      return { ok: true, json: async () => [{ id: ID, reference_number: 'CC-2026-000001' }] };
+    }
+    if (url.includes('/rest/v1/enquiries?id=eq.')) return { ok: true };
+    throw new Error('unexpected request');
+  };
+  const h = require('../api/enquiries.js');
+  const res = mockRes();
+  await h(req({ name: 'Test Person', email: 'a@b.co', role: 'Partnership enquiry', interest: 'General enquiry' }), res);
+  assert.equal(res.code, 200);
+  assert.equal(res.body.reference, 'CC-2026-000001');
+});
+
+test('admin enquiry search includes the public reference number', async () => {
+  adminEnv();
+  process.env.SUPABASE_ANON_KEY = 'anon';
+  let requestedUrl = '';
+  global.fetch = async (url) => {
+    if (url.endsWith('/auth/v1/user')) {
+      return { ok: true, json: async () => ({ id: 'admin-id', email: 'boss@example.com', email_confirmed_at: '2026-01-01' }) };
+    }
+    requestedUrl = String(url);
+    return { ok: true, json: async () => [] };
+  };
+  const h = require('../api/admin/enquiries.js');
+  const res = mockRes();
+  await h({ method: 'GET', headers: { authorization: 'Bearer token' }, query: { search: 'CC-2026-000001' } }, res);
+  assert.equal(res.code, 200);
+  const query = new URL(requestedUrl).searchParams;
+  assert.match(query.get('select'), /reference_number/);
+  assert.match(query.get('or'), /reference_number\.ilike/);
+});

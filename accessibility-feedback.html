@@ -152,7 +152,7 @@ form.addEventListener('submit',async e=>{
  try{
   const response=await fetch('/api/enquiries',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:document.getElementById('name').value.trim(),email:document.getElementById('email').value.trim(),role:'Accessibility feedback',interest:details,website:document.getElementById('website').value})});
   const data=await response.json().catch(()=>({}));
-  if(response.ok&&data.ok){statusEl.className='status ok';statusEl.textContent=data.message||'Your enquiry has been sent.';form.reset();const count=document.getElementById('count');if(count)count.textContent='0'}
+  if(response.ok&&data.ok){statusEl.className='status ok';statusEl.textContent=(data.message||'Your enquiry has been sent.')+(data.reference?' Reference: '+data.reference:'');form.reset();const count=document.getElementById('count');if(count)count.textContent='0'}
   else{statusEl.className='status err';statusEl.textContent=response.status===503?'The enquiry email service is not configured yet. Your information has not been sent or stored. Please try again later.':(data.message||'We could not send your enquiry. Please try again later.')}
  }catch(_){statusEl.className='status err';statusEl.textContent='We could not reach the enquiry service. Please try again later.'}
  finally{submit.disabled=false}

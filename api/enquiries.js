@@ -147,7 +147,7 @@ module.exports = async (req, res) => {
     }
     const rows = await insertResponse.json();
     saved = Array.isArray(rows) ? rows[0] : null;
-    if (!saved || !saved.id) {
+    if (!saved || !saved.id || !saved.reference_number) {
       return reply(res, 503, { ok: false, error: 'database_save_unconfirmed' });
     }
   } catch (_) {
@@ -167,7 +167,7 @@ module.exports = async (req, res) => {
     const text = [
       'New ClinicConsilium enquiry',
       '',
-      'Reference: ' + saved.id,
+      'Reference: ' + saved.reference_number,
       'Name: ' + name,
       'Email: ' + email,
       'Role: ' + role,
@@ -215,13 +215,13 @@ module.exports = async (req, res) => {
     return reply(res, 200, {
       ok: true,
       message: 'Your general enquiry has been received and the team has been notified.',
-      reference: saved.id
+      reference: saved.reference_number
     });
   }
   return reply(res, 200, {
     ok: true,
     message: 'Your general enquiry has been safely received. Email notifications are not yet active.',
-    reference: saved.id,
+    reference: saved.reference_number,
     notification: deliveryStatus
   });
 };
