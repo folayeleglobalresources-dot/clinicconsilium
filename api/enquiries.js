@@ -11,7 +11,8 @@ const ALLOWED_ROLES = new Set([
   'International care enquiry',
   'Medicine access enquiry',
   'Pharmacy partner application',
-  'Medicine supplier partnership'
+  'Medicine supplier partnership',
+  'Data protection request'
 ]);
 
 function reply(res, status, payload) {
@@ -26,6 +27,7 @@ function clean(value, max) {
 }
 
 function enquiryType(role) {
+  if (role === 'Data protection request') return 'data_protection_request';
   if (['Partnership enquiry', 'Medicine access enquiry', 'Pharmacy partner application', 'Medicine supplier partnership'].includes(role)) return 'partnership';
   if (role === 'Doctor or healthcare professional') return 'professional_interest';
   if (role === 'International care enquiry') return 'international_care';
@@ -87,12 +89,22 @@ module.exports = async (req, res) => {
   const email = clean(body.email, 254).toLowerCase();
   const role = clean(body.role, 80);
   const interest = clean(body.interest, 1500);
+  const isDataRequest = role === 'Data protection request';
+  const dataRequestType = clean(body.data_request_type, 40);
+  const authorityConfirmed = body.authority_confirmed === true;
+  const allowedDataRequestTypes = new Set(['access','rectification','erasure','restriction','objection','portability','withdraw_consent','automated_decision','complaint','other']);
 
   if (name.length < 2 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || !ALLOWED_ROLES.has(role)) {
     return reply(res, 400, { ok: false, error: 'check_required_fields' });
   }
   if (/[\r\n]/.test(email)) {
     return reply(res, 400, { ok: false, error: 'invalid_email' });
+  }
+  if (isDataRequest && (!allowedDataRequestTypes.has(dataRequestType) || !authorityConfirmed)) {
+    return reply(res, 400, { ok: false, error: 'data_request_confirmation_required' });
+  }
+  if (!isDataRequest && (dataRequestType || body.authority_confirmed === true)) {
+    return reply(res, 400, { ok: false, error: 'invalid_data_request_fields' });
   }
 
   // The first release must not collect clinical or identifying health information.
@@ -125,7 +137,7 @@ module.exports = async (req, res) => {
 
   const resendApiKey = clean(process.env.RESEND_API_KEY, 500);
   const resendSender = clean(process.env.CLINICCONSILIUM_FROM_EMAIL, 254);
-  const resendRecipient = clean(process.env.CLINICCONSILIUM_ENQUIRY_TO, 254).toLowerCase();
+  const resendRecipient = clean(isDataRequest ? process.env.CLINICCONSILIUM_DATA_PROTECTION_EMAIL : process.env.CLINICCONSILIUM_ENQUIRY_TO, 254).toLowerCase();
   const emailConfigured = Boolean(resendApiKey && resendSender && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(resendRecipient));
 
   let saved;
@@ -139,6 +151,8 @@ module.exports = async (req, res) => {
         role,
         interest,
         enquiry_type: enquiryType(role),
+        data_request_type: isDataRequest ? dataRequestType : null,
+        data_request_authority_confirmed: isDataRequest ? true : null,
         source: 'website',
         email_delivery_status: emailConfigured ? 'pending' : 'not_configured'
       })
@@ -167,7 +181,16 @@ module.exports = async (req, res) => {
   let deliveryReference = null;
 
   if (emailConfigured) {
-    const text = [
+    const text = isDataRequest ? [
+      'New ClinicConsilium data protection request',
+      '',
+      'Reference: ' + saved.reference_number,
+      'Request type: ' + dataRequestType,
+      'Name: ' + name,
+      'Email: ' + email,
+      '',
+      'The request details are available through the restricted administrator queue. They are intentionally not copied into this email.'
+    ].join('\n') : [
       'New ClinicConsilium enquiry',
       '',
       'Reference: ' + saved.reference_number,
@@ -193,7 +216,7 @@ module.exports = async (req, res) => {
           from: resendSender,
           to: [resendRecipient],
           reply_to: email,
-          subject: 'ClinicConsilium — ' + role,
+          subject: isDataRequest ? 'ClinicConsilium — Data protection request' : 'ClinicConsilium — ' + role,
           text
         })
       });
@@ -225,13 +248,13 @@ module.exports = async (req, res) => {
   if (deliveryStatus === 'sent') {
     return reply(res, 200, {
       ok: true,
-      message: 'Your enquiry has been received and the team notification was accepted by our email provider.',
+      message: isDataRequest ? 'Your data protection request has been recorded. The notification was accepted by the configured email provider.' : 'Your enquiry has been received and the team notification was accepted by our email provider.',
       reference: saved.reference_number
     });
   }
   return reply(res, 200, {
     ok: true,
-    message: deliveryStatus === 'failed' ? 'Your enquiry has been safely received, but the team notification could not be sent.' : 'Your enquiry has been safely received. Email notifications are not configured yet.',
+    message: deliveryStatus === 'failed' ? (isDataRequest ? 'Your data protection request has been recorded, but its notification could not be sent. Keep your reference for follow-up.' : 'Your enquiry has been safely received, but the team notification could not be sent.') : (isDataRequest ? 'Your data protection request has been recorded. Keep your reference for follow-up.' : 'Your enquiry has been safely received. Email notifications are not configured yet.'),
     reference: saved.reference_number,
     notification: deliveryStatus
   });

@@ -401,3 +401,72 @@ test('LifeSaver page prioritises local emergency services and does not claim dis
   assert.doesNotMatch(html, /api\/enquiries|api\/emergency/);
   assert.match(sitemap, /https:\/\/clinicconsilium\.vercel\.app\/lifesaver\.html/);
 });
+
+
+test('data protection requests are validated and stored in the restricted enquiry workflow', async () => {
+  process.env.SUPABASE_URL = 'https://example.supabase.co';
+  process.env.SUPABASE_SERVICE_ROLE_KEY = 'test-key';
+  delete process.env.RESEND_API_KEY;
+  delete process.env.CLINICCONSILIUM_FROM_EMAIL;
+  delete process.env.CLINICCONSILIUM_DATA_PROTECTION_EMAIL;
+  let inserted;
+  global.fetch = async (url, options = {}) => {
+    if (url.endsWith('/rest/v1/enquiries') && options.method === 'POST') {
+      inserted = JSON.parse(options.body);
+      return { ok: true, json: async () => [{ id: ID, reference_number: 'CC-2026-000003' }] };
+    }
+    throw new Error('data request should not notify an unconfigured recipient');
+  };
+  const h = require('../api/enquiries.js');
+  let res = mockRes();
+  await h(req({ name: 'Data Subject', email: 'subject@example.com', role: 'Data protection request', data_request_type: 'access', authority_confirmed: false, interest: 'Please provide information about my account.' }), res);
+  assert.equal(res.code, 400);
+  assert.equal(res.body.error, 'data_request_confirmation_required');
+  res = mockRes();
+  await h(req({ name: 'Data Subject', email: 'subject@example.com', role: 'Data protection request', data_request_type: 'access', authority_confirmed: true, interest: 'Please provide information about my account.' }), res);
+  assert.equal(res.code, 200);
+  assert.equal(res.body.reference, 'CC-2026-000003');
+  assert.equal(inserted.enquiry_type, 'data_protection_request');
+  assert.equal(inserted.data_request_type, 'access');
+  assert.equal(inserted.data_request_authority_confirmed, true);
+  assert.equal(inserted.email_delivery_status, 'not_configured');
+});
+
+test('staff cannot see or update data protection requests, even when assigned', async () => {
+  adminEnv();
+  process.env.SUPABASE_ANON_KEY = 'anon';
+  process.env.CLINICCONSILIUM_STAFF_EMAILS = 'staff@example.com';
+  let activityFetched = false, requestedUrl = '';
+  global.fetch = async (url) => {
+    const u = String(url);
+    if (u.endsWith('/auth/v1/user')) return { ok: true, json: async () => ({ id: 'staff-id', email: 'staff@example.com', email_confirmed_at: '2026-01-01' }) };
+    if (u.includes('/rest/v1/enquiries?id=eq.')) return { ok: true, json: async () => [{ id: ID, reference_number: 'CC-2026-000004', name: 'Data Subject', email: 'subject@example.com', role: 'Data protection request', interest: '', enquiry_type: 'data_protection_request', data_request_type: 'access', status: 'new', owner_email: 'staff@example.com' }] };
+    if (u.includes('/rest/v1/enquiries?')) { requestedUrl = u; return { ok: true, json: async () => [] }; }
+    if (u.includes('admin_get_enquiry_activity')) { activityFetched = true; return { ok: true, json: async () => [] }; }
+    throw new Error('unexpected request');
+  };
+  const h = require('../api/admin/enquiries.js');
+  let res = mockRes();
+  await h({ method: 'GET', headers: { authorization: 'Bearer token' }, query: { id: ID } }, res);
+  assert.equal(res.code, 404);
+  assert.equal(activityFetched, false);
+  res = mockRes();
+  await h({ method: 'GET', headers: { authorization: 'Bearer token' }, query: {} }, res);
+  assert.equal(res.code, 200);
+  assert.equal(new URL(requestedUrl).searchParams.get('enquiry_type'), 'neq.data_protection_request');
+});
+
+test('privacy, terms and data-request pages carry legal draft markers and a working route', () => {
+  const fs = require('node:fs');
+  const path = require('node:path');
+  const read = file => fs.readFileSync(path.join(__dirname, '..', file), 'utf8');
+  const privacy = read('privacy.html'), terms = read('terms.html'), request = read('data-request.html'), sitemap = read('sitemap.xml');
+  assert.match(privacy, /DRAFT — PENDING LEGAL REVIEW/);
+  assert.match(privacy, /retention schedule/);
+  assert.match(privacy, /data-request\.html/);
+  assert.match(terms, /DRAFT — PENDING LEGAL REVIEW/);
+  assert.match(request, /Nigeria Data Protection Act 2023/);
+  assert.match(request, /name="authority_confirmed"/);
+  assert.match(request, /fetch\('\/api\/enquiries'/);
+  assert.match(sitemap, /https:\/\/clinicconsilium\.vercel\.app\/data-request\.html/);
+});
