@@ -4,7 +4,7 @@ const clean=(v,n)=>typeof v==='string'?v.trim().slice(0,n):'';
 const safe=(v,n)=>clean(v,n).replace(/[^a-zA-Z0-9\s-]/g,'').trim();
 function reply(res,status,payload,noStore=false){res.setHeader('Cache-Control',noStore?'no-store':'public, max-age=60, stale-while-revalidate=120');res.setHeader('X-Content-Type-Options','nosniff');res.setHeader('Content-Type','application/json; charset=utf-8');return res.status(status).json(payload);}
 function distanceKm(a,b,c,d){const rad=x=>x*Math.PI/180,dl=rad(c-a),dn=rad(d-b),h=Math.sin(dl/2)**2+Math.cos(rad(a))*Math.cos(rad(c))*Math.sin(dn/2)**2;return 6371*2*Math.atan2(Math.sqrt(h),Math.sqrt(1-h));}
-module.exports=async(req,res)=>{
+async function directoryHandler(req,res){
  if(req.method!=='GET'){res.setHeader('Allow','GET');return reply(res,405,{ok:false,error:'method_not_allowed'});}
  const url=clean(process.env.SUPABASE_URL,500).replace(/\/$/,'');const key=process.env.SUPABASE_SERVICE_ROLE_KEY;if(!url||!key)return reply(res,503,{ok:false,error:'directory_not_configured'});
  const type=clean(req.query&&req.query.type,24).toLowerCase();if(type&&!TYPES.has(type))return reply(res,400,{ok:false,error:'invalid_listing_type'});
@@ -21,4 +21,12 @@ module.exports=async(req,res)=>{
  if(hasNear)rows=rows.filter(x=>Number.isFinite(Number(x.latitude))&&Number.isFinite(Number(x.longitude))).map(x=>({...x,distance_km:Number(distanceKm(lat,lng,Number(x.latitude),Number(x.longitude)).toFixed(1))})).filter(x=>x.distance_km<=radius).sort((a,b)=>a.distance_km-b.distance_km).slice(0,limit);
  return reply(res,200,{ok:true,listings:rows,count:rows.length,filters:{type,city,state,specialty,country,nearby:hasNear,radius_km:hasNear?radius:null}},hasNear);
  }catch(_){return reply(res,503,{ok:false,error:'directory_unavailable'},hasNear);}
+};
+const handleApplications=require('../lib/healthcare-network-applications');
+const handleDocuments=require('../lib/healthcare-network-application-documents');
+module.exports=async(req,res)=>{
+ const resource=clean(req.query&&req.query.resource,40);
+ if(resource==='applications')return handleApplications(req,res);
+ if(resource==='application-documents')return handleDocuments(req,res);
+ return directoryHandler(req,res);
 };

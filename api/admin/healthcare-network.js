@@ -14,7 +14,7 @@ async function requireAdmin(req){
 }
 function list(v,max){return Array.isArray(v)?v.map(x=>clean(x,100)).filter(Boolean).slice(0,max):[];}
 function slugify(s){return clean(s,180).toLowerCase().normalize('NFKD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').slice(0,160);}
-module.exports=async(req,res)=>{
+async function listingHandler(req,res){
  if(!['GET','POST','PATCH'].includes(req.method)){res.setHeader('Allow','GET, POST, PATCH');return reply(res,405,{ok:false,error:'method_not_allowed'});}
  const admin=await requireAdmin(req);if(!admin.ok)return reply(res,admin.status,{ok:false,error:admin.error});
  const base=admin.url+'/rest/v1/healthcare_network_listings';
@@ -58,4 +58,12 @@ module.exports=async(req,res)=>{
   await fetch(admin.url+'/rest/v1/security_audit_events',{method:'POST',headers:headers(admin.key,{Prefer:'return=minimal'}),body:JSON.stringify({actor_user_id:admin.id,action:'healthcare_network_'+action,resource_type:'healthcare_network_listing',resource_id:id,metadata:{listing_type:before.listing_type,verification_status:changed[0].verification_status,publication_status:changed[0].publication_status}})}).catch(()=>null);
   return reply(res,200,{ok:true,listing:changed[0]});
  }catch(_){return reply(res,503,{ok:false,error:'listing_update_failed'});}
+};
+const handleApplications=require('../../lib/admin-healthcare-network-applications');
+const handleDocuments=require('../../lib/admin-healthcare-network-documents');
+module.exports=async(req,res)=>{
+ const resource=clean(req.query&&req.query.resource,40);
+ if(resource==='applications')return handleApplications(req,res);
+ if(resource==='documents')return handleDocuments(req,res);
+ return listingHandler(req,res);
 };
