@@ -14,7 +14,7 @@ module.exports=async(req,res)=>{
  if(!/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(appId)||token.length<40||!filename||!TYPES.has(mime)||!['professional_registration','facility_licence','accreditation','other'].includes(docType)||!encoded)return reply(res,400,{ok:false,error:'document_fields_invalid'});
  const buf=Buffer.from(encoded,'base64');if(!buf.length||buf.length>MAX_FILE||buf.toString('base64').replace(/=+$/,'')!==encoded.replace(/=+$/,''))return reply(res,413,{ok:false,error:'file_size_or_encoding_invalid'});
  if(!validMagic(buf,mime))return reply(res,415,{ok:false,error:'file_content_does_not_match_type'});
- const url=clean(process.env.SUPABASE_URL,500).replace(/\\/$/,''),key=process.env.SUPABASE_SERVICE_ROLE_KEY;if(!url||!key)return reply(res,503,{ok:false,error:'upload_service_unavailable'});
+ const url=clean(process.env.SUPABASE_URL,500).replace(/\/$/,''),key=process.env.SUPABASE_SERVICE_ROLE_KEY;if(!url||!key)return reply(res,503,{ok:false,error:'upload_service_unavailable'});
  try{
   const ar=await fetch(url+'/rest/v1/healthcare_network_applications?id=eq.'+encodeURIComponent(appId)+'&select=id,upload_token_hash,upload_token_expires_at&limit=1',{headers:headers(key,{'Content-Type':'application/json'})});
   if(!ar.ok)return reply(res,503,{ok:false,error:'application_lookup_failed'});const apps=await ar.json(),app=apps[0];if(!app)return reply(res,404,{ok:false,error:'application_not_found'});
@@ -25,7 +25,7 @@ module.exports=async(req,res)=>{
   const ext=mime==='application/pdf'?'pdf':mime==='image/png'?'png':'jpg',path='applications/'+appId+'/'+crypto.randomUUID()+'.'+ext;
   const uploaded=await fetch(url+'/storage/v1/object/'+BUCKET+'/'+path,{method:'POST',headers:headers(key,{'Content-Type':mime,'x-upsert':'false','cache-control':'0'}),body:buf});
   if(!uploaded.ok)return reply(res,503,{ok:false,error:'private_document_upload_failed'});
-  const meta=await fetch(url+'/rest/v1/healthcare_network_documents',{method:'POST',headers:headers(key,{'Content-Type':'application/json',Prefer:'return=representation'}),body:JSON.stringify({application_id:appId,object_path:path,document_type:docType,original_filename:filename.replace(/[\\r\\n]/g,' ').slice(0,180),mime_type:mime,file_size_bytes:buf.length})});
+  const meta=await fetch(url+'/rest/v1/healthcare_network_documents',{method:'POST',headers:headers(key,{'Content-Type':'application/json',Prefer:'return=representation'}),body:JSON.stringify({application_id:appId,object_path:path,document_type:docType,original_filename:filename.replace(/[\r\n]/g,' ').slice(0,180),mime_type:mime,file_size_bytes:buf.length})});
   if(!meta.ok){await fetch(url+'/storage/v1/object/'+BUCKET+'/'+path,{method:'DELETE',headers:headers(key)}).catch(()=>null);return reply(res,503,{ok:false,error:'document_record_failed'});}
   const rows=await meta.json();return reply(res,201,{ok:true,document:{id:rows[0].id,filename:rows[0].original_filename,document_type:rows[0].document_type},message:'Your document was uploaded to private storage for review.'});
  }catch(_){return reply(res,503,{ok:false,error:'upload_service_unavailable'});}
