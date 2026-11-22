@@ -44,13 +44,12 @@ module.exports=async(req,res)=>{
  if(!read.ok)return reply(res,503,{ok:false,error:'listing_lookup_failed'});
  const rows=await read.json();if(!rows.length)return reply(res,404,{ok:false,error:'listing_not_found'});
  const before=rows[0],patch={reviewed_by:admin.id,reviewed_at:new Date().toISOString(),updated_at:new Date().toISOString()};
- if(action==='verify'){if(before.verification_status!=='pending_review')return reply(res,409,{ok:false,error:'listing_not_reviewable'});patch.verification_status='verified';}
+ if(action==='verify'){if(before.verification_status!=='pending_review')return reply(res,409,{ok:false,error:'listing_not_reviewable'});if(!before.registration_body||!before.credential_reference)return reply(res,409,{ok:false,error:'regulatory_evidence_reference_required'});patch.verification_status='verified';}
  if(action==='publish'){if(before.verification_status!=='verified')return reply(res,409,{ok:false,error:'verification_required_before_publication'});patch.publication_status='published';patch.published_at=new Date().toISOString();}
  if(action==='unpublish'){patch.publication_status='unpublished';patch.published_at=null;}
  if(action==='reject'){patch.verification_status='rejected';patch.publication_status='unpublished';patch.published_at=null;}
  if(action==='suspend'){patch.verification_status='suspended';patch.publication_status='unpublished';patch.published_at=null;}
  if(action==='reinstate'){if(before.verification_status!=='suspended')return reply(res,409,{ok:false,error:'listing_not_suspended'});patch.verification_status='pending_review';patch.publication_status='unpublished';patch.published_at=null;}
- const notes=clean(body.review_notes,2000);if(notes)patch.description=before.description;
  try{
   const r=await fetch(base+'?id=eq.'+encodeURIComponent(id)+'&select='+COLS,{method:'PATCH',headers:headers(admin.key,{Prefer:'return=representation'}),body:JSON.stringify(patch)});
   if(!r.ok)return reply(res,503,{ok:false,error:'listing_update_failed'});
