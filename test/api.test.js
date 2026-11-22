@@ -388,3 +388,16 @@ test('admin internal notes reject clinical or sensitive health information', asy
   assert.equal(res.code, 400);
   assert.equal(res.body.error, 'sensitive_information_not_allowed');
 });
+
+
+test('LifeSaver page prioritises local emergency services and does not claim dispatch', () => {
+  const fs = require('node:fs');
+  const path = require('node:path');
+  const html = fs.readFileSync(path.join(__dirname, '..', 'lifesaver.html'), 'utf8');
+  const sitemap = fs.readFileSync(path.join(__dirname, '..', 'sitemap.xml'), 'utf8');
+  assert.ok(html.indexOf('CONTACT LOCAL EMERGENCY SERVICES FIRST') < html.indexOf('<header'));
+  assert.match(html, /href="tel:112"/);
+  assert.match(html, /does not receive emergency calls, dispatch ambulances/);
+  assert.doesNotMatch(html, /api\/enquiries|api\/emergency/);
+  assert.match(sitemap, /https:\/\/clinicconsilium\.vercel\.app\/lifesaver\.html/);
+});
