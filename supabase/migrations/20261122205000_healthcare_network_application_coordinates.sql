@@ -9,3 +9,7 @@ do $$ begin
       check ((latitude is null and longitude is null) or (latitude is not null and longitude is not null));
   end if;
 end $$;
+-- Index the remaining foreign keys used by application review and conversion.
+create index if not exists healthcare_network_applications_listing_id_idx on public.healthcare_network_applications(listing_id);
+create index if not exists healthcare_network_applications_reviewed_by_idx on public.healthcare_network_applications(reviewed_by);
+create index if not exists healthcare_network_documents_reviewed_by_idx on public.healthcare_network_documents(reviewed_by);
