@@ -4,7 +4,7 @@
   "private": true,
   "description": "ClinicConsilium public site and serverless API foundation",
   "engines": {
-    "node": ">=20"
+    "node": "22.x"
   },
   "scripts": {
     "test": "node --test",
