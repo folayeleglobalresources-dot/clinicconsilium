@@ -303,3 +303,88 @@ test('admin enquiry search includes the public reference number', async () => {
   assert.match(query.get('select'), /reference_number/);
   assert.match(query.get('or'), /reference_number\.ilike/);
 });
+
+
+test('platform audit and users/roles views are administrator-only', async () => {
+  adminEnv();
+  process.env.SUPABASE_ANON_KEY = 'anon';
+  process.env.CLINICCONSILIUM_STAFF_EMAILS = 'staff@example.com';
+  global.fetch = async (url) => {
+    if (String(url).endsWith('/auth/v1/user')) {
+      return { ok: true, json: async () => ({ id: 'staff-id', email: 'staff@example.com', email_confirmed_at: '2026-01-01' }) };
+    }
+    throw new Error('staff access must not query protected views');
+  };
+  const h = require('../api/admin/enquiries.js');
+  for (const view of ['audit', 'users']) {
+    const res = mockRes();
+    await h({ method: 'GET', headers: { authorization: 'Bearer token' }, query: { view } }, res);
+    assert.equal(res.code, 403);
+    assert.equal(res.body.error, 'administrator_access_required');
+  }
+});
+
+test('admin audit view combines safe security and enquiry events', async () => {
+  adminEnv();
+  process.env.SUPABASE_ANON_KEY = 'anon';
+  global.fetch = async (url) => {
+    if (String(url).endsWith('/auth/v1/user')) {
+      return { ok: true, json: async () => ({ id: 'admin-id', email: 'boss@example.com', email_confirmed_at: '2026-01-01' }) };
+    }
+    if (String(url).includes('/rest/v1/security_audit_events?')) {
+      return { ok: true, json: async () => [{ id: 'audit-id', actor_user_id: ID, action: 'account_registration_approved', resource_type: 'account_registration', resource_id: ID, metadata: { requested_account_type: 'professional', patient_user_id: 'must-not-leak' }, created_at: '2026-11-22T10:00:00Z' }] };
+    }
+    if (String(url).includes('/rest/v1/enquiry_activity?')) {
+      return { ok: true, json: async () => [{ id: 'activity-id', enquiry_id: ID, actor_email: 'boss@example.com', event_type: 'status_changed', details: { from: 'new', to: 'in_review', note: 'private note content' }, created_at: '2026-11-22T11:00:00Z' }] };
+    }
+    throw new Error('unexpected request');
+  };
+  const h = require('../api/admin/enquiries.js');
+  const res = mockRes();
+  await h({ method: 'GET', headers: { authorization: 'Bearer token' }, query: { view: 'audit' } }, res);
+  assert.equal(res.code, 200);
+  assert.equal(res.body.read_only, true);
+  assert.equal(res.body.total, 2);
+  assert.equal(res.body.events[0].source, 'enquiry');
+  assert.equal(res.body.events[1].details.patient_user_id, undefined);
+  assert.equal(res.body.events[0].details.note, undefined);
+});
+
+test('admin users/roles view aggregates auth users and assigned roles without write controls', async () => {
+  adminEnv();
+  process.env.SUPABASE_ANON_KEY = 'anon';
+  global.fetch = async (url) => {
+    const u = String(url);
+    if (u.endsWith('/auth/v1/user')) return { ok: true, json: async () => ({ id: 'admin-id', email: 'boss@example.com', email_confirmed_at: '2026-01-01' }) };
+    if (u.includes('/auth/v1/admin/users?')) return { ok: true, json: async () => ({ users: [{ id: ID, email: 'person@example.com', email_confirmed_at: '2026-01-01', created_at: '2026-01-01T00:00:00Z', last_sign_in_at: '2026-11-22T09:00:00Z', user_metadata: { full_name: 'Example Person' } }] }) };
+    if (u.includes('/rest/v1/account_registrations?')) return { ok: true, json: async () => [{ user_id: ID, email: 'person@example.com', full_name: 'Example Person', requested_account_type: 'professional', status: 'approved', verification_status: 'verified', approved_access_role: 'professional', created_at: '2026-01-01T00:00:00Z' }] };
+    if (u.includes('/rest/v1/platform_role_assignments?')) return { ok: true, json: async () => [{ user_id: ID, role: 'credential_reviewer', granted_at: '2026-01-02T00:00:00Z', revoked_at: null }] };
+    if (u.includes('/rest/v1/organisation_memberships?')) return { ok: true, json: async () => [{ user_id: ID, organisation_id: '22222222-2222-4222-8222-222222222222', role: 'clinician', status: 'active', created_at: '2026-01-03T00:00:00Z' }] };
+    if (u.includes('/rest/v1/organisations?')) return { ok: true, json: async () => [{ id: '22222222-2222-4222-8222-222222222222', display_name: 'Example Clinic' }] };
+    throw new Error('unexpected request');
+  };
+  const h = require('../api/admin/enquiries.js');
+  const res = mockRes();
+  await h({ method: 'GET', headers: { authorization: 'Bearer token' }, query: { view: 'users' } }, res);
+  assert.equal(res.code, 200);
+  assert.equal(res.body.read_only, true);
+  assert.equal(res.body.users[0].full_name, 'Example Person');
+  assert.equal(res.body.users[0].platform_roles[0].role, 'credential_reviewer');
+  assert.equal(res.body.users[0].organisation_memberships[0].organisation, 'Example Clinic');
+  assert.equal(res.body.users[0].configured_workspace_role, 'none');
+});
+
+test('admin internal notes reject clinical or sensitive health information', async () => {
+  adminEnv();
+  process.env.SUPABASE_ANON_KEY = 'anon';
+  global.fetch = async (url) => {
+    if (String(url).endsWith('/auth/v1/user')) return { ok: true, json: async () => ({ id: 'admin-id', email: 'boss@example.com', email_confirmed_at: '2026-01-01' }) };
+    if (String(url).includes('/rest/v1/enquiries?id=eq.')) return { ok: true, json: async () => [{ id: ID, reference_number: 'CC-2026-000001', name: 'Test Person', email: 'a@b.co', role: 'Partnership enquiry', interest: 'General', status: 'new', admin_notes: '', owner_email: null }] };
+    throw new Error('note validation should stop before write');
+  };
+  const h = require('../api/admin/enquiries.js');
+  const res = mockRes();
+  await h({ method: 'PATCH', headers: { authorization: 'Bearer token' }, body: { id: ID, admin_notes: 'Patient diagnosis: hypertension' } }, res);
+  assert.equal(res.code, 400);
+  assert.equal(res.body.error, 'sensitive_information_not_allowed');
+});
