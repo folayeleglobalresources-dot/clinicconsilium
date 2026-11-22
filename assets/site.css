@@ -153,3 +153,57 @@ footer .foot-bottom, footer .footer-bottom {
     gap: 7px 12px !important;
   }
 }
+
+
+/* Shared branded shell for account and protected administration workspaces */
+body .cc-app-header {
+  background: var(--dark) !important;
+  color: #FFFFFF !important;
+  border-bottom: 1px solid var(--line) !important;
+}
+body .cc-app-header > .wrap {
+  box-sizing: border-box;
+  width: min(1320px, calc(100% - 40px));
+  min-height: 66px;
+  margin: 0 auto;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+body .cc-app-header .cc-app-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+body .cc-app-header .cc-brand-logo {
+  display: block;
+  width: 176px;
+  height: auto;
+  max-height: 48px;
+  object-fit: contain;
+}
+body .cc-app-header a {
+  color: #FFFFFF !important;
+  font-weight: 700;
+}
+body .cc-app-header small {
+  color: #E4F1E9 !important;
+  font-size: 11px;
+}
+@media (max-width: 600px) {
+  body .cc-app-header > .wrap {
+    width: calc(100% - 28px);
+    min-height: 60px;
+    gap: 10px;
+  }
+  body .cc-app-header .cc-brand-logo {
+    width: 145px;
+    max-height: 42px;
+  }
+  body .cc-app-header a {
+    font-size: 11px;
+  }
+}
