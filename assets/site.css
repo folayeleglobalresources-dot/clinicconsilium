@@ -207,3 +207,29 @@ body .cc-app-header small {
     font-size: 11px;
   }
 }
+
+/* Keep the mobile menu control reachable while the navigation panel is open. */
+@media (max-width: 900px) {
+  header .menu, .header .menu, .nav .menu, .account-head .menu {
+    position: relative !important;
+    z-index: 110 !important;
+  }
+  header .links.open, .header .links.open, .nav .links.open, .account-head .links.open {
+    z-index: 100 !important;
+  }
+}
+
+/* Keep the official brand mark bounded on pages using the shared stylesheet alone. */
+.brand img, .footer-logo img {
+  display: block !important;
+  width: auto !important;
+  height: 56px !important;
+  max-width: min(220px, 55vw) !important;
+  object-fit: contain !important;
+}
+@media (max-width: 600px) {
+  .brand img, .footer-logo img {
+    height: 48px !important;
+    max-width: min(190px, 62vw) !important;
+  }
+}

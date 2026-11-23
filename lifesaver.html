@@ -45,6 +45,12 @@
 .life-footer{border-top:1px solid var(--line);padding:20px 0;color:var(--muted);font-size:12px}
 .life-footer .wrap{max-width:1100px;margin:auto;padding:0 22px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 @media(max-width:720px){.life-grid{grid-template-columns:1fr}.life-wrap{padding:22px 16px 42px}.life-header .wrap{padding:22px 16px 28px}.life-priority{font-size:13px}}
+
+header.header .nav{display:flex;align-items:center;gap:16px}
+header.header .nav .links{display:flex;align-items:center;gap:14px;margin-left:auto;padding:0;background:transparent;border:0;box-shadow:none}
+header.header .nav .links a{display:inline-flex;padding:0;border:0;background:transparent;color:#28463A;font-size:12px;font-weight:700;white-space:nowrap;text-decoration:none}
+header.header .menu{display:none}
+@media(max-width:900px){header.header .nav{position:relative;flex-direction:row;align-items:center}header.header .menu{display:block;position:relative;z-index:101;margin-left:auto}header.header .nav .links{display:none;position:absolute;top:100%;left:0;right:0;z-index:100;grid-template-columns:1fr;flex-direction:column;align-items:stretch;gap:0;padding:14px;background:#fff;border:1px solid #D8E6DE;box-shadow:0 12px 24px #043D2E18}header.header .nav .links.open{display:flex}header.header .nav .links a{padding:10px 0;border-bottom:1px solid #edf2ee}}
 </style>
 </head>
 <body>
@@ -55,7 +61,7 @@
 <header class="header"><div class="wrap nav">
 <a class="brand" href="index.html" aria-label="ClinicConsilium home"><img src="assets/clinicconsilium-logo-optimized.png" alt="ClinicConsilium"></a>
 <button class="menu" id="menuToggle" aria-label="Open navigation" aria-expanded="false" aria-controls="mainNav">☰</button>
-<nav class="links" id="mainNav" aria-label="Main navigation"><a href="index.html">Home</a><a href="safety.html">Safety</a><a href="services.html">Services</a><a href="contact.html">Contact</a></nav>
+<nav class="links" id="mainNav" aria-label="Main navigation"><a href="index.html">Home</a><a href="services.html">Services</a><a href="how-it-works.html">How it works</a><a href="providers.html">For providers</a><a href="international-care.html">International care</a><a href="about.html">About</a><a href="contact.html">Contact</a></nav>
 </div></header>
 <main id="main">
 <section class="life-header"><div class="wrap">
@@ -105,5 +111,5 @@
 </main>
 <footer class="life-footer"><div class="wrap"><span>ClinicConsilium · Trusted Healthcare. Without Borders.</span><a href="safety.html">Safety &amp; responsible care</a><a href="contact.html">Non-emergency contact</a></div></footer>
 <script src="assets/design.js" defer></script>
-</body>
+<script id="standard-mobile-menu">(function(){var b=document.getElementById('menuToggle'),n=document.getElementById('mainNav');if(!b||!n)return;b.addEventListener('click',function(){var o=n.classList.toggle('open');b.setAttribute('aria-expanded',String(o));b.setAttribute('aria-label',o?'Close navigation':'Open navigation');b.textContent=o?'×':'☰'});n.addEventListener('click',function(e){if(e.target.closest('a')){n.classList.remove('open');b.setAttribute('aria-expanded','false');b.setAttribute('aria-label','Open navigation');b.textContent='☰'}})})();</script></body>
 </html>
