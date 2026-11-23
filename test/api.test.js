@@ -496,3 +496,52 @@ test('status page states accounts are not yet available and manual interest crea
   assert.match(html, /Accounts are not yet available/);
   assert.match(html, /No account is created/i);
 });
+
+
+test('reference migration generates atomic CC references and only backfills missing references', () => {
+  const migration = fs.readFileSync(path.join(__dirname, '..', 'supabase/migrations/20261122201813_enquiry_reference_numbers.sql'), 'utf8');
+  assert.match(migration, /create or replace function public\\.assign_enquiry_reference_number/i);
+  assert.match(migration, /on conflict \\(reference_year\\)\\s+do update set last_value = public\\.enquiry_reference_counters\\.last_value \\+ 1/i);
+  assert.match(migration, /new\\.reference_number := 'CC-' \\|\\| v_year::text \\|\\| '-' \\|\\| lpad\\(v_next::text, 6, '0'\\)/i);
+  assert.match(migration, /where reference_number is null/i);
+  assert.match(migration, /create unique index if not exists enquiries_reference_number_uidx/i);
+  assert.match(migration, /create trigger enquiries_assign_reference_number\\s+before insert on public\\.enquiries/i);
+});
+
+test('every public enquiries form displays the reference returned by the API', () => {
+  const root = path.join(__dirname, '..');
+  const pages = fs.readdirSync(root).filter(file => file.endsWith('.html'));
+  const enquiryPages = pages.filter(file => fs.readFileSync(path.join(root, file), 'utf8').includes("fetch('/api/enquiries'"));
+  assert.ok(enquiryPages.length >= 7, 'expected all public enquiry forms to use the common enquiry API');
+  for (const file of enquiryPages) {
+    const html = fs.readFileSync(path.join(root, file), 'utf8');
+    assert.match(html, /(?:data|result)\\.reference/, `${file} must show the generated enquiry reference`);
+  }
+});
+
+test('admin workspace searches and displays enquiries by their public reference', () => {
+  const html = fs.readFileSync(path.join(__dirname, '..', 'admin-dashboard.html'), 'utf8');
+  assert.match(html, /Search by reference, name or email/);
+  assert.match(html, /r\\.reference_number/);
+  assert.match(html, /reference_number\\|\\|/);
+});
+
+test('enquiry API does not claim success unless the database returns a reference', async () => {
+  process.env.SUPABASE_URL = 'https://example.supabase.co';
+  process.env.SUPABASE_SERVICE_ROLE_KEY = 'test-key';
+  delete process.env.RESEND_API_KEY;
+  delete process.env.CLINICCONSILIUM_FROM_EMAIL;
+  delete process.env.CLINICCONSILIUM_ENQUIRY_TO;
+  global.fetch = async (url, options = {}) => {
+    if (url.endsWith('/rest/v1/enquiries') && options.method === 'POST') {
+      return { ok: true, json: async () => [{ id: ID }] };
+    }
+    throw new Error('unexpected request');
+  };
+  const h = require('../api/enquiries.js');
+  const res = mockRes();
+  await h(req({ name: 'Test Person', email: 'a@b.co', role: 'Partnership enquiry', interest: 'General enquiry' }), res);
+  assert.equal(res.code, 503);
+  assert.equal(res.body.ok, false);
+  assert.equal(res.body.error, 'database_save_unconfirmed');
+});
