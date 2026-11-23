@@ -50,6 +50,7 @@ module.exports = async (req, res) => {
     scope: 'initial-release-general-enquiries',
     database,
     enquiry_delivery: emailConfigured ? 'configured_not_delivery_verified' : 'not_configured',
+    accounts: 'not_yet_available',
     patient_services: 'not_available',
     timestamp: new Date().toISOString()
   });

@@ -1,3 +1,5 @@
+const fs = require('node:fs');
+const path = require('node:path');
 const test = require('node:test');
 const assert = require('node:assert');
 
@@ -80,6 +82,8 @@ test('health endpoint verifies the database without reading enquiry rows', async
   const res = mockRes();
   await require('../api/health.js')({ method: 'GET' }, res);
   assert.equal(res.body.database, 'connected');
+  assert.equal(res.body.accounts, 'not_yet_available');
+  assert.equal(res.body.patient_services, 'not_available');
   assert.ok(requested.url.endsWith('/rest/v1/enquiries?select=id&limit=0'));
   assert.equal(requested.options.method, 'GET');
 });
@@ -469,4 +473,26 @@ test('privacy, terms and data-request pages carry legal draft markers and a work
   assert.match(request, /name="authority_confirmed"/);
   assert.match(request, /fetch\('\/api\/enquiries'/);
   assert.match(sitemap, /https:\/\/clinicconsilium\.vercel\.app\/data-request\.html/);
+});
+
+
+test('public account page only offers manual registration interest and creates no account', () => {
+  const html = fs.readFileSync(path.join(__dirname, '..', 'account.html'), 'utf8');
+  assert.match(html, /Registration interest/);
+  assert.match(html, /We review requests manually, and no account is created yet/);
+  assert.doesNotMatch(html, /supabase-js|signInWithPassword|auth\\.signUp|Create secure account|Sign in/);
+});
+
+test('public navigation does not promote patient workspace or account sign-in', () => {
+  const home = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
+  const portals = fs.readFileSync(path.join(__dirname, '..', 'portals.html'), 'utf8');
+  assert.doesNotMatch(home, /Patient workspace preview/);
+  assert.doesNotMatch(portals, /Sign in or create an account/);
+  assert.match(portals, /Register interest · manual review/);
+});
+
+test('status page states accounts are not yet available and manual interest creates no account', () => {
+  const html = fs.readFileSync(path.join(__dirname, '..', 'status.html'), 'utf8');
+  assert.match(html, /Accounts are not yet available/);
+  assert.match(html, /No account is created/i);
 });
