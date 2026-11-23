@@ -500,12 +500,12 @@ test('status page states accounts are not yet available and manual interest crea
 
 test('reference migration generates atomic CC references and only backfills missing references', () => {
   const migration = fs.readFileSync(path.join(__dirname, '..', 'supabase/migrations/20261122201813_enquiry_reference_numbers.sql'), 'utf8');
-  assert.match(migration, /create or replace function public\\.assign_enquiry_reference_number/i);
-  assert.match(migration, /on conflict \\(reference_year\\)\\s+do update set last_value = public\\.enquiry_reference_counters\\.last_value \\+ 1/i);
-  assert.match(migration, /new\\.reference_number := 'CC-' \\|\\| v_year::text \\|\\| '-' \\|\\| lpad\\(v_next::text, 6, '0'\\)/i);
+  assert.match(migration, /create or replace function public\.assign_enquiry_reference_number/i);
+  assert.match(migration, /on conflict \(reference_year\)\s+do update set last_value = public\.enquiry_reference_counters\.last_value \+ 1/i);
+  assert.match(migration, /new\.reference_number := 'CC-' \|\| v_year::text \|\| '-' \|\| lpad\(v_next::text, 6, '0'\)/i);
   assert.match(migration, /where reference_number is null/i);
   assert.match(migration, /create unique index if not exists enquiries_reference_number_uidx/i);
-  assert.match(migration, /create trigger enquiries_assign_reference_number\\s+before insert on public\\.enquiries/i);
+  assert.match(migration, /create trigger enquiries_assign_reference_number\s+before insert on public\.enquiries/i);
 });
 
 test('every public enquiries form displays the reference returned by the API', () => {
@@ -515,15 +515,15 @@ test('every public enquiries form displays the reference returned by the API', (
   assert.ok(enquiryPages.length >= 7, 'expected all public enquiry forms to use the common enquiry API');
   for (const file of enquiryPages) {
     const html = fs.readFileSync(path.join(root, file), 'utf8');
-    assert.match(html, /(?:data|result)\\.reference/, `${file} must show the generated enquiry reference`);
+    assert.match(html, /(?:data|result)\.reference/, `${file} must show the generated enquiry reference`);
   }
 });
 
 test('admin workspace searches and displays enquiries by their public reference', () => {
   const html = fs.readFileSync(path.join(__dirname, '..', 'admin-dashboard.html'), 'utf8');
   assert.match(html, /Search by reference, name or email/);
-  assert.match(html, /r\\.reference_number/);
-  assert.match(html, /reference_number\\|\\|/);
+  assert.match(html, /r\.reference_number/);
+  assert.match(html, /reference_number\|\|/);
 });
 
 test('enquiry API does not claim success unless the database returns a reference', async () => {
