@@ -11,7 +11,7 @@
 body{margin:0;background:#F2F8F5;color:#102B24;font:16px/1.65 'DM Sans',Arial,sans-serif}
 .account-shell{width:min(900px,calc(100% - 36px));margin:0 auto;padding:28px 0 64px}
 .account-head{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:12px 0 28px;border-bottom:1px solid #D8E6DE}
-.account-head img{width:auto;height:54px;max-width:220px;object-fit:contain}
+.account-head img{width:auto;height:54px;max-width:220px;object-fit:contain}.account-head .links{display:flex;align-items:center;gap:15px}.account-head .links a{font-size:12px;color:#28463A;text-decoration:none;font-weight:700;white-space:nowrap}.account-head .menu{display:none}
 .account-head a,.account-actions a{color:#075E45;font-weight:700}
 .account-card{margin:48px auto 0;max-width:720px;padding:clamp(24px,5vw,48px);background:#fff;border:1px solid #D8E6DE;border-radius:20px;box-shadow:0 16px 44px #043D2E0D}
 .eyebrow{color:#0B8060;font-size:12px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase}
@@ -23,11 +23,11 @@ h1{margin:12px 0 16px;color:#043D2E;font-size:clamp(32px,5vw,46px);line-height:1
 .account-actions a{display:inline-block;padding:12px 17px;border:1px solid #B7D0C2;border-radius:10px;text-decoration:none}
 .account-actions a.primary{background:#075E45;color:#fff;border-color:#075E45}
 .small{margin-top:24px;color:#52685E;font-size:13px}
-@media(max-width:560px){.account-head{align-items:flex-start;flex-direction:column}.account-head img{height:46px}.account-card{margin-top:28px}}
+@media(max-width:900px){.account-head{position:relative}.account-head .menu{display:block}.account-head .links{display:none;position:absolute;top:100%;left:0;right:0;z-index:30;flex-direction:column;align-items:stretch;gap:0;background:#fff;padding:14px;border:1px solid #D8E6DE;box-shadow:0 12px 24px #043D2E18}.account-head .links.open{display:flex}.account-head .links a{padding:10px 0;border-bottom:1px solid #edf2ee}}@media(max-width:560px){.account-head{align-items:center;flex-direction:row}.account-head img{height:46px}.account-card{margin-top:28px}}
 </style>
 </head>
 <body><main class="account-shell">
-<header class="account-head"><a href="index.html" aria-label="ClinicConsilium homepage"><img src="assets/clinicconsilium-logo-optimized.png" alt="ClinicConsilium"></a><a href="index.html">Back to homepage</a></header>
+<header class="account-head"><a href="index.html" aria-label="ClinicConsilium homepage"><img src="assets/clinicconsilium-logo-optimized.png" alt="ClinicConsilium"></a><button class="menu" id="menuToggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="mainNav">☰</button><nav class="links" id="mainNav" aria-label="Main navigation"><a href="index.html">Home</a><a href="services.html">Services</a><a href="how-it-works.html">How it works</a><a href="providers.html">For providers</a><a href="international-care.html">International care</a><a href="about.html">About</a><a href="contact.html">Contact</a></nav></header>
 <section class="account-card" aria-labelledby="page-title">
 <span class="eyebrow">Account access · Not yet available</span>
 <h1 id="page-title">Registration interest</h1>
@@ -37,4 +37,4 @@ h1{margin:12px 0 16px;color:#043D2E;font-size:clamp(32px,5vw,46px);line-height:1
 <p>Healthcare professionals and organisations can register partnership interest through the dedicated onboarding pages. For general questions about future access, contact the ClinicConsilium team.</p>
 <div class="account-actions"><a class="primary" href="provider-interest.html">Healthcare professional interest</a><a href="partnership-enquiry.html">Organisation partnership interest</a><a href="contact.html">General contact</a></div>
 <p class="small">Please do not send medical records, diagnoses, prescriptions, identity documents or other sensitive health information through general enquiries. Patient accounts, clinical records and patient workspaces remain unavailable until a formal launch is announced.</p>
-</section></main></body></html>
+</section></main><script>(function(){const b=document.getElementById('menuToggle'),n=document.getElementById('mainNav');if(!b||!n)return;b.addEventListener('click',()=>{const o=n.classList.toggle('open');b.setAttribute('aria-expanded',String(o));b.setAttribute('aria-label',o?'Close navigation':'Open navigation');b.textContent=o?'×':'☰'});n.addEventListener('click',e=>{if(e.target.closest('a')){n.classList.remove('open');b.setAttribute('aria-expanded','false');b.textContent='☰'}})})();</script></body></html>

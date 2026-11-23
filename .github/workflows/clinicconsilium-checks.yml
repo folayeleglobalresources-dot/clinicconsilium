@@ -11,7 +11,7 @@ permissions:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
@@ -25,3 +25,13 @@ jobs:
         run: npm test
       - name: Check serverless API syntax
         run: npm run check
+      - name: Set up Python for Playwright
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install Playwright
+        run: |
+          python -m pip install --disable-pip-version-check playwright==1.57.0
+          python -m playwright install --with-deps chromium
+      - name: Run public-page browser smoke tests
+        run: python tests/smoke_public_pages.py
