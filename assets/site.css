@@ -207,3 +207,11 @@ body .cc-app-header small {
     font-size: 11px;
   }
 }
+
+/* Remove decorative text labels placed over photographs and illustrations.
+   Keep image alt text and source/licence credits for accessibility and attribution. */
+.photo-label,
+.image-caption,
+.exchange-note {
+  display: none !important;
+}
