@@ -159,5 +159,24 @@ class PublicSiteSmokeTests(unittest.TestCase):
         self.assertIn("CC-2026-000001", status.inner_text())
         page.close()
 
+
+    def test_faq_search_category_filter_and_answer_disclosure(self):
+        page = self.browser.new_page(viewport={"width": 390, "height": 844})
+        page.goto(BASE_URL + "/faq.html", wait_until="domcontentloaded")
+        search = page.locator("#faq-search-input")
+        search.fill("registration")
+        visible = page.locator(".faq-item:visible")
+        self.assertGreaterEqual(visible.count(), 2)
+        self.assertTrue(page.locator(".faq-group-title", has_text="Services, availability and accounts").is_visible())
+        self.assertFalse(page.locator(".faq-group-title", has_text="About ClinicConsilium").is_visible())
+        search.fill("")
+        page.get_by_role("button", name="Providers", exact=True).click()
+        self.assertEqual(page.locator(".faq-group:visible").count(), 1)
+        self.assertTrue(page.locator(".faq-group-title", has_text="Healthcare providers and network participation").is_visible())
+        first = page.locator(".faq-item:visible").first
+        first.locator("summary").click()
+        self.assertTrue(first.evaluate("(el) => el.open"))
+        page.close()
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
