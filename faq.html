@@ -28,12 +28,57 @@
 .links a:last-child{border-bottom:0}
 }
 @media(prefers-reduced-motion:reduce){.faq-filter,.faq-item{transition:none}}
+
+/* Shared landing-page announcement, navigation and footer */
+.announcement{background:#043D2E;color:#d7e8e3;font-size:11px;letter-spacing:.03em}
+.announcement .faq-wrap{min-height:30px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.announcement b{color:#d9f36a;font-weight:700}
+.header{position:sticky;top:0;z-index:50;background:#075E45F2;border-bottom:1px solid #ffffff2b;backdrop-filter:blur(16px)}
+.header .nav{min-height:68px;display:flex;align-items:center;gap:28px;position:relative}
+.header .brand img{width:155px;height:auto;max-height:none;max-width:none}
+.header .links{display:flex;align-items:center;gap:clamp(10px,1.65vw,22px);margin-left:auto}
+.header .links a{font-size:12px;font-weight:700;color:#e3f0e9;transition:color .2s}
+.header .links a:hover,.header .links a:focus-visible{color:#d9f36a}
+.header .menu{display:none;margin-left:auto;border:1px solid #ffffff55;background:#ffffff12;border-radius:50%;width:44px;height:44px;font-size:20px;color:#fff;cursor:pointer}
+footer{background:#043D2E;color:#c1d8c9;padding:42px 0 18px}
+.foot-top{display:grid;grid-template-columns:1.4fr repeat(3,1fr);gap:28px}
+.foot-brand img{width:155px;background:white;padding:8px;border-radius:12px;margin-bottom:16px}
+.foot-brand p{font-size:13px;max-width:250px}
+.foot-col b{display:block;color:white;font:600 13px Manrope,Arial,sans-serif;margin-bottom:15px}
+.foot-col a{display:block;font-size:12px;padding:5px 0;color:#b5c9c5}
+.foot-col a:hover{color:#d9f36a}
+footer .disclaimer{margin-top:26px;padding:16px 18px;border-radius:12px;background:#ffffff0b;color:#a9bfba;font-size:11px;line-height:1.7;max-width:none;border-left:0}
+.foot-bottom{border-top:1px solid #ffffff20;margin-top:18px;padding-top:14px;display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap;font-size:11px;color:#c1d8c9}
+.foot-bottom a{margin-left:14px;color:#c1d8c9}
+@media(max-width:800px){
+.announcement .faq-wrap{min-height:27px;justify-content:center;text-align:center}
+.announcement .faq-wrap span:first-child{display:none}
+.header .nav{min-height:64px}
+.header .brand img{width:155px}
+.header .menu{display:block}
+.header .links{display:none!important;position:absolute;top:100%;left:0;right:0;background:#064F3C;padding:18px 22px 22px;box-shadow:0 18px 30px #102b3b35;flex-direction:column;align-items:stretch;gap:0}
+.header .links.open{display:flex!important}
+.header .links a{font-size:14px;padding:11px 0;border-bottom:1px solid #ffffff20}
+.header .links a:last-child{border-bottom:0}
+.foot-top{grid-template-columns:1fr 1fr}
+}
+@media(max-width:540px){
+.header .brand img{width:140px}
+.foot-top{grid-template-columns:1fr}
+.foot-bottom{display:block}
+.foot-bottom a{margin:12px 12px 0 0}
+}
+
 </style>
 <meta property="og:type" content="website"><meta property="og:site_name" content="ClinicConsilium"><meta property="og:title" content="Frequently Asked Questions | ClinicConsilium"><meta property="og:description" content="Clear answers about ClinicConsilium, current availability, privacy and how to contact us."><meta property="og:url" content="https://clinicconsilium.vercel.app/faq.html"><meta property="og:image" content="https://clinicconsilium.vercel.app/assets/clinicconsilium-social-card.svg"><meta name="twitter:card" content="summary_large_image">
 </head>
 <body>
-<div class="topline"><div class="faq-wrap"><span>Trusted Healthcare. Without Borders.</span><strong>Platform in development · Not an emergency service</strong></div></div>
-<header class="nav"><div class="faq-wrap navin"><a class="brand" href="index.html" aria-label="ClinicConsilium homepage"><img src="assets/clinicconsilium-logo-optimized.png" alt="ClinicConsilium — Trusted Healthcare. Without Borders." style="display:block;width:220px;max-width:54vw;height:auto;max-height:64px;object-fit:contain"></a><button class="menu" type="button" aria-expanded="false" aria-controls="primary-links">Menu ☰</button><nav class="links" id="primary-links" aria-label="Main navigation"><a href="index.html">Home</a><a href="services.html">Services</a><a href="how-it-works.html">How it works</a><a href="providers.html">For providers</a><a href="international-care.html">International care</a><a href="about.html">About</a><a href="contact.html">Contact</a></nav></div></header>
+<div class="announcement"><div class="faq-wrap"><span>ClinicConsilium · Trusted Healthcare. Without Borders.</span><b>Building a more connected healthcare journey · Nigeria first</b></div></div>
+<header class="header"><div class="faq-wrap nav">
+<a class="brand" href="index.html" aria-label="ClinicConsilium home"><img src="assets/clinicconsilium-logo-optimized.png" alt="ClinicConsilium — Trusted Healthcare. Without Borders."></a>
+<button class="menu" id="menuToggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="mainNav">☰</button>
+<nav class="links" id="mainNav" aria-label="Main navigation"><a href="index.html">Home</a><a href="services.html">Services</a><a href="lifesaver.html">LifeSaver</a><a href="how-it-works.html">How it works</a><a href="providers.html">For providers</a><a href="international-care.html">International care</a><a href="about.html">About</a><a href="contact.html">Contact</a></nav>
+</div></header>
 <main>
 <section class="faq-hero"><div class="faq-wrap faq-hero-grid"><div><span class="faq-kicker">HELP CENTRE · FREQUENTLY ASKED QUESTIONS</span><h1>Good questions deserve <span>clear answers.</span></h1><p class="faq-lead">Find straightforward information about ClinicConsilium, what is available today, how provider participation works, and how we approach privacy and safe care navigation.</p><div class="faq-actions"><a class="button primary" href="#faq-library">Browse questions ↓</a><a class="button secondary" href="contact.html">Contact our team ↗</a></div><p class="faq-note">Clear information · Responsible care navigation · No emergency response</p></div><figure class="faq-photo"><img src="https://upload.wikimedia.org/wikipedia/commons/9/9e/Doctor_consults_with_patient.jpg" alt="A doctor consulting with a patient as two attending physicians observe" fetchpriority="high" decoding="async" onerror="this.onerror=null;this.src='assets/img/illus-chat.svg';this.alt='Illustration of a patient speaking with a care team';"><figcaption>Photo: National Cancer Institute (NIH) / Wikimedia Commons · Public domain · <a href="https://commons.wikimedia.org/wiki/File:Doctor_consults_with_patient.jpg" target="_blank" rel="noopener noreferrer">Source & licence</a></figcaption></figure></div></section>
 <section class="faq-main" id="faq-library"><div class="faq-wrap">
@@ -73,8 +118,16 @@
 </div></section>
 <section class="faq-contact"><div class="faq-wrap"><div class="faq-contact-card"><div class="faq-contact-copy"><h2>Still have a question?</h2><p>Our contact page is the right place for general platform questions, partnership enquiries and requests for clarification.</p></div><a class="button primary" href="contact.html">Contact ClinicConsilium ↗</a></div></div></section>
 </main>
-<footer class="footer"><div class="faq-wrap"><div class="footer-top"><div class="footer-brand"><strong>ClinicConsilium</strong><p>Trusted Healthcare. Without Borders. A developing healthcare navigation and coordination platform focused on clarity, connection and responsible care journeys.</p></div><nav class="footlinks" aria-label="Footer navigation"><a href="services.html">Services</a><a href="providers.html">Providers</a><a href="international-care.html">International care</a><a href="insights.html">Insights</a><a href="faq.html" aria-current="page">FAQs</a><a href="safety.html">Safety</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="trust-security.html">Trust & security</a><a href="contact.html">Contact</a><a href="status.html">Service status</a><a href="accessibility.html">Accessibility</a><a href="sitemap.html">Site map</a></nav></div><div class="footer-bottom"><span>© 2026 ClinicConsilium. All rights reserved.</span><span class="disclaimer">ClinicConsilium is in development and is not an emergency service or a substitute for professional medical advice. In an emergency, contact local emergency services or visit the nearest emergency department.</span></div></div></footer>
+<footer><div class="faq-wrap"><div class="foot-top">
+<div class="foot-brand"><img src="assets/clinicconsilium-logo-optimized.png" alt="ClinicConsilium"><p>Trusted Healthcare. Without Borders.<br>Trusted care, connected.</p></div>
+<div class="foot-col"><b>Explore</b><a href="index.html#pathways">Care pathways</a><a href="how-it-works.html">How it works</a><a href="patient-dashboard.html">Patient workspace preview</a><a href="insights.html">Health insights</a><a href="faq.html" aria-current="page">FAQ</a></div>
+<div class="foot-col"><b>For partners</b><a href="provider-interest.html">Professionals</a><a href="hospital-partnerships.html">Hospitals &amp; clinics</a><a href="partnership-enquiry.html">Pharmacy partners</a><a href="partnerships.html">Partnerships</a></div>
+<div class="foot-col"><b>ClinicConsilium</b><a href="about.html">About</a><a href="contact.html">Contact</a><a href="safety.html">Safety</a><a href="trust-security.html">Trust &amp; security</a></div>
+</div>
+<div class="disclaimer">ClinicConsilium is a healthcare access and coordination platform in development. It is not a hospital, pharmacy or emergency service and does not provide diagnosis or treatment. Service availability may change as development progresses. Photographs are illustrative and do not imply partnership or endorsement.</div>
+<div class="foot-bottom"><span>© ClinicConsilium</span><span><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="accessibility.html">Accessibility</a></span></div>
+</div></footer>
 <script>
-(function(){const menu=document.querySelector('.menu'),nav=document.querySelector('.links');if(menu&&nav){const setMenuOpen=open=>{nav.classList.toggle('open',open);menu.setAttribute('aria-expanded',String(open));menu.textContent=open?'Close ×':'Menu ☰';};menu.addEventListener('click',()=>setMenuOpen(menu.getAttribute('aria-expanded')!=='true'));nav.addEventListener('click',e=>{if(e.target.closest('a'))setMenuOpen(false);});}const input=document.getElementById('faq-search-input'),filters=[...document.querySelectorAll('.faq-filter')],groups=[...document.querySelectorAll('.faq-group')],empty=document.getElementById('faq-empty');let active='all';function update(){const q=(input.value||'').trim().toLowerCase();let shown=0;groups.forEach(group=>{let count=0;const allowed=active==='all'||active===group.dataset.category;group.querySelectorAll('.faq-item').forEach(item=>{const match=allowed&&(!q||item.textContent.toLowerCase().includes(q));item.hidden=!match;if(match){count++;shown++;}});group.hidden=count===0;});empty.classList.toggle('visible',shown===0);}input.addEventListener('input',update);filters.forEach(button=>button.addEventListener('click',()=>{active=button.dataset.filter;filters.forEach(item=>item.setAttribute('aria-pressed',String(item===button)));update();}));update();})();
+(function(){const menu=document.getElementById('menuToggle'),nav=document.getElementById('mainNav');if(menu&&nav){const setMenuOpen=open=>{nav.classList.toggle('open',open);menu.setAttribute('aria-expanded',String(open));menu.setAttribute('aria-label',open?'Close navigation':'Open navigation');menu.textContent=open?'×':'☰';};menu.addEventListener('click',()=>setMenuOpen(menu.getAttribute('aria-expanded')!=='true'));nav.addEventListener('click',e=>{if(e.target.closest('a'))setMenuOpen(false);});}const input=document.getElementById('faq-search-input'),filters=[...document.querySelectorAll('.faq-filter')],groups=[...document.querySelectorAll('.faq-group')],empty=document.getElementById('faq-empty');let active='all';function update(){const q=(input.value||'').trim().toLowerCase();let shown=0;groups.forEach(group=>{let count=0;const allowed=active==='all'||active===group.dataset.category;group.querySelectorAll('.faq-item').forEach(item=>{const match=allowed&&(!q||item.textContent.toLowerCase().includes(q));item.hidden=!match;if(match){count++;shown++;}});group.hidden=count===0;});empty.classList.toggle('visible',shown===0);}input.addEventListener('input',update);filters.forEach(button=>button.addEventListener('click',()=>{active=button.dataset.filter;filters.forEach(item=>item.setAttribute('aria-pressed',String(item===button)));update();}));update();})();
 </script><script src="assets/design.js" defer></script>
 </body></html>
